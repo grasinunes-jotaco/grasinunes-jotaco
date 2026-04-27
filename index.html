@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Jota Co">
+<meta name="theme-color" content="#111318">
+<title>Jota Co — Central Comercial</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f5f7;--bg2:#ffffff;--bg3:#f0f1f5;--bg4:#e8eaef;--bg5:#d8dae3;
+  --b1:rgba(0,0,0,0.07);--b2:rgba(0,0,0,0.12);--b3:rgba(0,0,0,0.20);
+  --text:#111827;--text2:#4b5563;--text3:#9ca3af;
+  --blue:#1d6fdb;--blue2:#1558b8;--bluebg:rgba(29,111,219,0.08);--blueb:rgba(29,111,219,0.22);
+  --green:#0e9964;--gnbg:rgba(14,153,100,0.08);--gnb:rgba(14,153,100,0.22);
+  --amber:#b45309;--ambg:rgba(180,83,9,0.08);--amb:rgba(180,83,9,0.22);
+  --red:#dc2626;--rdbg:rgba(220,38,38,0.08);--rdb:rgba(220,38,38,0.22);
+  --r:10px;--rl:16px;
+  --nav-h:68px;--top-h:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:16px;line-height:1.55;overscroll-behavior:none;}
+
+/* ── TOPBAR (desktop) ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--top-h);padding:0 24px;
+  background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.tlogo{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--blue);letter-spacing:.04em;white-space:nowrap;}
+.tlogo span{color:var(--text3);}
+.tnav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;justify-content:center;}
+.tnav::-webkit-scrollbar{display:none;}
+.nbtn{padding:6px 15px;border-radius:7px;border:none;background:transparent;color:var(--text2);font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.nbtn:hover{background:var(--bg3);color:var(--text);}
+.nbtn.active{background:var(--bluebg);color:var(--blue);border:1px solid var(--blueb);}
+.tbadge{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--blue);background:var(--bluebg);border:1px solid var(--blueb);border-radius:5px;padding:4px 10px;letter-spacing:.04em;white-space:nowrap;}
+
+/* ── BOTTOM NAV (mobile) ── */
+.bottomnav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  height:var(--nav-h);
+  background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid var(--b1);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.bntabs{display:flex;height:100%;}
+.bntab{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;border:none;background:transparent;color:var(--text3);
+  cursor:pointer;transition:color .15s;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  padding:0 2px;
+}
+.bntab svg{width:24px;height:24px;stroke-width:1.7;}
+.bntab.active{color:var(--blue);}
+.bntab.active svg path,.bntab.active svg rect,.bntab.active svg circle,.bntab.active svg line,.bntab.active svg polyline,.bntab.active svg polygon{stroke:var(--blue);}
+
+/* ── MORE PANEL ── */
+.morepanel{
+  display:none;position:fixed;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));left:0;right:0;z-index:99;
+  background:#ffffff;border-top:1px solid var(--b1);padding:6px 0 10px;
+  box-shadow:0 -4px 20px rgba(0,0,0,0.08);
+}
+.morepanel.open{display:block;}
+.mpitem{display:flex;align-items:center;gap:14px;padding:14px 22px;cursor:pointer;color:var(--text2);font-size:16px;font-weight:500;transition:background .15s;}
+.mpitem:hover,.mpitem:active{background:var(--bg3);}
+.mpitem.active{color:var(--blue2);}
+.mpitem svg{width:20px;height:20px;stroke-width:1.7;flex-shrink:0;}
+
+/* ── MAIN ── */
+.main{
+  padding:calc(var(--top-h) + 24px) 24px 36px;
+  max-width:1120px;margin:0 auto;
+  min-height:100vh;
+}
+
+/* ── PAGE HEADER ── */
+.sh{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px;gap:12px;flex-wrap:wrap;}
+.st{font-size:26px;font-weight:700;color:var(--text);letter-spacing:-.03em;line-height:1.1;}
+.ss{font-size:12px;color:var(--text3);margin-top:5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;}
+
+/* ── METRIC GRID ── */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px;}
+.mc{
+  background:#ffffff;border:1px solid var(--b1);border-radius:var(--rl);
+  padding:20px 18px;transition:border-color .2s;
+  box-shadow:0 1px 4px rgba(0,0,0,0.05);
+}
+.mc.blue{border-color:var(--blueb);background:linear-gradient(135deg,#f0f6ff 0%,#e8f0ff 100%);}
+.ml{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:10px;}
+.mv{font-size:30px;font-weight:700;color:var(--text);line-height:1;font-family:'Space Mono',monospace;letter-spacing:-.02em;}
+.mv.blue{color:var(--blue);}
+.ms{font-size:13px;color:var(--text3);margin-top:6px;font-weight:500;}
+
+/* ── CARD ── */
+.card{background:#ffffff;border:1px solid var(--b1);border-radius:var(--rl);overflow:hidden;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--b1);background:var(--bg3);}
+.card-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.09em;}
+.card-body{padding:0 20px;}
+
+/* ── ROW ── */
+.dr{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--b1);gap:12px;}
+.dr:last-child{border-bottom:none;}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;}
+.bg{background:var(--gnbg);color:var(--green);border:1px solid var(--gnb);}
+.ba{background:var(--ambg);color:var(--amber);border:1px solid var(--amb);}
+.br{background:var(--rdbg);color:var(--red);border:1px solid var(--rdb);}
+.bb{background:var(--bluebg);color:var(--blue2);border:1px solid var(--blueb);}
+.bgray{background:var(--bg4);color:var(--text2);border:1px solid var(--b2);}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:var(--r);border:1px solid var(--b2);background:transparent;color:var(--text2);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.btn:hover{background:var(--bg3);color:var(--text);border-color:var(--b3);}
+.btnp{background:var(--blue);color:#fff;border-color:transparent;}
+.btnp:hover{background:var(--blue2);color:#fff;}
+.btns{padding:7px 12px;font-size:12px;}
+
+/* ── PROGRESS BAR ── */
+.pbar{flex:1;height:6px;background:var(--bg5);border-radius:999px;overflow:hidden;min-width:60px;}
+.pfill{height:100%;border-radius:999px;transition:width .9s cubic-bezier(.4,0,.2,1);}
+
+/* ── SECTION LABEL ── */
+.slabel{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin:22px 0 12px;display:flex;align-items:center;gap:10px;}
+.slabel::after{content:'';flex:1;height:1px;background:var(--b1);}
+
+/* ── TABLE ── */
+.vtab{width:100%;border-collapse:collapse;font-size:14px;}
+.vtab th{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-weight:700;padding:11px 14px;text-align:left;border-bottom:1px solid var(--b1);background:var(--bg3);white-space:nowrap;color:var(--text2);}
+.vtab td{padding:13px 14px;border-bottom:1px solid var(--b1);color:var(--text2);vertical-align:middle;}
+.vtab td:first-child{color:var(--text);}
+.vtab tr:last-child td{border-bottom:none;}
+.vtab tbody tr{transition:background .15s;}
+.vtab tbody tr:hover td{background:var(--bg3);}
+
+/* ── AVATAR ── */
+.av{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;letter-spacing:.02em;font-family:'Space Mono',monospace;}
+
+/* ── MODAL ── */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center;padding:0;}
+.mo.open{display:flex;}
+.modal{background:#ffffff;border:1px solid var(--b1);border-radius:20px 20px 0 0;width:100%;max-height:92vh;overflow-y:auto;}
+.mhead{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--b1);}
+.mtit{font-size:17px;font-weight:700;color:var(--text);letter-spacing:-.01em;}
+.mclose{background:none;border:none;color:var(--text3);cursor:pointer;font-size:26px;line-height:1;transition:color .15s;padding:0 4px;}
+.mclose:hover{color:var(--text);}
+.mbody{padding:18px 22px;}
+.mfoot{display:flex;gap:10px;justify-content:flex-end;padding:16px 22px;border-top:1px solid var(--b1);}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.fgg{display:flex;flex-direction:column;gap:6px;}
+.fgg.full{grid-column:1/-1;}
+.fl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;font-weight:700;}
+.fi,.fs,.fta{background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:15px;padding:11px 14px;outline:none;width:100%;transition:border-color .15s;-webkit-appearance:none;}
+.fi:focus,.fs:focus,.fta:focus{border-color:var(--blue);}
+.fta{resize:vertical;min-height:80px;}
+.fs{appearance:none;-webkit-appearance:none;cursor:pointer;}
+
+/* ── REPORT BLOCK ── */
+.rb{border-left:3px solid var(--blue);padding:14px 16px;margin-bottom:12px;background:var(--bg3);border-radius:0 var(--r) var(--r) 0;}
+.rbt{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.rbb{font-size:15px;color:var(--text2);line-height:1.7;}
+
+/* ── DELIVERY ── */
+.del-month{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;padding:10px 20px;background:var(--bg3);border-bottom:1px solid var(--b1);}
+
+/* ── RITUAL DAY ── */
+.rday{font-size:10px;font-weight:700;min-width:56px;color:var(--blue);background:var(--bluebg);border:1px solid var(--blueb);padding:5px 8px;border-radius:5px;text-align:center;letter-spacing:.06em;font-family:'Space Mono',monospace;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:calc(var(--nav-h) + 14px);left:50%;transform:translateX(-50%) translateY(10px);background:var(--text);border:1px solid var(--b3);border-radius:var(--r);padding:12px 22px;font-size:14px;color:#fff;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;font-weight:600;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── MONO ── */
+.mono{font-family:'Space Mono',monospace;font-weight:700;}
+
+/* ── VALUE HIGHLIGHT ── */
+.vval{font-family:'Space Mono',monospace;font-weight:700;font-size:17px;color:var(--text);}
+.vval.green{color:var(--green);}
+.vval.blue{color:var(--blue);}
+.vval.amber{color:var(--amber);}
+
+/* ── SLABEL ── */
+
+/* ── SCROLL TABLE WRAP ── */
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.tscroll::-webkit-scrollbar{height:3px;}
+.tscroll::-webkit-scrollbar-track{background:transparent;}
+.tscroll::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+
+/* ── OVERLAY ── */
+.overlay{display:none;position:fixed;inset:0;z-index:98;background:transparent;}
+.overlay.open{display:block;}
+
+/* ── NAME + SUB ── */
+.iname{font-size:15px;font-weight:700;color:var(--text);}
+.isub{font-size:12px;color:var(--text3);margin-top:3px;}
+.inext{font-size:12px;color:var(--blue2);margin-top:4px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .topbar{display:none;}
+  .bottomnav{display:block;}
+  .main{padding:18px 16px calc(var(--nav-h) + env(safe-area-inset-bottom) + 20px);}
+  .mgrid{grid-template-columns:repeat(2,1fr);}
+  .st{font-size:22px;}
+  .mv{font-size:26px;}
+  .vtab{font-size:13px;}
+  .vtab th{font-size:10px;}
+  .vtab th,.vtab td{padding:10px 12px;}
+  .mo{padding:0;align-items:flex-end;}
+  .modal{border-radius:20px 20px 0 0;}
+  .fg{grid-template-columns:1fr;}
+  .fgg.full{grid-column:1;}
+  .vval{font-size:16px;}
+  .iname{font-size:14px;}
+  .card-body{padding:0 16px;}
+  .dr{padding:14px 0;}
+}
+@media(min-width:641px){
+  .mo{padding:24px;align-items:center;}
+  .modal{max-width:540px;border-radius:var(--rl);}
+  .toast{bottom:24px;}
+}
+@media(max-width:380px){
+  .mv{font-size:22px;}
+  .mgrid{gap:8px;}
+  .mc{padding:16px 14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOPBAR (desktop) ── -->
+<div class="topbar">
+  <div class="tlogo">JOTA<span>/</span>CO</div>
+  <div class="tnav" id="tnav"></div>
+  <div class="tbadge" id="semana">SEM 18 · ABR</div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="main" id="mc"></div>
+
+<!-- ── BOTTOM NAV (mobile) ── -->
+<nav class="bottomnav">
+  <div class="bntabs" id="bntabs"></div>
+</nav>
+
+<!-- ── MORE PANEL ── -->
+<div class="overlay" id="overlay" onclick="closeMore()"></div>
+<div class="morepanel" id="morepanel"></div>
+
+<!-- ── MODAL PIPELINE ── -->
+<div class="mo" id="mp">
+  <div class="modal">
+    <div class="mhead"><div class="mtit" id="mptit">Nova negociação</div><button class="mclose" onclick="closeM('mp')">×</button></div>
+    <div class="mbody">
+      <div class="fg">
+        <div class="fgg full"><label class="fl">Cliente / Empresa</label><input class="fi" id="pc" placeholder="Ex: Coca-Cola"></div>
+        <div class="fgg"><label class="fl">BU</label>
+          <select class="fs" id="pb"><option>PUBLICIDADE</option><option>ADVISORY</option><option>PALESTRAS</option><option>JOTA LAB</option><option>JOTA EDITION</option><option>A TRINCA MÍDIA</option><option>SELETO</option></select>
+        </div>
+        <div class="fgg"><label class="fl">Valor (R$)</label><input class="fi" id="pv" type="number" placeholder="500000"></div>
+        <div class="fgg"><label class="fl">Estágio</label>
+          <select class="fs" id="pe"><option>Prospecção</option><option>Em Negociação</option><option>Proposta Enviada</option><option>Em Contrato</option><option>Aguardando Decisão</option><option>Fechado</option><option>Perdido</option></select>
+        </div>
+        <div class="fgg"><label class="fl">Probabilidade (%)</label><input class="fi" id="pp" type="number" min="0" max="100" placeholder="70"></div>
+        <div class="fgg"><label class="fl">Responsável</label>
+          <select class="fs" id="pr"><option>Grasi</option><option>Emily</option><option>Kathleen</option><option>Rafael</option><option>Joel</option></select>
+        </div>
+        <div class="fgg"><label class="fl">Previsão fechamento</label><input class="fi" id="pd" type="date"></div>
+        <div class="fgg full"><label class="fl">Próximo passo</label><input class="fi" id="pnext" placeholder="Ex: Reunião segunda-feira"></div>
+        <div class="fgg full"><label class="fl">Observações</label><textarea class="fta" id="pobs"></textarea></div>
+      </div>
+    </div>
+    <div class="mfoot"><button class="btn" onclick="closeM('mp')">Cancelar</button><button class="btn btnp" onclick="savePip()">Salvar</button></div>
+  </div>
+</div>
+
+<!-- ── MODAL CLIENTE ── -->
+<div class="mo" id="mcli">
+  <div class="modal">
+    <div class="mhead"><div class="mtit">Cliente ativo</div><button class="mclose" onclick="closeM('mcli')">×</button></div>
+    <div class="mbody">
+      <div class="fg">
+        <div class="fgg full"><label class="fl">Nome / Empresa</label><input class="fi" id="cn"></div>
+        <div class="fgg"><label class="fl">BU</label>
+          <select class="fs" id="cb"><option>PUBLICIDADE</option><option>ADVISORY</option><option>SELETO</option><option>PALESTRAS</option><option>JOTA LAB</option><option>JOTA EDITION</option><option>A TRINCA MÍDIA</option></select>
+        </div>
+        <div class="fgg"><label class="fl">Valor contrato (R$)</label><input class="fi" id="cv" type="number"></div>
+        <div class="fgg"><label class="fl">Status</label>
+          <select class="fs" id="cs"><option>Em entrega</option><option>No prazo</option><option>Atenção</option><option>Atrasado</option><option>Concluído</option></select>
+        </div>
+        <div class="fgg"><label class="fl">Responsável</label>
+          <select class="fs" id="cres"><option>Grasi</option><option>Emily</option><option>Kathleen</option><option>Rafael</option><option>Maria Alves</option></select>
+        </div>
+        <div class="fgg"><label class="fl">Próxima entrega</label><input class="fi" id="cdat" type="date"></div>
+        <div class="fgg full"><label class="fl">Entregas</label><textarea class="fta" id="cent"></textarea></div>
+      </div>
+    </div>
+    <div class="mfoot"><button class="btn" onclick="closeM('mcli')">Cancelar</button><button class="btn btnp" onclick="saveCli()">Salvar</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+const METAS={
+  'PALESTRAS':      {meta:1000000,   real:830000,   resp:'Emily'},
+  'PUBLICIDADE':    {meta:20000000,  real:16461000, resp:'Grasi'},
+  'JOTA LAB':       {meta:5000000,   real:1670700,  resp:'Eduardo'},
+  'JOTA EDITION':   {meta:5140000,   real:928000,   resp:'Emily'},
+  'ADVISORY':       {meta:10000000,  real:10500000, resp:'Grasi'},
+  'A TRINCA MÍDIA': {meta:100000000, real:0,        resp:'Grasi'},
+  'CLUBES SÓCIOS':  {meta:100000000, real:6000000,  resp:'Grasi'},
+  'ADSENSE':        {meta:660000,    real:392065,   resp:'—'},
+};
+
+// Metas mensais reais — aba MENSAL da planilha
+const METAS_MENSAIS={
+  'Janeiro':  {'PALESTRAS':670000,  'PUBLICIDADE':1170000, 'JOTA LAB':420000,  'JOTA EDITION':600000, 'ADVISORY':1250000, 'A TRINCA MÍDIA':0,        'CLUBES SÓCIOS':0,       'ADSENSE':55000},
+  'Fevereiro':{'PALESTRAS':570000,  'PUBLICIDADE':1000000, 'JOTA LAB':450000,  'JOTA EDITION':600000, 'ADVISORY':1500000, 'A TRINCA MÍDIA':0,        'CLUBES SÓCIOS':0,       'ADSENSE':55000},
+  'Março':    {'PALESTRAS':570000,  'PUBLICIDADE':1500000, 'JOTA LAB':400000,  'JOTA EDITION':550000, 'ADVISORY':2000000, 'A TRINCA MÍDIA':0,        'CLUBES SÓCIOS':0,       'ADSENSE':52000},
+  'Abril':    {'PALESTRAS':0,       'PUBLICIDADE':2200000, 'JOTA LAB':500000,  'JOTA EDITION':180000, 'ADVISORY':1000000, 'A TRINCA MÍDIA':20000000, 'CLUBES SÓCIOS':9000000, 'ADSENSE':52000},
+  'Maio':     {'PALESTRAS':0,       'PUBLICIDADE':0,       'JOTA LAB':0,       'JOTA EDITION':0,      'ADVISORY':0,       'A TRINCA MÍDIA':0,        'CLUBES SÓCIOS':0,       'ADSENSE':0},
+};
+
+const PIPELINE_INICIAL=[
+  {c:'NUVEMSHOP',        bu:'PUBLICIDADE',         v:3000000,  e:'Em Contrato',     p:90, resp:'Grasi', next:'Renovação de contrato',      obs:''},
+  {c:'XP',               bu:'PUBLICIDADE',         v:800000,   e:'Em Contrato',     p:80, resp:'Grasi', next:'Proposta enviada',           obs:''},
+  {c:'AUDIBLE',          bu:'PUBLICIDADE',         v:1000000,  e:'Proposta Enviada',p:50, resp:'Emily', next:'Reunião 27/04',              obs:'Devolutiva em junho'},
+  {c:'HOSTINGER',        bu:'PUBLICIDADE',         v:120000,   e:'Em Negociação',   p:50, resp:'Emily', next:'',                          obs:'Vídeo conceito'},
+  {c:'4 LOCAÇÕES',       bu:'JOTA LAB',            v:100000,   e:'Em Negociação',   p:65, resp:'Emily', next:'Fechar contratos',           obs:'4 x R$25k'},
+  {c:'NATASHA OKADA',    bu:'JOTA LAB',            v:105000,   e:'Em Negociação',   p:60, resp:'Emily', next:'',                          obs:'Sala de Guerra'},
+  {c:'MARÍLIA',          bu:'JOTA LAB',            v:105000,   e:'Em Negociação',   p:60, resp:'Emily', next:'',                          obs:'Sala de Guerra'},
+  {c:'CARRARO',          bu:'A TRINCA MÍDIA',      v:6000000,  e:'Em Contrato',     p:85, resp:'Grasi', next:'Definir forma de pagamento', obs:'Negociação pgto'},
+  {c:'THE BEST AÇAÍ',    bu:'A TRINCA MÍDIA',      v:5000000,  e:'Em Negociação',   p:40, resp:'Grasi', next:'Retorno Sérgio',            obs:'Pediu mais tempo'},
+  {c:'BYD',              bu:'A TRINCA MÍDIA',      v:21000000, e:'Proposta Enviada',p:35, resp:'Joel',  next:'Aguardando retorno',        obs:'Joel enviou R$21M'},
+  {c:'PORMADE',          bu:'A TRINCA MÍDIA',      v:6000000,  e:'Em Negociação',   p:50, resp:'Emily', next:'',                          obs:'1 ano de contrato'},
+  {c:'TATIANE TEÓFILO',  bu:'ADVISORY',            v:1000000,  e:'Em Negociação',   p:60, resp:'Grasi', next:'Quarta 15/04',              obs:'Marcou reunião'},
+  {c:'FÁBIO',            bu:'CLUBE SÓCIOS',        v:1500000,  e:'Em Negociação',   p:50, resp:'Grasi', next:'',                          obs:'Clax Club'},
+  {c:'ELCIO RUDNICK',    bu:'PALESTRAS',           v:250000,   e:'Em Negociação',   p:40, resp:'Joel',  next:'Palestra 08/06/2026',       obs:'Alphaville'},
+  {c:'DR. CARLOS',       bu:'ADVISORY',            v:1000000,  e:'Em Negociação',   p:45, resp:'Grasi', next:'Fechar em abril',           obs:''},
+  {c:'ROGÉRIO PENA',     bu:'SELETO',              v:3000000,  e:'Em Negociação',   p:55, resp:'Joel',  next:'Follow-up',                obs:''},
+  {c:'FRAME',            bu:'SELETO',              v:3000000,  e:'Em Negociação',   p:50, resp:'Joel',  next:'Negociação com Joel',       obs:''},
+  {c:'DR. ÍCARO',        bu:'SELETO',              v:3000000,  e:'Em Negociação',   p:60, resp:'Grasi', next:'Reunião quarta 15/04',      obs:''},
+  {c:'AMBRENNA E VICTOR',bu:'SELETO',              v:3000000,  e:'Em Negociação',   p:40, resp:'Grasi', next:'Fechar junho',              obs:''},
+  {c:'ADAPTA',           bu:'A TRINCA MÍDIA',      v:5000000,  e:'Em Negociação',   p:40, resp:'Joel',  next:'Negociação Flávio e Joel',  obs:''},
+  {c:'KIWIFI',           bu:'A TRINCA MÍDIA',      v:5000000,  e:'Em Negociação',   p:40, resp:'Joel',  next:'Negociação Flávio e Joel',  obs:''},
+  {c:'AMARO AVIAÇÃO',    bu:'A TRINCA MÍDIA',      v:5000000,  e:'Prospecção',      p:25, resp:'Grasi', next:'Reunião 14/04',              obs:'5MI mas em voos'},
+  {c:'16 NEGOCIAÇÕES',   bu:'JOTA EDITION',        v:75000,    e:'Em Negociação',   p:50, resp:'Emily', next:'',                          obs:'11 negociações de R$ 7.000 na mesa'},
+];
+
+const ADVISORY_ATIVOS=[
+  {n:'Dr. Antônio',       per:'Nov/25–Nov/26', dur:'1 ano',   foco:'Influência',                  v:1000000,  rec:400000,  prox:'SELETO',        obs:'19/abr · próxima reunião',        abr:'Reunião Presencial', abr_s:'pendente'},
+  {n:'Douglas Nexfit',    per:'Até ago/26',    dur:'1 ano',   foco:'Influência',                  v:500000,   rec:500000,  prox:'JOEL PUBLI',    obs:'OK pago · evento 27/04 clientes NEXFIT', abr:'Evento 27/04',       abr_s:'agendado'},
+  {n:'Fábio Gonçalves',   per:'Jan–Jul/26',    dur:'6 meses', foco:'Posicionamento + Motor',      v:2000000,  rec:468000,  prox:'PROSPERUS',     obs:'Realizado 13/04 · Online 30/04',  abr:'Reunião Presencial', abr_s:'realizado'},
+  {n:'Adriana Alves',     per:'6 meses',       dur:'6 meses', foco:'Contatos / Empresas',         v:500000,   rec:500000,  prox:'—',             obs:'OK pago',                         abr:'—',                  abr_s:'ok'},
+  {n:'Bia Finochio',      per:'Fev/26–Jan/27', dur:'1 ano',   foco:'Influência / posicionamento', v:1500000,  rec:300000,  prox:'—',             obs:'Realizado 17/04 · 9h',            abr:'Reunião Presencial', abr_s:'realizado'},
+  {n:'Ivan Pons',         per:'Fev–Ago/26',    dur:'6 meses', foco:'Influência',                  v:600000,   rec:100000,  prox:'—',             obs:'65 membros · Founder Led Growth', abr:'Reunião Presencial', abr_s:'pendente'},
+  {n:'Fernanda Tochetto', per:'Fev–Ago/26',    dur:'6 meses', foco:'Influência + Captação',       v:1000000,  rec:1000000, prox:'SELETO',        obs:'Interesse renovação. Adv 05/05',  abr:'1h online c/ Joel',  abr_s:'agendado'},
+  {n:'Marcos Carraro',    per:'Até Dez/27',    dur:'2 anos',  foco:'Conselho + Influência',       v:3000000,  rec:695000,  prox:'A TRINCA MÍDIA',obs:'Renovação confirmada',            abr:'Reunião Presencial', abr_s:'pendente'},
+  {n:'Isabela Soller',    per:'Mar–Jul/26',    dur:'6 meses', foco:'Direção Estratégica',         v:1000000,  rec:400000,  prox:'A TRINCA MÍDIA',obs:'Joel visitou empresa 31/03',      abr:'Agendar',            abr_s:'em contrato'},
+  {n:'Bruno Andrade',     per:'Mar–Jul/26',    dur:'6 meses', foco:'Influência + Captação',       v:1000000,  rec:130000,  prox:'SELETO',        obs:'Realizado 04/03',                 abr:'Agendar',            abr_s:'em contrato'},
+  {n:'Victor e Ambrenna', per:'30 dias',       dur:'1 mês',   foco:'Influência / direção',        v:1000000,  rec:300000,  prox:'SELETO',        obs:'Online 10/04 Joel + Malu',        abr:'Realizado 10/04',    abr_s:'realizado'},
+];
+
+const SELETO_ATIVOS=[
+  {n:'Cristiano 10X',       seg:'Advocacia',         v:3000000, rec:430667,  ent:'Jan/26'},
+  {n:'Cristiano Demartini', seg:'Odontologia/Saúde', v:3000000, rec:500000,  ent:'Jan/26'},
+  {n:'Eduardo e Wilton',    seg:'Franchising',       v:3000000, rec:100000,  ent:'Jan/26'},
+  {n:'Everton Pieri',       seg:'Estética',          v:3000000, rec:1475000, ent:'Jan/26'},
+  {n:'Francelino',          seg:'Educação',           v:3000000, rec:1125000, ent:'Jan/26'},
+  {n:'Índio da Costa',      seg:'—',                 v:3000000, rec:970000,  ent:'Jan/26'},
+  {n:'Jhonny e Carla',      seg:'Contabilidade',     v:3000000, rec:2600000, ent:'Jan/26'},
+  {n:'João Brognoli',       seg:'Marketing',         v:3000000, rec:850000,  ent:'Jan/26'},
+  {n:'José Netto de Lima',  seg:'Medicina',          v:3000000, rec:250000,  ent:'Mar/26'},
+  {n:'Mauro Santos',        seg:'Tecnologia',        v:3000000, rec:1260000, ent:'Jan/26'},
+  {n:'Pedro Quintanilha',   seg:'Educação',           v:3000000, rec:827999,  ent:'Jan/26'},
+  {n:'Ricardo Novak',       seg:'Odontologia/Saúde', v:3000000, rec:2668354, ent:'Jan/26'},
+  {n:'Rodrigo',             seg:'—',                 v:3000000, rec:1550000, ent:'Jan/26'},
+  {n:'Seu Elias',           seg:'Barbearia',         v:3000000, rec:1323273, ent:'Jan/26'},
+  {n:'Tiago Granito',       seg:'Eventos',           v:3000000, rec:150000,  ent:'Jan/26'},
+  {n:'Yuri Abreu',          seg:'Suplementos',       v:3000000, rec:1875000, ent:'Jan/26'},
+];
+
+const ADVISORY_ENTREGAS=[
+  {mes:'ABRIL 2026', itens:[
+    {n:'Dr. Antônio',      ativ:'Reunião Presencial',          st:'PENDENTE',  obs:'19/abr'},
+    {n:'Bia Finochio',     ativ:'Reunião Presencial',          st:'REALIZADO', obs:'17/04 · 9h · advisory 2h'},
+    {n:'Ivan Pons',        ativ:'Reunião Presencial',          st:'PENDENTE',  obs:'29/04 zoom online'},
+    {n:'Fábio Gonçalves',  ativ:'Reunião Presencial',          st:'REALIZADO', obs:'13/04 · Fábio e Ju no escritório Joel'},
+    {n:'Fábio Gonçalves',  ativ:'Encontro ON LINE',            st:'AGENDADO',  obs:'30/04 · posicionamento redes sociais'},
+    {n:'Marcos Carraro',   ativ:'Reunião Presencial',          st:'PENDENTE',  obs:'Piracicaba'},
+    {n:'Fernanda Tochetto',ativ:'1h online c/ Joel',           st:'AGENDADO',  obs:''},
+    {n:'Victor e Ambrenna',ativ:'Reunião online c/ Joel + Malu',st:'REALIZADO',obs:'10/04'},
+    {n:'Isabela Soller',   ativ:'Agendar entrega',             st:'EM CONTRATO',obs:''},
+    {n:'Bruno Andrade',    ativ:'Reunião online c/ Grasi',     st:'REALIZADO',  obs:'22/04 · call Zoom'},
+    {n:'Antonio Melo',     ativ:'Reunião online c/ Grasi',     st:'REALIZADO',  obs:'21/04'},
+    {n:'Douglas Nexfit',   ativ:'Evento clientes NEXFIT',      st:'AGENDADO',   obs:'27/04'},
+  ]},
+  {mes:'MAIO 2026', itens:[
+    {n:'Fernanda Tochetto',ativ:'Encontro presencial 04/05',  st:'AGENDADO',  obs:''},
+    {n:'Fábio Gonçalves',  ativ:'Visita na empresa',           st:'AGENDADO',  obs:'12/05'},
+    {n:'Dr. Antônio',      ativ:'Agendar entrega',             st:'EM CONTRATO',obs:''},
+    {n:'Douglas Nexfit',   ativ:'Agendar entrega',             st:'EM CONTRATO',obs:''},
+    {n:'Bia Finochio',     ativ:'Agendar entrega',             st:'EM CONTRATO',obs:''},
+    {n:'Ivan Pons',        ativ:'Agendar entrega',             st:'EM CONTRATO',obs:''},
+    {n:'Marcos Carraro',   ativ:'Agendar entrega',             st:'EM CONTRATO',obs:''},
+    {n:'Isabela Soller',   ativ:'Agendar entrega',             st:'EM CONTRATO',obs:''},
+    {n:'Bruno Andrade',    ativ:'Presencial 06/05',            st:'AGENDADO',   obs:''},
+  ]},
+  {mes:'JUNHO 2026', itens:[
+    {n:'Fernanda Tochetto',ativ:'Gravação de podcast',         st:'AGENDADO',  obs:'15/06 · 14h'},
+    {n:'Victor e Ambrenna',ativ:'Reunião presencial Jota Co',  st:'AGENDADO',  obs:'09/06 · 10h'},
+  ]},
+];
+
+const VENDAS=[
+  {bu:'ADVISORY',     cli:'FÁBIO GONÇALVES',           desc:'6 meses',              v:1000000,  mes:'Janeiro',   resp:'Grasi/Emily'},
+  {bu:'ADVISORY',     cli:'IVAN PONS',                  desc:'6 meses',              v:600000,   mes:'Janeiro',   resp:'Grasi/Emily'},
+  {bu:'JOTA LAB',     cli:'JONAS LIMA',                 desc:'Mentor MLS',           v:25000,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'PEDRO QUINTANILHA',          desc:'Seleto',               v:50000,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'NATHALIA FREITAS',           desc:'Mentor MLS',           v:25000,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'BRENO',                      desc:'Clube Tech Sales',     v:25000,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'SELETO - PEDRO QUINTANILHA', desc:'Seleto Club',          v:160000,   mes:'Janeiro',   resp:'Emily'},
+  {bu:'PUBLICIDADE',  cli:'HOSTINGER',                  desc:'2 vídeos conceito',    v:269000,   mes:'Janeiro',   resp:'Emily'},
+  {bu:'PUBLICIDADE',  cli:'MEDICAL SAN',                desc:'1 ano publicidade',    v:1000000,  mes:'Janeiro',   resp:'Joel Jota'},
+  {bu:'JOTA LAB',     cli:'FORMAÇÃO DE MENTORES',       desc:'Formação Mentores',    v:50000,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'SHEENA - MAGIC EVENTOS',     desc:'Fora ecossistema',     v:31500,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'RODRIGO',                    desc:'Seleto Club',          v:40000,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'EVERTON',                    desc:'Seleto Club',          v:20000,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'A TRINCA REAL STATE',        desc:'Mentor',               v:25000,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'MARÍLIA',                    desc:'Mentora MLS',          v:74000,    mes:'Janeiro',   resp:'Emily'},
+  {bu:'JOTA EDITION', cli:'ESCOLA DO PODCAST',          desc:'Geral janeiro',        v:357000,   mes:'Janeiro',   resp:'Grasi'},
+  {bu:'ADSENSE',      cli:'ADSENSE',                    desc:'Adsense jan',          v:124680,   mes:'Janeiro',   resp:'—'},
+  {bu:'ADVISORY',     cli:'BIA FINOCHIO',               desc:'1 ano',                v:1500000,  mes:'Fevereiro', resp:'Joel Jota'},
+  {bu:'ADVISORY',     cli:'FERNANDA TOCHETTO',          desc:'1 ano',                v:1000000,  mes:'Fevereiro', resp:'Grasi'},
+  {bu:'ADVISORY',     cli:'MARCOS',                     desc:'1 ano',                v:2400000,  mes:'Fevereiro', resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'DOUGLAS',                    desc:'Membro Trinca RS',     v:31500,    mes:'Fevereiro', resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'CRISTIANO ODONTOTOP',        desc:'MLS',                  v:50000,    mes:'Fevereiro', resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'PEDRO QUINTANILHA',          desc:'Internet',             v:2050,     mes:'Fevereiro', resp:'Emily'},
+  {bu:'JOTA EDITION', cli:'ESCOLA DO PODCAST',          desc:'Geral fevereiro',      v:276000,   mes:'Fevereiro', resp:'Grasi'},
+  {bu:'PALESTRAS',    cli:'SUÉLIO',                     desc:'Palestra + Advisory',  v:800000,   mes:'Fevereiro', resp:'Emily'},
+  {bu:'PUBLICIDADE',  cli:'CHEIRIN BÃO',                desc:'Publicidade Joel/Lalas',v:15000000,mes:'Fevereiro', resp:'Grasi'},
+  {bu:'ADSENSE',      cli:'ADSENSE',                    desc:'Adsense fev',          v:65184,    mes:'Fevereiro', resp:'—'},
+  {bu:'ADVISORY',     cli:'FÁBIO GONÇALVES - RENOV.',   desc:'6 meses',              v:1000000,  mes:'Março',     resp:'Grasi/Emily'},
+  {bu:'ADVISORY',     cli:'ISABELA SOLLER',             desc:'6 meses',              v:1000000,  mes:'Março',     resp:'Grasi/Emily'},
+  {bu:'ADVISORY',     cli:'BRUNO ANDRADE',              desc:'6 meses',              v:1000000,  mes:'Março',     resp:'Grasi/Emily'},
+  {bu:'ADVISORY',     cli:'AMBRENNA E VICTOR',          desc:'30 dias',              v:1000000,  mes:'Março',     resp:'Grasi/Emily'},
+  {bu:'JOTA LAB',     cli:'CLAX CLUB',                  desc:'Evento 01/03',         v:20000,    mes:'Março',     resp:'—'},
+  {bu:'JOTA LAB',     cli:'EDUARDO - PROSPERUS',        desc:'Prosperus',            v:50000,    mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'SELETO',                     desc:'Planner 100 unid.',    v:19900,    mes:'Março',     resp:'—'},
+  {bu:'JOTA LAB',     cli:'TREINAMENTO SELETO',         desc:'23/02/2026',           v:20000,    mes:'Março',     resp:'—'},
+  {bu:'JOTA LAB',     cli:'KATERINE',                   desc:'Advisory Prosperus',   v:50000,    mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'THIAGO MANCUSSI',            desc:'Advisory Prosperus',   v:50000,    mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'KATERINE - CONTRAT.',        desc:'Advisory Prosperus',   v:25000,    mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'MOISÉS',                     desc:'Cliente MLS',          v:25000,    mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'ATRS',                       desc:'Cliente MLS',          v:25000,    mes:'Março',     resp:'—'},
+  {bu:'JOTA LAB',     cli:'PEDRO QUINTANILHA',          desc:'Internet',             v:2050,     mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'PEDRO QUINTANILHA',          desc:'Seleto',               v:50000,    mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'ROSANGELA LOPES',            desc:'Exclusive',            v:25000,    mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'DANI MARTINS',               desc:'23 e 24 de abril',     v:50000,    mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'LEANDRO',                    desc:'JotaLab + Advisory',   v:105000,   mes:'Março',     resp:'Joel'},
+  {bu:'JOTA LAB',     cli:'ÍCARO GASPAR',               desc:'Mentor MLS',           v:25000,    mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'VANESSA GOLTZMAN',           desc:'JotaLab + Advisory',   v:105000,   mes:'Março',     resp:'—'},
+  {bu:'CLUBES SÓCIOS',cli:'JOSÉ NETTO',                 desc:'Seleto',               v:3000000,  mes:'Março',     resp:'Joel Jota'},
+  {bu:'CLUBES SÓCIOS',cli:'TIAGO GRANITO',              desc:'Seleto',               v:3000000,  mes:'Março',     resp:'Joel Jota'},
+  {bu:'JOTA EDITION', cli:'ESCOLA DO PODCAST',          desc:'Geral março',          v:146000,   mes:'Março',     resp:'Grasi'},
+  {bu:'JOTA EDITION', cli:'MÁQUINA TRIPLA',             desc:'Vendido 26/03',        v:87000,    mes:'Março',     resp:'—'},
+  {bu:'PUBLICIDADE',  cli:'AIRBNB',                     desc:'4 eps podcast',        v:192000,   mes:'Março',     resp:'Emily'},
+  {bu:'ADSENSE',      cli:'ADSENSE',                    desc:'Adsense mar',          v:202202,   mes:'Março',     resp:'—'},
+  {bu:'JOTA LAB',     cli:'PEDRO QUINTANILHA',          desc:'Inclusão de Internet', v:2050,     mes:'Março',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'JAQUELINE JUNQUEIRA',        desc:'Clube MAAB - MLS',     v:25000,    mes:'Abril',     resp:'Emily'},
+  {bu:'PALESTRAS',    cli:'FABIOLA',                    desc:'Palestras Lalas',      v:30000,    mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA EDITION', cli:'THAIS BERTI',                desc:'Máquina Tripla',       v:7000,     mes:'Abril',     resp:'—'},
+  {bu:'JOTA EDITION', cli:'LISIANE',                    desc:'Máquina Tripla',       v:7000,     mes:'Abril',     resp:'Kath'},
+  {bu:'JOTA EDITION', cli:'NATHALIA CUMINALE',          desc:'Máquina Tripla',       v:7000,     mes:'Abril',     resp:'Kath'},
+  {bu:'JOTA LAB',     cli:'GABRIELA AMIGA LALAS',       desc:'Locação JLab',         v:20000,    mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'QUÉSIA CARDOSO',             desc:'Mentor MLS',           v:25000,    mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA EDITION', cli:'DIEGO',                      desc:'Máquina Tripla',       v:7000,     mes:'Abril',     resp:'Rafael'},
+  {bu:'JOTA EDITION', cli:'DOUGLAS WALTRIK',            desc:'Máquina Tripla',       v:10000,    mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'WALKYRIA - SALA DE GUERRA',  desc:'Locação JLab',         v:105000,   mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'JOSÉ RUBENS - SALA DE GUERRA',desc:'Locação JLab',        v:105000,   mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'NÚBIA',                      desc:'Locação JLab',         v:25000,    mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'TIAGO MANCUSSI',             desc:'Locação JLab',         v:50000,    mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA EDITION', cli:'BRUNO',                      desc:'Máquina Tripla',       v:7000,     mes:'Abril',     resp:'Kath'},
+  {bu:'JOTA EDITION', cli:'RAYANE',                     desc:'Máquina Tripla',       v:7000,     mes:'Abril',     resp:'Kath'},
+  {bu:'JOTA LAB',     cli:'A TRINCA REAL STATE',        desc:'Locação JLab',         v:25000,    mes:'Abril',     resp:'Joel Jota'},
+  {bu:'JOTA EDITION', cli:'MARCOS VARANDAS',            desc:'Máquina Tripla',       v:7000,     mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA EDITION', cli:'AN PAULA',                   desc:'Máquina Tripla Online',v:3000,     mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA EDITION', cli:'ANDRÉ PIVETTI',               desc:'Máquina Tripla Online',v:3000,     mes:'Abril',     resp:'Kath'},
+  {bu:'JOTA EDITION', cli:'JAMILE',                      desc:'Máquina Tripla',        v:10000,    mes:'Abril',     resp:'Rafael'},
+  {bu:'JOTA EDITION', cli:'ROBSON',                       desc:'Máquina Tripla Individual', v:3000, mes:'Abril',     resp:'Emily'},
+  {bu:'JOTA EDITION', cli:'EDUARDO RAMALHO',              desc:'Máquina Tripla Individual', v:3000, mes:'Abril',     resp:'Kath'},
+  {bu:'JOTA LAB',     cli:'CLAX CLUB - ROBERTA',          desc:'Locação JLab',         v:20000,    mes:'Abril',     resp:'Joel Jota'},
+  {bu:'JOTA EDITION', cli:'LUCIANO MACARO',               desc:'Máquina Tripla Online',v:3000,     mes:'Abril',     resp:'Kath'},
+  {bu:'JOTA LAB',     cli:'PEDRO QUINTANILHA',            desc:'Livros 300 Não é Milagre', v:14700, mes:'Abril',    resp:'Joel Jota'},
+  {bu:'ADVISORY',     cli:'CAIO BARBOSA',                  desc:'30 dias',                  v:1000000, mes:'Abril',  resp:'Grasi'},
+];
+
+let editPipIdx=-1, editCliIdx=-1;
+const db={
+  pip:JSON.parse(localStorage.getItem('jc3_pip_v2')||JSON.stringify(PIPELINE_INICIAL)),
+  cli:JSON.parse(localStorage.getItem('jc3_cli')||'[]'),
+  metas:JSON.parse(localStorage.getItem('jc3_metas')||JSON.stringify(METAS)),
+};
+function persist(){
+  localStorage.setItem('jc3_pip_v2',JSON.stringify(db.pip));
+  localStorage.setItem('jc3_cli',JSON.stringify(db.cli));
+  localStorage.setItem('jc3_metas',JSON.stringify(db.metas));
+}
+
+// ── NAVIGATION CONFIG ──
+const TABS_MOBILE=[
+  {id:'overview', label:'Geral',    icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>'},
+  {id:'pipeline', label:'Pipeline', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>'},
+  {id:'vendas',   label:'Vendas',   icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>'},
+  {id:'advisory', label:'Advisory', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'},
+  {id:'more',     label:'Mais',     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>'},
+];
+const MORE_ITEMS=[
+  {id:'seleto',   label:'Sócio Seleto',  icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'},
+  {id:'clientes', label:'Publi · Palestra',      icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'},
+  {id:'time',     label:'Time',          icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'},
+  {id:'reporte',  label:'Reporte Joel',  icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>'},
+];
+const ALL_NAV=['overview','pipeline','vendas','advisory','seleto','clientes','time','reporte'];
+const NAV_LABELS={overview:'Visão Geral',pipeline:'Pipeline',vendas:'Vendas',advisory:'Advisory',seleto:'Seleto',clientes:'Publi · Palestra',time:'Time',reporte:'Reporte'};
+
+// Build desktop nav
+const dnav=document.getElementById('tnav');
+dnav.innerHTML=ALL_NAV.map(k=>`<button class="nbtn" data-p="${k}" onclick="showP('${k}')">${NAV_LABELS[k]}</button>`).join('');
+
+// Build mobile bottom nav
+const bntabs=document.getElementById('bntabs');
+bntabs.innerHTML=TABS_MOBILE.map(t=>`
+  <button class="bntab" data-p="${t.id}" onclick="handleMobileTab('${t.id}')">${t.icon}<span>${t.label}</span></button>`).join('');
+
+// Build more panel
+const mp2=document.getElementById('morepanel');
+mp2.innerHTML=MORE_ITEMS.map(m=>`
+  <div class="mpitem" data-p="${m.id}" onclick="selectMore('${m.id}')">${m.icon}<span>${m.label}</span></div>`).join('');
+
+let moreOpen=false;
+
+function handleMobileTab(id){
+  if(id==='more'){
+    moreOpen=!moreOpen;
+    document.getElementById('morepanel').classList.toggle('open',moreOpen);
+    document.getElementById('overlay').classList.toggle('open',moreOpen);
+    // toggle active state of more button
+    document.querySelectorAll('.bntab').forEach(b=>b.classList.remove('active'));
+    if(moreOpen) document.querySelector('.bntab[data-p="more"]').classList.add('active');
+  } else {
+    closeMore();
+    showP(id);
+  }
+}
+
+function selectMore(id){
+  closeMore();
+  showP(id);
+}
+
+function closeMore(){
+  moreOpen=false;
+  document.getElementById('morepanel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+let currentPanel='overview';
+function showP(id){
+  currentPanel=id;
+  // Render
+  const mc=document.getElementById('mc');
+  if(id==='overview') mc.innerHTML=renderOv();
+  else if(id==='pipeline') mc.innerHTML=renderPip();
+  else if(id==='vendas') mc.innerHTML=renderVendas();
+  else if(id==='advisory') mc.innerHTML=renderAdvisory();
+  else if(id==='seleto') mc.innerHTML=renderSeleto();
+  else if(id==='clientes') mc.innerHTML=renderCli();
+  else if(id==='time') mc.innerHTML=renderTime();
+  else if(id==='reporte') mc.innerHTML=renderReport();
+  // Update desktop nav
+  document.querySelectorAll('.nbtn').forEach(b=>b.classList.toggle('active',b.dataset.p===id));
+  // Update mobile nav
+  document.querySelectorAll('.bntab').forEach(b=>{
+    const isMore=MORE_ITEMS.some(m=>m.id===id)&&b.dataset.p==='more';
+    b.classList.toggle('active', b.dataset.p===id||isMore);
+  });
+  document.querySelectorAll('.mpitem').forEach(b=>b.classList.toggle('active',b.dataset.p===id));
+  // Animate after render
+  if(id==='overview') setTimeout(animBars,80);
+  // Scroll to top
+  window.scrollTo(0,0);
+}
+
+showP('overview');
+
+// ══ UTILS ══
+function fmt(n){if(n>=1000000)return (n/1000000).toFixed(1).replace('.',',')+' M';if(n>=1000)return (n/1000).toFixed(0)+'k';return n.toLocaleString('pt-BR');}
+function fmtFull(n){return 'R$ '+n.toLocaleString('pt-BR');}
+function fmtD(d){if(!d)return '';const p=d.split('-');return `${p[2]}/${p[1]}`;}
+function pctBar(pct,color){return `<div class="pbar"><div class="pfill" data-w="${pct}" style="width:0%;background:${color}"></div></div>`;}
+function animBars(){document.querySelectorAll('.pfill[data-w]').forEach(el=>el.style.width=el.dataset.w+'%');}
+
+// ══ OVERVIEW ══
+function renderOv(){
+  const m=db.metas;
+  const tMeta=Object.values(m).reduce((a,b)=>a+b.meta,0);
+  const tReal=Object.values(m).reduce((a,b)=>a+b.real,0);
+  const pct=Math.round(tReal/tMeta*100);
+  const pipAt=db.pip.filter(p=>!['Fechado','Perdido'].includes(p.e));
+  const pipV=pipAt.reduce((a,b)=>a+(+b.v||0),0);
+  const totalCli=31+db.cli.length;
+
+  const buRows=Object.entries(m).map(([bu,d])=>{
+    const p=Math.min(Math.round(d.real/d.meta*100),100);
+    const clr=d.real>=d.meta?'#0e9964':p>=40?'#1d6fdb':'#dc2626';
+    const badge=d.real>=d.meta?'<span class="badge bg">Meta ✓</span>':p>=40?'<span class="badge bb">Em dia</span>':'<span class="badge br">Risco</span>';
+    return `<div class="dr">
+      <div style="flex:1;min-width:0">
+        <div class="iname">${bu}</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+          ${pctBar(p,clr)}
+          <div style="font-size:13px;font-weight:700;color:${clr};min-width:36px;font-family:'Space Mono',monospace">${p}%</div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;margin-left:14px">
+        <div class="vval">R$${fmt(d.real)}</div>
+        <div style="font-size:12px;color:var(--text3);font-family:'Space Mono',monospace;margin-top:3px">de R$${fmt(d.meta)}</div>
+        <div style="margin-top:5px">${badge}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div class="sh">
+    <div><div class="st">Visão Geral</div><div class="ss">2026 · Atualizado Semana 15</div></div>
+    <button class="btn btns" onclick="openEditMetas()">Editar</button>
+  </div>
+  <div class="mgrid">
+    <div class="mc blue"><div class="ml">Meta Anual</div><div class="mv blue">R$${fmt(tMeta)}</div><div class="ms">8 BUs</div></div>
+    <div class="mc"><div class="ml">Realizado</div><div class="mv mono">R$${fmt(tReal)}</div><div class="ms">${pct}% da meta</div></div>
+    <div class="mc"><div class="ml">Pipeline</div><div class="mv mono">R$${fmt(pipV)}</div><div class="ms">${pipAt.length} negociações</div></div>
+    <div class="mc"><div class="ml">Carteira</div><div class="mv mono">${totalCli}</div><div class="ms">clientes ativos</div></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><span class="card-title">BUs — Realizado vs Meta Anual</span></div>
+    <div class="card-body">${buRows}</div>
+  </div>
+  ${renderMesMes()}
+  ${renderHistorico()}`;
+}
+
+function renderMesMes(){
+  const meses=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const now=new Date();
+  const nomeMes=meses[now.getMonth()];
+  const buOrder=['PUBLICIDADE','ADVISORY','PALESTRAS','CLUBES SÓCIOS','JOTA LAB','JOTA EDITION','A TRINCA MÍDIA','ADSENSE'];
+
+  // Vendas do mês atual por BU
+  const vendMes={};
+  VENDAS.filter(v=>v.mes===nomeMes).forEach(v=>{vendMes[v.bu]=(vendMes[v.bu]||0)+v.v;});
+
+  const metasMes=METAS_MENSAIS[nomeMes]||{};
+  const rows=buOrder.map(bu=>{
+    const d=db.metas[bu];if(!d)return '';
+    const metaMensal=metasMes[bu]||0;
+    const real=vendMes[bu]||0;
+    if(metaMensal===0&&real===0)return '';
+    const p=metaMensal>0?Math.min(Math.round(real/metaMensal*100),999):real>0?100:0;
+    const clr=real>=metaMensal&&metaMensal>0?'#0e9964':p>=40?'#1d6fdb':'#dc2626';
+    const badge=real>=metaMensal&&metaMensal>0?'<span class="badge bg">Meta ✓</span>':p>=40?'<span class="badge bb">Em dia</span>':'<span class="badge br">Risco</span>';
+    return `<div class="dr">
+      <div style="flex:1;min-width:0">
+        <div class="iname">${bu}</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+          ${pctBar(p,clr)}
+          <div style="font-size:13px;font-weight:700;color:${clr};min-width:36px;font-family:'Space Mono',monospace">${p}%</div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;margin-left:14px">
+        <div class="vval">R$${fmt(real)}</div>
+        <div style="font-size:12px;color:var(--text3);font-family:'Space Mono',monospace;margin-top:3px">meta R$${fmt(metaMensal)}</div>
+        <div style="margin-top:5px">${badge}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const totalMes=Object.values(vendMes).reduce((a,b)=>a+b,0);
+  const totalMetaMes=Object.values(metasMes).reduce((a,b)=>a+b,0);
+  const pctTotal=totalMetaMes>0?Math.round(totalMes/totalMetaMes*100):0;
+
+  return `<div style="background:var(--blue2);border-radius:14px;padding:18px 16px 6px;margin:16px 0 8px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.2px;color:rgba(255,255,255,0.7);text-transform:uppercase">Mês Vigente</div>
+        <div style="font-size:20px;font-weight:800;color:#fff;margin-top:2px">${nomeMes} ${now.getFullYear()}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:11px;color:rgba(255,255,255,0.7)">Meta do mês</div>
+        <div style="font-family:'Space Mono',monospace;font-size:17px;font-weight:700;color:#fff">R$${fmt(totalMetaMes)}</div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:2px">Realizado</div>
+        <div style="font-family:'Space Mono',monospace;font-size:26px;font-weight:800;color:#fff">R$${fmt(totalMes)}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:32px;font-weight:900;color:${pctTotal>=100?'#6aeec7':pctTotal>=40?'#fde68a':'#fca5a5'}">${pctTotal}%</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.7)">da meta</div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);border-radius:10px;overflow:hidden;margin-bottom:14px">
+      ${buOrder.map(bu=>{
+        const d=db.metas[bu];if(!d)return '';
+        const metaMensal=Math.round(d.meta/12);
+        const real=vendMes[bu]||0;
+        const p=metaMensal>0?Math.min(Math.round(real/metaMensal*100),100):0;
+        const clr=real>=metaMensal?'#6aeec7':p>=40?'#93c5fd':'#fca5a5';
+        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.08)">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:700;color:#fff">${bu}</div>
+            <div style="height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin-top:6px;overflow:hidden">
+              <div style="height:4px;background:${clr};width:${p}%;border-radius:2px;transition:width .4s"></div>
+            </div>
+          </div>
+          <div style="text-align:right;margin-left:16px;flex-shrink:0">
+            <div style="font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:${clr}">R$${fmt(real)}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55)">de R$${fmt(metaMensal)}</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+function renderHistorico(){
+  const mesesRealizados=['Janeiro','Fevereiro','Março','Abril'];
+  const buOrder=['PUBLICIDADE','ADVISORY','PALESTRAS','CLUBES SÓCIOS','JOTA LAB','JOTA EDITION','A TRINCA MÍDIA','ADSENSE'];
+
+  const blocos=mesesRealizados.map(mes=>{
+    const vendMes={};
+    VENDAS.filter(v=>v.mes===mes).forEach(v=>{vendMes[v.bu]=(vendMes[v.bu]||0)+v.v;});
+    const totalReal=Object.values(vendMes).reduce((a,b)=>a+b,0);
+    if(totalReal===0) return '';
+    const metasMes=METAS_MENSAIS[mes]||{};
+    const totalMeta=Object.values(metasMes).reduce((a,b)=>a+b,0);
+    const pctTotal=totalMeta>0?Math.min(Math.round(totalReal/totalMeta*100),999):0;
+    const pctClr=pctTotal>=100?'#0e9964':pctTotal>=40?'#1d6fdb':'#dc2626';
+
+    const buItens=buOrder.filter(bu=>vendMes[bu]>0||(metasMes[bu]||0)>0).map(bu=>{
+      const real=vendMes[bu]||0;
+      const meta=metasMes[bu]||0;
+      if(real===0&&meta===0) return '';
+      const p=meta>0?Math.min(Math.round(real/meta*100),100):real>0?100:0;
+      const clr=real>=meta?'#0e9964':p>=40?'#1d6fdb':'#dc2626';
+      return `<tr>
+        <td style="padding:7px 10px;font-size:13px;color:var(--text2);border-bottom:1px solid var(--b2)">${bu}</td>
+        <td style="padding:7px 10px;font-family:'Space Mono',monospace;font-size:13px;color:var(--text3);border-bottom:1px solid var(--b2);text-align:right">R$${fmt(meta)}</td>
+        <td style="padding:7px 10px;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:${clr};border-bottom:1px solid var(--b2);text-align:right">R$${fmt(real)}</td>
+        <td style="padding:7px 10px;border-bottom:1px solid var(--b2);text-align:right">
+          <span style="font-size:12px;font-weight:700;color:${clr}">${p}%</span>
+          <div style="height:3px;background:var(--b2);border-radius:2px;margin-top:4px;min-width:40px;overflow:hidden">
+            <div style="height:3px;background:${clr};width:${p}%;border-radius:2px"></div>
+          </div>
+        </td>
+      </tr>`;
+    }).join('');
+
+    return `<div style="margin-bottom:14px;border:1px solid var(--b2);border-radius:12px;overflow:hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--bg4)">
+        <div style="font-size:15px;font-weight:800;color:var(--text)">${mes}</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="text-align:right">
+            <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px">Realizado</div>
+            <div style="font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:${pctClr}">R$${fmt(totalReal)}</div>
+          </div>
+          <div style="background:${pctClr};color:#fff;font-size:13px;font-weight:800;border-radius:8px;padding:4px 10px;font-family:'Space Mono',monospace">${pctTotal}%</div>
+        </div>
+      </div>
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr style="background:var(--bg2)">
+            <th style="padding:6px 10px;font-size:11px;color:var(--text3);font-weight:600;text-align:left;border-bottom:1px solid var(--b2)">BU</th>
+            <th style="padding:6px 10px;font-size:11px;color:var(--text3);font-weight:600;text-align:right;border-bottom:1px solid var(--b2)">Meta</th>
+            <th style="padding:6px 10px;font-size:11px;color:var(--text3);font-weight:600;text-align:right;border-bottom:1px solid var(--b2)">Realizado</th>
+            <th style="padding:6px 10px;font-size:11px;color:var(--text3);font-weight:600;text-align:right;border-bottom:1px solid var(--b2)">%</th>
+          </tr>
+        </thead>
+        <tbody>${buItens}</tbody>
+      </table>
+    </div>`;
+  }).join('');
+
+  const totalAno=VENDAS.reduce((a,v)=>a+v.v,0);
+
+  return `<div class="slabel">Histórico — Meses Realizados</div>
+  <div style="margin-bottom:4px">${blocos}</div>
+  <div style="background:var(--bg4);border:1px solid var(--b2);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <div style="font-size:13px;font-weight:700;color:var(--text2)">Total Acumulado 2026</div>
+    <div style="font-family:'Space Mono',monospace;font-size:18px;font-weight:800;color:var(--blue2)">R$${fmt(totalAno)}</div>
+  </div>`;
+}
+
+function openEditMetas(){
+  const rows=Object.entries(db.metas).map(([bu,d])=>`
+    <div class="fgg"><label class="fl">${bu}</label>
+    <input class="fi" data-bu="${bu}" value="${d.real}" type="number" placeholder="Realizado"></div>`).join('');
+  const div=document.createElement('div');
+  div.className='mo open';div.id='memm';
+  div.innerHTML=`<div class="modal" style="max-width:560px">
+    <div class="mhead"><div class="mtit">Atualizar realizados</div><button class="mclose" onclick="document.getElementById('memm').remove()">×</button></div>
+    <div class="mbody"><div class="fg">${rows}</div></div>
+    <div class="mfoot"><button class="btn" onclick="document.getElementById('memm').remove()">Cancelar</button><button class="btn btnp" onclick="saveMetasEdit(this)">Salvar</button></div>
+  </div>`;
+  document.body.appendChild(div);
+}
+function saveMetasEdit(btn){
+  btn.closest('.mo').querySelectorAll('input[data-bu]').forEach(i=>{if(db.metas[i.dataset.bu])db.metas[i.dataset.bu].real=+i.value||0;});
+  persist();btn.closest('.mo').remove();showP('overview');showToast('Atualizado!');
+}
+
+// ══ PIPELINE ══
+function renderPip(){
+  const pip=db.pip;
+  const ativo=pip.filter(p=>!['Fechado','Perdido'].includes(p.e));
+  const alta=ativo.filter(p=>(+p.p||0)>=70);
+  const med=ativo.filter(p=>(+p.p||0)>=30&&(+p.p||0)<70);
+  const baixa=ativo.filter(p=>(+p.p||0)<30);
+  const fech=pip.filter(p=>p.e==='Fechado');
+  const perd=pip.filter(p=>p.e==='Perdido');
+  const volAt=ativo.reduce((a,b)=>a+(+b.v||0),0);
+  const contrato=pip.filter(p=>p.e==='Em Contrato');
+
+  function rows(arr){
+    return arr.map(item=>{
+      const idx=pip.indexOf(item);
+      const bc=item.e==='Fechado'?'bg':item.e==='Perdido'?'br':item.e==='Em Contrato'?'bg':item.e==='Proposta Enviada'?'bb':'ba';
+      return `<div class="dr">
+        <div style="flex:1;min-width:0">
+          <div class="iname">${item.c}</div>
+          <div class="isub">${item.bu} · ${item.resp}${item.pd?' · '+fmtD(item.pd):''}</div>
+          ${item.next?`<div class="inext">→ ${item.next}</div>`:''}
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div class="vval">R$${fmt(+item.v||0)}</div>
+          <div style="margin-top:5px"><span class="badge ${bc}">${item.e}</span></div>
+          <div style="font-size:12px;color:var(--text3);margin-top:4px;font-family:'Space Mono',monospace">${item.p||0}%</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;margin-left:8px">
+          <button class="btn btns" onclick="editPip(${idx})" style="padding:5px 8px">✏</button>
+          <button class="btn btns" onclick="delPip(${idx})" style="padding:5px 8px">✕</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  let html=`<div class="sh">
+    <div><div class="st">Pipeline</div><div class="ss">Negociações ativas</div></div>
+    <button class="btn btnp btns" onclick="openPipM()">+ Nova</button>
+  </div>
+  <div class="mgrid">
+    <div class="mc"><div class="ml">Volume ativo</div><div class="mv mono">R$${fmt(volAt)}</div><div class="ms">${ativo.length} negoc.</div></div>
+    <div class="mc blue"><div class="ml">Alta +70%</div><div class="mv blue mono">${alta.length}</div><div class="ms">R$${fmt(alta.reduce((a,b)=>a+(+b.v||0),0))}</div></div>
+    <div class="mc"><div class="ml">Em contrato</div><div class="mv mono">${contrato.length}</div><div class="ms">R$${fmt(contrato.reduce((a,b)=>a+(+b.v||0),0))}</div></div>
+  </div>`;
+
+  const grupos=[['Alta — +70%',alta],['Média — 30–70%',med],['Baixa — -30%',baixa],['Fechados',fech],['Perdidos',perd]];
+  grupos.forEach(([label,arr])=>{
+    if(!arr.length)return;
+    html+=`<div class="slabel">${label}</div><div class="card"><div class="card-body">${rows(arr)}</div></div>`;
+  });
+  if(!pip.length)html+=`<div style="text-align:center;padding:48px 20px;color:var(--text3)">Nenhuma negociação.</div>`;
+  return html;
+}
+function openPipM(idx){
+  editPipIdx=idx!==undefined?idx:-1;
+  document.getElementById('mptit').textContent=editPipIdx>=0?'Editar negociação':'Nova negociação';
+  const item=editPipIdx>=0?db.pip[editPipIdx]:{};
+  ['pc','pv','pp','pnext','pobs'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  document.getElementById('pc').value=item.c||'';
+  document.getElementById('pb').value=item.bu||'PUBLICIDADE';
+  document.getElementById('pv').value=item.v||'';
+  document.getElementById('pe').value=item.e||'Em Negociação';
+  document.getElementById('pp').value=item.p||'';
+  document.getElementById('pr').value=item.resp||'Grasi';
+  document.getElementById('pd').value=item.pd||'';
+  document.getElementById('pnext').value=item.next||'';
+  document.getElementById('pobs').value=item.obs||'';
+  document.getElementById('mp').classList.add('open');
+}
+function editPip(idx){openPipM(idx);}
+function delPip(idx){if(!confirm('Remover esta negociação?'))return;db.pip.splice(idx,1);persist();showP('pipeline');showToast('Removida');}
+function savePip(){
+  const item={c:document.getElementById('pc').value.trim(),bu:document.getElementById('pb').value,v:document.getElementById('pv').value,e:document.getElementById('pe').value,p:document.getElementById('pp').value,resp:document.getElementById('pr').value,pd:document.getElementById('pd').value,next:document.getElementById('pnext').value.trim(),obs:document.getElementById('pobs').value.trim()};
+  if(!item.c){showToast('Informe o cliente');return;}
+  if(editPipIdx>=0)db.pip[editPipIdx]=item;else db.pip.push(item);
+  persist();closeM('mp');showP('pipeline');showToast(editPipIdx>=0?'Atualizada':'Adicionada!');
+}
+
+// ══ VENDAS ══
+function renderVendas(){
+  const meses=['Janeiro','Fevereiro','Março','Abril'];
+  const sumMes={};VENDAS.forEach(v=>{sumMes[v.mes]=(sumMes[v.mes]||0)+v.v;});
+  const totBU={};VENDAS.forEach(v=>{totBU[v.bu]=(totBU[v.bu]||0)+v.v;});
+  const totalG=Object.values(totBU).reduce((a,b)=>a+b,0);
+
+  let html=`<div class="sh"><div><div class="st">Vendas Fechadas</div><div class="ss">Jan a Abr 2026</div></div></div>
+  <div class="mgrid">
+    <div class="mc blue"><div class="ml">Total Jan–Abr</div><div class="mv blue mono">R$${fmt(totalG)}</div><div class="ms">${VENDAS.length} transações</div></div>
+    ${meses.map(m=>`<div class="mc"><div class="ml">${m.slice(0,3)}</div><div class="mv mono">R$${fmt(sumMes[m]||0)}</div></div>`).join('')}
+  </div>
+  <div class="card">
+    <div class="card-head"><span class="card-title">Por BU</span></div>
+    <div class="card-body">
+    ${Object.entries(totBU).sort((a,b)=>b[1]-a[1]).map(([bu,v])=>`
+      <div class="dr">
+        <div class="iname">${bu}</div>
+        <div class="vval blue">R$${fmt(v)}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+
+  meses.forEach(mes=>{
+    const items=VENDAS.filter(v=>v.mes===mes);
+    if(!items.length)return;
+    const tot=items.reduce((a,b)=>a+b.v,0);
+    html+=`<div class="slabel">${mes} — R$${fmt(tot)}</div>
+    <div class="card"><div class="tscroll">
+    <table class="vtab"><thead><tr><th>Cliente</th><th>BU</th><th>Resp.</th><th style="text-align:right">Valor</th></tr></thead><tbody>
+    ${items.map(v=>`<tr><td><div style="font-weight:700;font-size:14px">${v.cli}</div><div style="font-size:12px;color:var(--text3);margin-top:2px">${v.desc}</div></td><td><span class="badge bgray">${v.bu}</span></td><td style="color:var(--text3);font-size:13px">${v.resp}</td><td style="text-align:right"><span class="vval">R$${fmt(v.v)}</span></td></tr>`).join('')}
+    </tbody></table></div></div>`;
+  });
+  return html;
+}
+
+// ══ ADVISORY ══
+function renderAdvisory(){
+  const advTot=ADVISORY_ATIVOS.reduce((a,b)=>a+b.v,0);
+  const advRec=ADVISORY_ATIVOS.reduce((a,b)=>a+b.rec,0);
+  const advSaldo=advTot-advRec;
+
+  const abr_badge=(s)=>{
+    if(s==='pendente')return'<span class="badge ba">Pendente</span>';
+    if(s==='agendado')return'<span class="badge bb">Agendado</span>';
+    if(s==='ok')return'<span class="badge bg">OK</span>';
+    return'<span class="badge bgray">Em contrato</span>';
+  };
+
+  // Summary cards
+  let html=`<div class="sh">
+    <div><div class="st">Advisory</div><div class="ss">${ADVISORY_ATIVOS.length} clientes ativos</div></div>
+  </div>
+  <div class="mgrid">
+    <div class="mc blue"><div class="ml">Contratado</div><div class="mv blue mono">R$${fmt(advTot)}</div><div class="ms">${ADVISORY_ATIVOS.length} clientes</div></div>
+    <div class="mc"><div class="ml">Recebido</div><div class="mv mono" style="color:var(--green)">R$${fmt(advRec)}</div><div class="ms">${Math.round(advRec/advTot*100)}% pago</div></div>
+    <div class="mc"><div class="ml">A receber</div><div class="mv mono">R$${fmt(advSaldo)}</div><div class="ms">saldo</div></div>
+    <div class="mc"><div class="ml">Abril pendente</div><div class="mv mono" style="color:var(--amber)">${ADVISORY_ATIVOS.filter(c=>c.abr_s==='pendente').length}</div><div class="ms">reuniões</div></div>
+  </div>`;
+
+  // Clients list
+  html+=`<div class="slabel">Publi · Palestra — Detalhamento</div>
+  <div class="card">`;
+  ADVISORY_ATIVOS.forEach((c,i)=>{
+    const pct=Math.round(c.rec/c.v*100);
+    const barclr=pct>=80?'#0e9964':pct>=30?'#1d6fdb':'#b45309';
+    html+=`<div class="card-body">
+      <div class="dr" style="align-items:flex-start;padding:13px 0">
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span class="iname">${c.n}</span>
+            ${abr_badge(c.abr_s)}
+          </div>
+          <div class="isub">${c.foco} · ${c.per} · ${c.dur}</div>
+          <div class="isub">${c.obs}</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:9px">
+            ${pctBar(pct,barclr)}
+            <span style="font-size:13px;font-weight:700;font-family:'Space Mono',monospace;color:${barclr}">${pct}%</span>
+          </div>
+          <div class="isub" style="margin-top:5px">Abril: ${c.abr}</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:14px">
+          <div style="font-size:12px;color:var(--text3);font-family:'Space Mono',monospace">R$${fmt(c.v)}</div>
+          <div class="vval green" style="margin-top:4px">R$${fmt(c.rec)}</div>
+          ${c.prox!=='—'?`<div style="font-size:12px;color:var(--blue2);margin-top:5px;font-weight:600">→ ${c.prox}</div>`:''}
+        </div>
+      </div>
+    </div>`;
+  });
+  html+=`</div>`;
+
+  // Cronograma de entregas
+  html+=`<div class="slabel">Cronograma de Entregas</div>`;
+  ADVISORY_ENTREGAS.forEach(bloco=>{
+    html+=`<div class="card" style="margin-bottom:12px">
+      <div class="del-month">${bloco.mes}</div>
+      <div class="card-body">`;
+    bloco.itens.forEach(item=>{
+      const bc=item.st==='REALIZADO'?'bg':item.st==='AGENDADO'?'bb':item.st==='PENDENTE'?'ba':'bgray';
+      html+=`<div class="dr">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:600;color:var(--text)">${item.n}</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:2px">${item.ativ}${item.obs?' · '+item.obs:''}</div>
+        </div>
+        <span class="badge ${bc}">${item.st}</span>
+      </div>`;
+    });
+    html+=`</div></div>`;
+  });
+  return html;
+}
+
+// ══ SELETO ══
+function renderSeleto(){
+  const selTot=SELETO_ATIVOS.reduce((a,b)=>a+b.v,0);
+  const selRec=SELETO_ATIVOS.reduce((a,b)=>a+b.rec,0);
+  const adim=SELETO_ATIVOS.filter(m=>Math.round(m.rec/m.v*100)>=80).length;
+
+  let html=`<div class="sh">
+    <div><div class="st">Sócio Seleto</div><div class="ss">${SELETO_ATIVOS.length} membros ativos</div></div>
+  </div>
+  <div class="mgrid">
+    <div class="mc blue"><div class="ml">Contratado</div><div class="mv blue mono">R$${fmt(selTot)}</div><div class="ms">${SELETO_ATIVOS.length} membros</div></div>
+    <div class="mc"><div class="ml">Recebido</div><div class="mv mono" style="color:var(--green)">R$${fmt(selRec)}</div><div class="ms">${Math.round(selRec/selTot*100)}% pago</div></div>
+    <div class="mc"><div class="ml">Saldo</div><div class="mv mono">R$${fmt(selTot-selRec)}</div></div>
+    <div class="mc"><div class="ml">Adimplentes</div><div class="mv mono" style="color:var(--green)">${adim}</div><div class="ms">de ${SELETO_ATIVOS.length}</div></div>
+  </div>
+  <div class="card"><div class="tscroll">
+  <table class="vtab"><thead><tr><th>#</th><th>Membro</th><th>Segmento</th><th>Entrada</th><th style="text-align:right">Recebido</th><th style="text-align:right">Saldo</th><th>Status</th></tr></thead><tbody>`;
+
+  SELETO_ATIVOS.forEach((m,i)=>{
+    const pct=Math.round(m.rec/m.v*100);
+    const saldo=m.v-m.rec;
+    const badge=pct>=80?'<span class="badge bg">Adimplente</span>':pct>=30?'<span class="badge ba">Em dia</span>':'<span class="badge br">Atenção</span>';
+    const barclr=pct>=80?'#0e9964':pct>=30?'#b45309':'#dc2626';
+    html+=`<tr>
+      <td style="color:var(--text3);font-family:'Space Mono',monospace;font-size:11px">${String(i+1).padStart(2,'0')}</td>
+      <td style="font-weight:600;color:var(--text)">${m.n}</td>
+      <td><span class="badge bgray">${m.seg}</span></td>
+      <td style="font-size:11px;color:var(--text3)">${m.ent}</td>
+      <td style="text-align:right">
+        <div class="vval" style="color:${barclr}">R$${fmt(m.rec)}</div>
+        <div style="font-size:12px;color:var(--text3);font-family:'Space Mono',monospace;margin-top:3px">${pct}%</div>
+      </td>
+      <td style="text-align:right"><span class="vval" style="color:var(--text2)">R$${fmt(saldo)}</span></td>
+      <td>${badge}</td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div></div>`;
+  return html;
+}
+
+// ══ CLIENTES ══
+function renderCli(){
+  const pub=[
+    {n:'Cheirin Bão',  resp:'Grasi',    v:15000000, st:'Em entrega', obs:'Publicidade Joel/Lalas · 1 ano'},
+    {n:'Medical San',  resp:'Joel Jota', v:1000000,  st:'Em entrega', obs:'1 ano contrato publicidade'},
+    {n:'Airbnb',       resp:'Emily',    v:192000,   st:'Em entrega', obs:'4 episódios podcast'},
+    {n:'Hostinger',    resp:'Emily',    v:269000,   st:'Concluído',  obs:'2 vídeos conceito'},
+  ];
+
+  let html=`<div class="sh">
+    <div><div class="st">Publi · Palestra Ativos</div><div class="ss">Publicidade · Palestras</div></div>
+    <button class="btn btnp btns" onclick="openCliM()">+ Cliente</button>
+  </div>`;
+
+  html+=`<div class="slabel">Publicidade</div>
+  <div class="card"><div class="card-body">`;
+  pub.forEach(c=>{
+    const bc=c.st==='Em entrega'?'bg':c.st==='Concluído'?'bb':'ba';
+    html+=`<div class="dr">
+      <div style="flex:1"><div class="iname">${c.n}</div><div class="isub">${c.resp} · ${c.obs}</div></div>
+      <div style="text-align:right;flex-shrink:0;margin-left:12px"><div class="vval">R$${fmt(c.v)}</div><div style="margin-top:6px"><span class="badge ${bc}">${c.st}</span></div></div>
+    </div>`;
+  });
+  html+=`</div></div>`;
+
+  html+=`<div class="slabel">Palestras</div>
+  <div class="card"><div class="card-body">
+    <div class="dr">
+      <div style="flex:1"><div class="iname">Suélio</div><div class="isub">Emily · Palestra + Advisory · Fev/26</div></div>
+      <div style="text-align:right"><div class="vval">R$800k</div><div style="margin-top:6px"><span class="badge bg">Em entrega</span></div></div>
+    </div>
+    <div class="dr">
+      <div style="flex:1"><div class="iname">Fabíola</div><div class="isub">Emily · Palestras Lalas · Abr/26</div></div>
+      <div style="text-align:right"><div class="vval">R$30k</div><div style="margin-top:6px"><span class="badge bg">Em entrega</span></div></div>
+    </div>
+  </div></div>`;
+
+  // Manual clients
+  if(db.cli.length){
+    const grupos={};
+    db.cli.forEach(c=>{if(!grupos[c.cb])grupos[c.cb]=[];grupos[c.cb].push(c);});
+    Object.entries(grupos).forEach(([bu,items])=>{
+      html+=`<div class="slabel">${bu} — Manual</div><div class="card"><div class="card-body">`;
+      items.forEach(c=>{
+        const idx=db.cli.indexOf(c);
+        const bc=c.cs==='Em entrega'||c.cs==='No prazo'?'bg':c.cs==='Atenção'?'ba':c.cs==='Atrasado'?'br':'bb';
+        html+=`<div class="dr">
+          <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">${c.cn}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">${c.cres}${c.cent?' · '+c.cent:''}</div></div>
+          <div style="text-align:right;margin-left:8px">${c.cv?`<div class="mono" style="font-size:12px;color:var(--text2)">R$${fmt(+c.cv)}</div>`:''}
+          <div style="margin-top:3px"><span class="badge ${bc}">${c.cs}</span></div></div>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-left:8px"><button class="btn btns" onclick="editCli(${idx})">✏</button><button class="btn btns" onclick="delCli(${idx})">✕</button></div>
+        </div>`;
+      });
+      html+=`</div></div>`;
+    });
+  }
+  return html;
+}
+function openCliM(){editCliIdx=-1;['cn','cv','cdat','cent'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});document.getElementById('mcli').classList.add('open');}
+function editCli(idx){editCliIdx=idx;const c=db.cli[idx];['cn','cb','cv','cs','cres','cdat','cent'].forEach(f=>{const el=document.getElementById(f);if(el)el.value=c[f]||'';});document.getElementById('mcli').classList.add('open');}
+function delCli(idx){if(!confirm('Remover?'))return;db.cli.splice(idx,1);persist();showP('clientes');showToast('Removido');}
+function saveCli(){
+  const c={cn:document.getElementById('cn').value.trim(),cb:document.getElementById('cb').value,cv:document.getElementById('cv').value,cs:document.getElementById('cs').value,cres:document.getElementById('cres').value,cdat:document.getElementById('cdat').value,cent:document.getElementById('cent').value.trim()};
+  if(!c.cn){showToast('Informe o nome');return;}
+  if(editCliIdx>=0)db.cli[editCliIdx]=c;else db.cli.push(c);
+  persist();closeM('mcli');showP('clientes');showToast('Salvo!');
+}
+
+// ══ TIME ══
+function renderTime(){
+  function tr(ini,clr,bg,nome,cargo,scope){return `<div class="dr">
+    <div class="av" style="background:${bg};color:${clr}">${ini}</div>
+    <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;color:var(--text)">${nome}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">${cargo}</div></div>
+    <div style="font-size:11px;color:var(--text3);text-align:right;max-width:160px;font-size:11px">${scope}</div>
+  </div>`;}
+  function rr(dia,nome,quem,det){return `<div class="dr" style="align-items:flex-start">
+    <div class="rday" style="margin-top:2px">${dia}</div>
+    <div style="flex:1;min-width:0;margin-left:10px"><div style="font-size:13px;font-weight:600;color:var(--text)">${nome}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">${quem}</div><div style="font-size:11px;color:var(--text3);margin-top:1px">${det}</div></div>
+  </div>`;}
+  return `<div class="sh"><div><div class="st">Time</div><div class="ss">Estrutura e rituais</div></div></div>
+  <div class="slabel">Time Comercial</div>
+  <div class="card"><div class="card-body">
+    ${tr('GN','var(--blue2)','var(--bluebg)','Grasi Nunes','Diretora Comercial','Todas as BUs · High ticket · Reporte')}
+    ${tr('EM','#6aeec7','rgba(106,238,199,0.1)','Emily','CX Seleto / Advisory','Especialista em todas as BUs')}
+    ${tr('KA','var(--green)','var(--gnbg)','Kathleen','Analista Comercial','Suporte · Follow-up')}
+    ${tr('RA','var(--amber)','var(--ambg)','Rafael','Suporte / Controller de Publicidade','Suporte · Prospecção')}
+  </div></div>
+  <div class="slabel">Jota Lab</div>
+  <div class="card"><div class="card-body">
+    ${tr('MA','var(--text2)','var(--bg4)','Maria Alves','CX Jota Lab','Atendimento · Locatários')}
+    ${tr('ED','var(--text2)','var(--bg4)','Eduardo','Analista Operacional','Operação')}
+    ${tr('CO','var(--text2)','var(--bg4)','Coruja','Técnico AV','Audiovisual · Eventos')}
+    ${tr('AR','var(--text2)','var(--bg4)','Artur','Técnico AV','Audiovisual · Suporte')}
+  </div></div>
+  <div class="slabel">Rituais de Gestão</div>
+  <div class="card"><div class="card-body">
+    ${rr('SEG','Daily Comercial','Emily · Kathleen · Rafael · Grasi','15 min · Pipeline + prioridades')}
+    ${rr('QUA','Review Pipeline','Grasi + Emily','30 min · Status negociações')}
+    ${rr('SEX','Reporte → Joel','Grasi','Assíncrono · Dashboard até 17h')}
+    ${rr('1°/MÊS','Review Mensal','Grasi + Joel','60 min · Resultado + ajuste de rota')}
+    ${rr('TRIM','Review Trimestral','Grasi + Joel + Lalas','90 min · Estratégia + metas')}
+  </div></div>`;
+}
+
+// ══ REPORTE ══
+function renderReport(){
+  const m=db.metas;
+  const tReal=Object.values(m).reduce((a,b)=>a+b.real,0);
+  const tMeta=Object.values(m).reduce((a,b)=>a+b.meta,0);
+  const hoje=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  const top3=db.pip.filter(p=>!['Perdido','Fechado'].includes(p.e)).sort((a,b)=>(+b.p||0)-(+a.p||0)).slice(0,3);
+  const buLines=Object.entries(m).map(([bu,d])=>{const p=Math.round(d.real/d.meta*100);return `${bu}: R$${fmt(d.real)} (${p}%)`;}).join('\n');
+  const pip3=top3.length?top3.map(p=>`• ${p.c} — R$${fmt(+p.v||0)} · ${p.e} · ${p.p}% · ${p.next||'—'}`).join('\n'):'Nenhuma negociação ativa.';
+  const adv_abr=ADVISORY_ATIVOS.filter(c=>c.abr_s==='pendente').map(c=>c.n).join(', ');
+
+  return `<div class="sh">
+    <div><div class="st">Reporte para Joel</div><div class="ss">${hoje}</div></div>
+    <button class="btn btnp btns" onclick="copyR()">Copiar</button>
+  </div>
+  <div id="rcont">
+    <div class="rb"><div class="rbt">01 · Resultado acumulado 2026</div>
+      <div class="rbb">Total realizado: <strong style="color:var(--blue2);font-family:'Space Mono',monospace">R$${fmt(tReal)}</strong> de R$${fmt(tMeta)} — ${Math.round(tReal/tMeta*100)}% da meta geral<br><br><span style="white-space:pre-line">${buLines}</span></div></div>
+    <div class="rb"><div class="rbt">02 · Pipeline — o que pode fechar</div>
+      <div class="rbb" style="white-space:pre-line">${pip3}</div></div>
+    <div class="rb"><div class="rbt">03 · Entregas</div>
+      <div class="rbb">
+        <div style="margin-bottom:10px"><strong style="color:var(--blue2)">Seleto</strong><br>
+          <div contenteditable="true" style="outline:none;min-height:28px;border-bottom:1px dashed var(--b2);padding:4px 0">Registre as entregas Seleto do período.</div></div>
+        <div style="margin-bottom:10px"><strong style="color:var(--blue2)">Advisory</strong><br>
+          <div contenteditable="true" style="outline:none;min-height:28px;border-bottom:1px dashed var(--b2);padding:4px 0">${adv_abr||'Registre as entregas Advisory do período.'}</div></div>
+        <div style="margin-bottom:10px"><strong style="color:var(--blue2)">Publicidade</strong><br>
+          <div contenteditable="true" style="outline:none;min-height:28px;border-bottom:1px dashed var(--b2);padding:4px 0">Registre as entregas de Publicidade do período.</div></div>
+        <div><strong style="color:var(--blue2)">Palestras</strong><br>
+          <div contenteditable="true" style="outline:none;min-height:28px;border-bottom:1px dashed var(--b2);padding:4px 0">Registre as entregas de Palestras do período.</div></div>
+      </div></div>
+    <div class="rb"><div class="rbt">04 · Ação necessária do Joel</div>
+      <div class="rbb" contenteditable="true" style="outline:none;min-height:40px;border-bottom:1px dashed var(--b2)">Edite aqui — decisões, aprovações ou abertura de portas necessárias.</div></div>
+    <div class="rb"><div class="rbt">05 · Foco da próxima semana</div>
+      <div class="rbb" contenteditable="true" style="outline:none;min-height:40px;border-bottom:1px dashed var(--b2)">Edite aqui — top 3 prioridades comerciais para a semana que vem.</div></div>
+  </div>`;
+}
+function copyR(){navigator.clipboard.writeText(document.getElementById('rcont').innerText).then(()=>showToast('Copiado!')).catch(()=>showToast('Selecione o texto manualmente'));}
+
+// ══ UTILS ══
+function closeM(id){document.getElementById(id).classList.remove('open');}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+</script>
+</body>
+</html>
