@@ -361,17 +361,18 @@ const PIPELINE_INICIAL=[
 ];
 
 const ADVISORY_ATIVOS=[
-  {n:'Dr. Antônio',       per:'Nov/25–Nov/26', dur:'1 ano',   foco:'Influência',                  v:1000000,  rec:400000,  prox:'SELETO',        obs:'19/abr · próxima reunião',        abr:'Reunião Presencial', abr_s:'pendente'},
+  {n:'Dr. Antônio',       per:'Nov/25–Nov/26', dur:'1 ano',   foco:'Influência',                  v:1000000,  rec:400000,  prox:'SELETO',        obs:'Quer pausa do programa · 19/abr',  abr:'Reunião Presencial', abr_s:'pendente'},
   {n:'Douglas Nexfit',    per:'Até ago/26',    dur:'1 ano',   foco:'Influência',                  v:500000,   rec:500000,  prox:'JOEL PUBLI',    obs:'OK pago · evento 27/04 clientes NEXFIT', abr:'Evento 27/04',       abr_s:'agendado'},
   {n:'Fábio Gonçalves',   per:'Jan–Jul/26',    dur:'6 meses', foco:'Posicionamento + Motor',      v:2000000,  rec:468000,  prox:'PROSPERUS',     obs:'Realizado 13/04 · Online 30/04',  abr:'Reunião Presencial', abr_s:'realizado'},
   {n:'Adriana Alves',     per:'6 meses',       dur:'6 meses', foco:'Contatos / Empresas',         v:500000,   rec:500000,  prox:'—',             obs:'OK pago',                         abr:'—',                  abr_s:'ok'},
   {n:'Bia Finochio',      per:'Fev/26–Jan/27', dur:'1 ano',   foco:'Influência / posicionamento', v:1500000,  rec:300000,  prox:'—',             obs:'Realizado 17/04 · 9h',            abr:'Reunião Presencial', abr_s:'realizado'},
-  {n:'Ivan Pons',         per:'Fev–Ago/26',    dur:'6 meses', foco:'Influência',                  v:600000,   rec:100000,  prox:'—',             obs:'65 membros · Founder Led Growth', abr:'Reunião Presencial', abr_s:'pendente'},
+  {n:'Ivan Pons',         per:'Fev–Ago/26',    dur:'6 meses', foco:'Influência',                  v:600000,   rec:100000,  prox:'—',             obs:'Realizado 29/04 presencial · 65 membros · Founder Led Growth', abr:'Reunião Presencial', abr_s:'realizado'},
   {n:'Fernanda Tochetto', per:'Fev–Ago/26',    dur:'6 meses', foco:'Influência + Captação',       v:1000000,  rec:1000000, prox:'SELETO',        obs:'Interesse renovação. Adv 05/05',  abr:'1h online c/ Joel',  abr_s:'agendado'},
   {n:'Marcos Carraro',    per:'Até Dez/27',    dur:'2 anos',  foco:'Conselho + Influência',       v:3000000,  rec:695000,  prox:'A TRINCA MÍDIA',obs:'Renovação confirmada',            abr:'Reunião Presencial', abr_s:'pendente'},
   {n:'Isabela Soller',    per:'Mar–Jul/26',    dur:'6 meses', foco:'Direção Estratégica',         v:1000000,  rec:400000,  prox:'A TRINCA MÍDIA',obs:'Joel visitou empresa 31/03',      abr:'Agendar',            abr_s:'em contrato'},
   {n:'Bruno Andrade',     per:'Mar–Jul/26',    dur:'6 meses', foco:'Influência + Captação',       v:1000000,  rec:130000,  prox:'SELETO',        obs:'Realizado 04/03',                 abr:'Agendar',            abr_s:'em contrato'},
   {n:'Victor e Ambrenna', per:'30 dias',       dur:'1 mês',   foco:'Influência / direção',        v:1000000,  rec:300000,  prox:'SELETO',        obs:'Online 10/04 Joel + Malu',        abr:'Realizado 10/04',    abr_s:'realizado'},
+  {n:'Caio e Calleti',    per:'Mai–Jun/26',    dur:'30 dias', foco:'Influência / direção',        v:1000000,  rec:300000,  prox:'SELETO',        obs:'Início Maio · agendar 01/05',     abr:'Início 01/05',       abr_s:'em contrato'},
 ];
 
 const SELETO_ATIVOS=[
@@ -397,7 +398,7 @@ const ADVISORY_ENTREGAS=[
   {mes:'ABRIL 2026', itens:[
     {n:'Dr. Antônio',      ativ:'Reunião Presencial',          st:'PENDENTE',  obs:'19/abr'},
     {n:'Bia Finochio',     ativ:'Reunião Presencial',          st:'REALIZADO', obs:'17/04 · 9h · advisory 2h'},
-    {n:'Ivan Pons',        ativ:'Reunião Presencial',          st:'PENDENTE',  obs:'29/04 zoom online'},
+    {n:'Ivan Pons',        ativ:'Reunião Presencial',          st:'REALIZADO', obs:'29/04 presencial'},
     {n:'Fábio Gonçalves',  ativ:'Reunião Presencial',          st:'REALIZADO', obs:'13/04 · Fábio e Ju no escritório Joel'},
     {n:'Fábio Gonçalves',  ativ:'Encontro ON LINE',            st:'AGENDADO',  obs:'30/04 · posicionamento redes sociais'},
     {n:'Marcos Carraro',   ativ:'Reunião Presencial',          st:'PENDENTE',  obs:'Piracicaba'},
@@ -418,6 +419,7 @@ const ADVISORY_ENTREGAS=[
     {n:'Marcos Carraro',   ativ:'Agendar entrega',             st:'EM CONTRATO',obs:''},
     {n:'Isabela Soller',   ativ:'Agendar entrega',             st:'EM CONTRATO',obs:''},
     {n:'Bruno Andrade',    ativ:'Presencial 06/05',            st:'AGENDADO',   obs:''},
+    {n:'Caio e Calleti',   ativ:'Início entrega 01/05',        st:'AGENDADO',   obs:'Contrato 30 dias · Maio/Junho'},
   ]},
   {mes:'JUNHO 2026', itens:[
     {n:'Fernanda Tochetto',ativ:'Gravação de podcast',         st:'AGENDADO',  obs:'15/06 · 14h'},
@@ -506,6 +508,7 @@ const VENDAS=[
   {bu:'JOTA EDITION', cli:'LUCIANO MACARO',               desc:'Máquina Tripla Online',v:3000,     mes:'Abril',     resp:'Kath'},
   {bu:'JOTA LAB',     cli:'PEDRO QUINTANILHA',            desc:'Livros 300 Não é Milagre', v:14700, mes:'Abril',    resp:'Joel Jota'},
   {bu:'ADVISORY',     cli:'CAIO BARBOSA',                  desc:'30 dias',                  v:1000000, mes:'Abril',  resp:'Grasi'},
+  {bu:'JOTA LAB',     cli:'PEDRO QUINTANILHA',             desc:'Locação JLab · 2 diárias', v:50000,   mes:'Abril',  resp:'Emily'},
 ];
 
 let editPipIdx=-1, editCliIdx=-1;
