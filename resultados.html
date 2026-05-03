@@ -147,7 +147,8 @@ html,body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',san
     <div class="hdr-right">
       <span class="upd" id="upd-ts">—</span>
       <span class="conn no" id="conn-badge">MANUAL</span>
-      <button class="badge-cfg" onclick="openCfg()">⚙ Planilha</button>
+      <button class="badge-cfg" onclick="openPaste()" style="background:var(--bluebg);color:var(--blue2);border-color:var(--blueb)">📋 Colar do Excel</button>
+      <button class="badge-cfg" onclick="openCfg()">⚙ Google Sheets</button>
       <button class="btn-upd" id="btn-upd" onclick="loadData()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
         Atualizar
@@ -158,7 +159,7 @@ html,body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',san
 
 <div class="wrap" id="app"></div>
 
-<div id="overlay" onclick="closeCfg()"></div>
+<div id="overlay" onclick="closeModals()"></div>
 <div class="mo" id="mcfg">
   <div class="modal">
     <div class="modal-head">
@@ -200,6 +201,56 @@ html,body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',san
     <div class="modal-foot">
       <button class="btn" style="flex:1" onclick="closeCfg()">Cancelar</button>
       <button class="btn btnp" style="flex:2" onclick="saveCfg()">Salvar e Conectar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL COLAR DO EXCEL -->
+<div class="mo" id="mpaste">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>📋 Colar dados do Excel / OneDrive</h2>
+      <p>Abra sua planilha, selecione os dados de cada seção e cole abaixo</p>
+    </div>
+    <div class="modal-body" style="padding-top:12px">
+      <div class="filters" style="margin-bottom:16px">
+        <button class="fbtn on" id="pt1" onclick="switchPTab(1)">1 · Metas por BU</button>
+        <button class="fbtn" id="pt2" onclick="switchPTab(2)">2 · Vendas por Mês</button>
+        <button class="fbtn" id="pt3" onclick="switchPTab(3)">3 · Vendas Fechadas</button>
+        <button class="fbtn" id="pt4" onclick="switchPTab(4)">4 · Meta do Mês</button>
+      </div>
+
+      <div id="ptab1">
+        <div style="background:var(--bg3);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;font-size:12px;color:var(--text2);line-height:1.7">
+          <strong style="color:var(--text)">No Excel:</strong> vá na aba principal → selecione a tabela <strong>"METAS POR BUSINESS UNIT"</strong> (do cabeçalho até a linha ADSENSE, sem o TOTAL) → <strong>Ctrl+C</strong> → cole abaixo
+        </div>
+        <textarea id="paste-bu" style="width:100%;height:160px;font-family:'Space Mono',monospace;font-size:11px;padding:10px 12px;border:1px solid var(--b2);border-radius:var(--r);resize:vertical;color:var(--text)" placeholder="Cole aqui (⌘V ou Ctrl+V)..."></textarea>
+      </div>
+
+      <div id="ptab2" style="display:none">
+        <div style="background:var(--bg3);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;font-size:12px;color:var(--text2);line-height:1.7">
+          <strong style="color:var(--text)">No Excel:</strong> selecione a tabela <strong>"VENDAS POR MÊS x B.U."</strong> (do cabeçalho "Mês" até a linha "TOTAL ANUAL") → <strong>Ctrl+C</strong> → cole abaixo
+        </div>
+        <textarea id="paste-men" style="width:100%;height:200px;font-family:'Space Mono',monospace;font-size:11px;padding:10px 12px;border:1px solid var(--b2);border-radius:var(--r);resize:vertical;color:var(--text)" placeholder="Cole aqui (⌘V ou Ctrl+V)..."></textarea>
+      </div>
+
+      <div id="ptab3" style="display:none">
+        <div style="background:var(--bg3);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;font-size:12px;color:var(--text2);line-height:1.7">
+          <strong style="color:var(--text)">No Excel:</strong> abra a aba <strong>"VENDAS FECHADAS"</strong> → Selecionar tudo <strong>Ctrl+A</strong> → <strong>Ctrl+C</strong> → cole abaixo
+        </div>
+        <textarea id="paste-vf" style="width:100%;height:200px;font-family:'Space Mono',monospace;font-size:11px;padding:10px 12px;border:1px solid var(--b2);border-radius:var(--r);resize:vertical;color:var(--text)" placeholder="Cole aqui (⌘V ou Ctrl+V)..."></textarea>
+      </div>
+
+      <div id="ptab4" style="display:none">
+        <div style="background:var(--bg3);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;font-size:12px;color:var(--text2);line-height:1.7">
+          <strong style="color:var(--text)">No Excel:</strong> selecione a seção <strong>"META MAIO 2026"</strong> (ou o mês atual) com os valores por BU → <strong>Ctrl+C</strong> → cole abaixo
+        </div>
+        <textarea id="paste-mmes" style="width:100%;height:160px;font-family:'Space Mono',monospace;font-size:11px;padding:10px 12px;border:1px solid var(--b2);border-radius:var(--r);resize:vertical;color:var(--text)" placeholder="Cole aqui (⌘V ou Ctrl+V)..."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" style="flex:1" onclick="closePaste()">Cancelar</button>
+      <button class="btn btnp" style="flex:2" onclick="savePaste()">✓ Atualizar Dashboard</button>
     </div>
   </div>
 </div>
@@ -440,8 +491,16 @@ async function loadData(){
       showToast('Erro ao buscar planilha — usando dados locais');
     }
   }else{
-    DATA = {...FB};
-    isConnected = false;
+    const pBU  = localStorage.getItem('jc_paste_bu');
+    const pMen = localStorage.getItem('jc_paste_men');
+    const pVF  = localStorage.getItem('jc_paste_vf');
+    DATA = {
+      bu:     pBU  ? JSON.parse(pBU)  : FB.bu,
+      mensal: pMen ? JSON.parse(pMen) : FB.mensal,
+      vf:     pVF  ? JSON.parse(pVF)  : FB.vf,
+      updated: pBU ? 'Colado do Excel — ' + new Date().toLocaleDateString('pt-BR') : FB.updated+' (dados fixos)',
+    };
+    isConnected = !!pBU;
   }
 
   render();
@@ -630,6 +689,7 @@ function openCfg(){
   document.getElementById('mcfg').classList.add('open');
   document.getElementById('overlay').classList.add('open');
 }
+function closeModals(){closeCfg();closePaste();}
 function closeCfg(){
   document.getElementById('mcfg').classList.remove('open');
   document.getElementById('overlay').classList.remove('open');
@@ -650,6 +710,148 @@ function toggleTemplate(){
   const open=el.style.display!=='none';
   el.style.display=open?'none':'block';
   btn.textContent=(open?'▶':'▼')+' Ver estrutura das abas';
+}
+
+// ── PASTE FROM EXCEL ───────────────────────────────────────────────
+function parseTSV(txt){
+  return txt.trim().split(/\r?\n/).map(r=>r.split('\t').map(c=>c.trim()));
+}
+
+function parseBUfromExcel(txt){
+  if(!txt.trim()) return null;
+  const rows=parseTSV(txt);
+  const BU_NAMES=['PALESTRAS','PUBLICIDADE','JOTA LAB','JOTA EDITION','ADVISORY','A TRINCA','CLUBES','ADSENSE'];
+  const result=[];
+  for(const r of rows){
+    if(!r[0]) continue;
+    const name=r[0].toUpperCase().trim();
+    if(name.includes('TOTAL')||name.includes('BUSINESS')||name.includes('META')) continue;
+    const isBU=BU_NAMES.some(b=>name.startsWith(b.split(' ')[0])||name.includes(b));
+    if(!isBU) continue;
+    // Cols: 0=BU, 1=META ANUAL, 7=VENDAS ACUMULADAS, 8=QTD, 9=TICKET, 12=PIPE
+    const meta   = parseN(r[1]);
+    const vendido= parseN(r[7]!==undefined&&r[7]!==''?r[7]:r[2]);
+    const qtd    = parseInt(String(r[8]!==undefined?r[8]:r[3]).replace(/[^\d]/g,''))||0;
+    const ticket = parseN(r[9]!==undefined&&r[9]!==''?r[9]:r[4]);
+    const pipe   = parseN(r[12]!==undefined&&r[12]!==''?r[12]:r[5]);
+    if(!meta&&!vendido) continue;
+    result.push({id:r[0].trim(),meta,vendido,qtd,ticket,pipe,meta_mes:0});
+  }
+  return result.length?result:null;
+}
+
+function parseMetaMes(txt, buData){
+  if(!txt.trim()) return buData;
+  const rows=parseTSV(txt);
+  for(const r of rows){
+    if(!r[0]||!r[1]) continue;
+    const name=r[0].toUpperCase().trim();
+    if(name.includes('META')||name.includes('TOTAL')||!r[1]) continue;
+    const val=parseN(r[1]);
+    const bu=buData.find(b=>{
+      const bid=b.id.toUpperCase();
+      return name.includes(bid.split(' ')[0])||bid.includes(name.split(' ')[0]);
+    });
+    if(bu) bu.meta_mes=val;
+  }
+  return buData;
+}
+
+function parseMensalfromExcel(txt){
+  if(!txt.trim()) return null;
+  const rows=parseTSV(txt);
+  const MESES=['JANEIRO','FEVEREIRO','MARÇO','MARCO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'];
+  const result=[];
+  for(const r of rows){
+    if(!r[0]) continue;
+    const name=r[0].toUpperCase().trim().normalize('NFD').replace(/[̀-ͯ]/g,'');
+    const mesMatch=MESES.find(m=>name.startsWith(m.substring(0,3))||name===m);
+    if(!mesMatch) continue;
+    // Cols: 0=Mes,1=Pal,2=Pub,3=Lab,4=Edi,5=Adv,6=Trinca,7=Sel,8=Ads,9=Total,10=Meta
+    result.push({
+      mes:r[0].trim(),
+      pal:parseN(r[1]),pub:parseN(r[2]),lab:parseN(r[3]),
+      edi:parseN(r[4]),adv:parseN(r[5]),
+      sel:parseN(r[7]),ads:parseN(r[8]),
+      total:parseN(r[9]),meta:parseN(r[10]),
+    });
+  }
+  return result.length?result:null;
+}
+
+function parseVFfromExcel(txt){
+  if(!txt.trim()) return null;
+  const rows=parseTSV(txt);
+  const BU_NAMES=['JOTA LAB','PUBLICIDADE','ADVISORY','JOTA EDITION','PALESTRAS','CLUBES','ADSENSE','A TRINCA'];
+  const headerIdx=rows.findIndex(r=>
+    (r[0].toUpperCase().includes('B.U.')||r[0].toUpperCase()==='BU')&&r.length>3
+  );
+  const start=headerIdx>=0?headerIdx+1:0;
+  const result=[];
+  for(const r of rows.slice(start)){
+    if(!r[0]||!r[2]) continue;
+    const buRaw=r[0].trim().toUpperCase();
+    if(!BU_NAMES.some(b=>buRaw.includes(b.split(' ')[0]))) continue;
+    // Cols: 0=BU,1=Data,2=Cliente,3=Desc,4=Subcat,5=Valor,6=Mes,7=Resp
+    const val=parseN(r[5])||parseN(r[4]);
+    const mes=r[6]||r[5]||'';
+    result.push({
+      bu:r[0].trim(),
+      data:r[1].trim().replace(/\/2026/g,'').replace(/\/26/g,''),
+      cli:r[2].trim(),
+      desc:r[3].trim(),
+      v:val,
+      mes:mes.trim(),
+      resp:(r[7]||'—').trim(),
+    });
+  }
+  return result.length?result:null;
+}
+
+let _ptab=1;
+function switchPTab(n){
+  _ptab=n;
+  [1,2,3,4].forEach(i=>{
+    document.getElementById('ptab'+i).style.display=i===n?'block':'none';
+    document.getElementById('pt'+i).classList.toggle('on',i===n);
+  });
+}
+function openPaste(){
+  document.getElementById('mpaste').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+}
+function closePaste(){
+  document.getElementById('mpaste').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+function savePaste(){
+  let updated=0;
+  const buTxt  =document.getElementById('paste-bu').value;
+  const menTxt =document.getElementById('paste-men').value;
+  const vfTxt  =document.getElementById('paste-vf').value;
+  const mmesTxt=document.getElementById('paste-mmes').value;
+
+  let buData=parseBUfromExcel(buTxt);
+  if(buData&&buData.length){
+    if(mmesTxt) buData=parseMetaMes(mmesTxt,buData);
+    localStorage.setItem('jc_paste_bu',JSON.stringify(buData));
+    updated++;
+  }else if(buTxt.trim()){
+    showToast('Metas por BU não reconhecidas — verifique a seleção');return;
+  }
+
+  const menData=parseMensalfromExcel(menTxt);
+  if(menData&&menData.length){localStorage.setItem('jc_paste_men',JSON.stringify(menData));updated++;}
+  else if(menTxt.trim()){showToast('Vendas por Mês não reconhecidas');return;}
+
+  const vfData=parseVFfromExcel(vfTxt);
+  if(vfData&&vfData.length){localStorage.setItem('jc_paste_vf',JSON.stringify(vfData));updated++;}
+  else if(vfTxt.trim()){showToast('Vendas Fechadas não reconhecidas');return;}
+
+  if(!updated){showToast('Cole os dados nas abas acima primeiro');return;}
+  closePaste();
+  loadData();
+  showToast('Dashboard atualizado com '+updated+' seção(ões)!');
 }
 
 // ── INIT ───────────────────────────────────────────────────────────
