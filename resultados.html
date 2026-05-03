@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resultados 2026 — Joel Jota Co</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f5f7;--bg2:#fff;--bg3:#f0f1f5;--bg4:#e8eaef;--bg5:#d8dae3;
+  --b1:rgba(0,0,0,.07);--b2:rgba(0,0,0,.12);--b3:rgba(0,0,0,.20);
+  --text:#111827;--text2:#4b5563;--text3:#9ca3af;
+  --blue:#1d6fdb;--blue2:#1558b8;--bluebg:rgba(29,111,219,.08);--blueb:rgba(29,111,219,.22);
+  --green:#0e9964;--gnbg:rgba(14,153,100,.08);--gnb:rgba(14,153,100,.22);
+  --amber:#b45309;--ambg:rgba(180,83,9,.08);--amb:rgba(180,83,9,.22);
+  --red:#dc2626;--rdbg:rgba(220,38,38,.08);--rdb:rgba(220,38,38,.22);
+  --r:10px;--rl:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:16px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 20px 60px}
+
+/* HEADER */
+.hdr{background:#fff;border-bottom:1px solid var(--b1);padding:0 20px;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(0,0,0,.06)}
+.hdr-in{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--blue);letter-spacing:.04em;white-space:nowrap}
+.logo span{color:var(--text3)}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.upd{font-size:11px;color:var(--text3);font-weight:500;white-space:nowrap}
+.badge-cfg{background:var(--bg3);border:1px solid var(--b2);color:var(--text3);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:'Space Grotesk',sans-serif;letter-spacing:.04em}
+.badge-cfg:hover{background:var(--bg4);color:var(--text2)}
+.btn-upd{background:var(--blue);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;padding:8px 16px;border-radius:var(--r);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.btn-upd:hover{background:var(--blue2)}
+.btn-upd.loading{opacity:.7;pointer-events:none}
+
+/* CARDS */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:22px}
+.mc{background:#fff;border:1px solid var(--b1);border-radius:var(--rl);padding:20px 18px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.mc.blue{border-color:var(--blueb);background:linear-gradient(135deg,#f0f6ff,#e8f0ff)}
+.ml{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:10px}
+.mv{font-size:28px;font-weight:700;color:var(--text);line-height:1;font-family:'Space Mono',monospace;letter-spacing:-.02em}
+.mv.blue{color:var(--blue)}
+.ms{font-size:12px;color:var(--text3);margin-top:6px;font-weight:500}
+
+/* SECTION LABEL */
+.sl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sl::after{content:'';flex:1;height:1px;background:var(--b1)}
+
+/* CARD */
+.card{background:#fff;border:1px solid var(--b1);border-radius:var(--rl);overflow:hidden;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--b1);background:var(--bg3)}
+.card-title{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.09em}
+.card-body{padding:0 18px}
+
+/* TABLE */
+.vtab{width:100%;border-collapse:collapse;font-size:14px}
+.vtab th{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;font-weight:700;padding:10px 14px;text-align:left;border-bottom:1px solid var(--b1);background:var(--bg3);white-space:nowrap}
+.vtab td{padding:12px 14px;border-bottom:1px solid var(--b1);color:var(--text2);vertical-align:middle}
+.vtab td:first-child{color:var(--text)}
+.vtab tr:last-child td{border-bottom:none}
+.vtab tbody tr:hover td{background:var(--bg3)}
+
+/* PROGRESS */
+.pbar{flex:1;height:7px;background:var(--bg5);border-radius:999px;overflow:hidden;min-width:60px}
+.pfill{height:100%;border-radius:999px;transition:width .9s cubic-bezier(.4,0,.2,1)}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.bg{background:var(--gnbg);color:var(--green);border:1px solid var(--gnb)}
+.ba{background:var(--ambg);color:var(--amber);border:1px solid var(--amb)}
+.br{background:var(--rdbg);color:var(--red);border:1px solid var(--rdb)}
+.bb{background:var(--bluebg);color:var(--blue2);border:1px solid var(--blueb)}
+.bgray{background:var(--bg4);color:var(--text2);border:1px solid var(--b2)}
+
+/* FILTER BUTTONS */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.fbtn{padding:6px 12px;border-radius:7px;border:1px solid var(--b2);background:transparent;color:var(--text2);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
+.fbtn:hover{background:var(--bg3)}
+.fbtn.on{background:var(--bluebg);color:var(--blue);border-color:var(--blueb)}
+
+/* TRIM GRID */
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+
+/* SETUP BANNER */
+.setup-banner{background:linear-gradient(135deg,#f0f6ff,#e8f0ff);border:1px solid var(--blueb);border-radius:var(--rl);padding:20px 22px;margin-bottom:20px;display:flex;align-items:flex-start;gap:16px}
+.setup-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.setup-txt h3{font-size:15px;font-weight:700;color:var(--blue);margin-bottom:6px}
+.setup-txt p{font-size:13px;color:var(--text2);line-height:1.6}
+.setup-txt ul{font-size:13px;color:var(--text2);margin:8px 0 12px 18px;line-height:1.8}
+.btn-setup{background:var(--blue);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;padding:9px 18px;border-radius:var(--r);cursor:pointer}
+.btn-setup:hover{background:var(--blue2)}
+
+/* MODAL */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;justify-content:center;padding:0}
+.mo.open{display:flex}
+.modal{background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:560px;max-height:92vh;overflow-y:auto}
+.modal-head{padding:22px 22px 16px;border-bottom:1px solid var(--b1)}
+.modal-head h2{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px}
+.modal-head p{font-size:13px;color:var(--text3)}
+.modal-body{padding:20px 22px}
+.modal-foot{display:flex;gap:10px;padding:16px 22px;border-top:1px solid var(--b1)}
+.fld{margin-bottom:16px}
+.fld label{display:block;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
+.fld input{width:100%;padding:10px 14px;border-radius:var(--r);border:1px solid var(--b2);font-family:'Space Grotesk',sans-serif;font-size:14px;color:var(--text);background:#fff}
+.fld input:focus{outline:none;border-color:var(--blue)}
+.fld .hint{font-size:11px;color:var(--text3);margin-top:5px;line-height:1.5}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:var(--r);border:1px solid var(--b2);background:transparent;color:var(--text2);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--bg3)}
+.btnp{background:var(--blue);color:#fff;border-color:transparent}
+.btnp:hover{background:var(--blue2);color:#fff}
+.step{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start}
+.step-n{min-width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-txt{font-size:13px;color:var(--text2);line-height:1.6}
+.step-txt strong{color:var(--text);font-weight:700}
+.mono{font-family:'Space Mono',monospace;font-size:11px;background:var(--bg3);border:1px solid var(--b1);padding:2px 7px;border-radius:4px;color:var(--blue2)}
+
+/* OVERLAY */
+#overlay{display:none;position:fixed;inset:0;z-index:199}
+#overlay.open{display:block}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--text);border-radius:var(--r);padding:12px 22px;font-size:14px;color:#fff;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;font-weight:600}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* CONNECTED BADGE */
+.conn{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:.04em}
+.conn.ok{background:var(--gnbg);color:var(--green);border:1px solid var(--gnb)}
+.conn.no{background:var(--ambg);color:var(--amber);border:1px solid var(--amb)}
+
+@media(max-width:640px){
+  .hdr-in{height:52px}
+  .logo{font-size:13px}
+  .upd{display:none}
+  .tgrid{grid-template-columns:repeat(2,1fr)}
+  .vtab{font-size:12px}
+  .vtab th,.vtab td{padding:9px 10px}
+  .mv{font-size:22px}
+  .wrap{padding:16px 14px 60px}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="logo">JOTA <span>CO</span> · RESULTADOS 2026</div>
+    <div class="hdr-right">
+      <span class="upd" id="upd-ts">—</span>
+      <span class="conn no" id="conn-badge">MANUAL</span>
+      <button class="badge-cfg" onclick="openCfg()">⚙ Planilha</button>
+      <button class="btn-upd" id="btn-upd" onclick="loadData()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+        Atualizar
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" id="app"></div>
+
+<div id="overlay" onclick="closeCfg()"></div>
+<div class="mo" id="mcfg">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Conectar com Google Sheets</h2>
+      <p>Configure a planilha para atualização automática dos dados</p>
+    </div>
+    <div class="modal-body">
+      <div id="cfg-steps">
+        <div class="step"><div class="step-n">1</div><div class="step-txt">Abra o <strong>Google Sheets</strong> e crie uma planilha nova (ou copie a estrutura abaixo)</div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-txt">Crie <strong>3 abas</strong> com os nomes exatos: <span class="mono">BU</span> · <span class="mono">MENSAL</span> · <span class="mono">VF</span></div></div>
+        <div class="step"><div class="step-n">3</div><div class="step-txt">Preencha cada aba com os dados (veja a estrutura no botão abaixo)</div></div>
+        <div class="step"><div class="step-n">4</div><div class="step-txt">No Google Sheets: <strong>Arquivo → Compartilhar → Publicar na web</strong> → escolha cada aba → formato <strong>CSV</strong> → Publicar</div></div>
+        <div class="step"><div class="step-n">5</div><div class="step-txt">Cole os 3 links abaixo e clique em <strong>Salvar</strong></div></div>
+      </div>
+      <button onclick="toggleTemplate()" style="font-size:12px;color:var(--blue);background:none;border:none;cursor:pointer;padding:0;margin-bottom:16px;font-family:'Space Grotesk',sans-serif;font-weight:600">▶ Ver estrutura das abas</button>
+      <div id="tmpl" style="display:none;background:var(--bg3);border-radius:var(--r);padding:14px 16px;margin-bottom:16px;font-size:12px;color:var(--text2);line-height:1.8">
+        <strong style="color:var(--text);display:block;margin-bottom:6px">Aba BU — colunas:</strong>
+        <span class="mono">BU · Meta Anual · Vendido · Qtd · Ticket · Pipeline · Meta Mes</span>
+        <br><span style="color:var(--text3)">Ex: PALESTRAS, 1000000, 830000, 2, 415000, 0, 0</span>
+        <br><br><strong style="color:var(--text);display:block;margin-bottom:6px">Aba MENSAL — colunas:</strong>
+        <span class="mono">Mes · Palestras · Publicidade · JotaLab · JotaEdition · Advisory · Seleto · Adsense · Total · Meta</span>
+        <br><br><strong style="color:var(--text);display:block;margin-bottom:6px">Aba VF — colunas:</strong>
+        <span class="mono">Data · BU · Cliente · Descricao · Valor · Mes · Responsavel</span>
+      </div>
+      <div class="fld">
+        <label>URL da aba BU (CSV)</label>
+        <input id="cfg-bu" type="url" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv&gid=...">
+        <div class="hint">Arquivo → Publicar na web → Aba "BU" → CSV → copiar link</div>
+      </div>
+      <div class="fld">
+        <label>URL da aba MENSAL (CSV)</label>
+        <input id="cfg-men" type="url" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv&gid=...">
+      </div>
+      <div class="fld">
+        <label>URL da aba VF — Vendas Fechadas (CSV)</label>
+        <input id="cfg-vf" type="url" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv&gid=...">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" style="flex:1" onclick="closeCfg()">Cancelar</button>
+      <button class="btn btnp" style="flex:2" onclick="saveCfg()">Salvar e Conectar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── GOOGLE SHEETS URLs ─────────────────────────────────────────────
+// Cole aqui os URLs do seu Google Sheets após publicar como CSV:
+const SHEET_URLS = {
+  bu:     '',   // URL da aba BU
+  mensal: '',   // URL da aba MENSAL
+  vf:     '',   // URL da aba VF
+};
+// ───────────────────────────────────────────────────────────────────
+
+// Config salva no browser (sobrescreve SHEET_URLS se configurado)
+let CFG = JSON.parse(localStorage.getItem('jc_res_cfg') || '{}');
+
+// ── DADOS FALLBACK (atualizados em 03/05/2026) ──────────────────────
+const FB = {
+  updated: '03/05/2026',
+  bu: [
+    {id:'PALESTRAS',     meta:1000000,   vendido:830000,   qtd:2,  ticket:415000,  pipe:0,        meta_mes:0},
+    {id:'PUBLICIDADE',   meta:20000000,  vendido:1461000,  qtd:3,  ticket:487000,  pipe:4920000,  meta_mes:2000000},
+    {id:'JOTA LAB',      meta:5000000,   vendido:1720700,  qtd:41, ticket:41968,   pipe:0,        meta_mes:500000},
+    {id:'JOTA EDITION',  meta:5140000,   vendido:966669,   qtd:21, ticket:46032,   pipe:0,        meta_mes:0},
+    {id:'ADVISORY',      meta:10000000,  vendido:10300000, qtd:9,  ticket:1144444, pipe:3000000,  meta_mes:4000000},
+    {id:'A TRINCA MÍDIA',meta:100000000, vendido:0,        qtd:0,  ticket:0,       pipe:53000000, meta_mes:10000000},
+    {id:'CLUBES/SELETO', meta:100000000, vendido:6000000,  qtd:2,  ticket:3000000, pipe:0,        meta_mes:9000000},
+    {id:'ADSENSE',       meta:660000,    vendido:466580,   qtd:4,  ticket:116645,  pipe:0,        meta_mes:50000},
+  ],
+  mensal: [
+    {mes:'Janeiro',  pal:0,      pub:1269000, lab:525500,  edi:357000,  adv:2600000,  sel:0,       ads:124680,  total:4876180,  meta:20150000},
+    {mes:'Fevereiro',pal:800000, pub:0,       lab:83550,   edi:276000,  adv:3700000,  sel:0,       ads:65184,   total:4924734,  meta:20150000},
+    {mes:'Março',    pal:0,      pub:192000,  lab:541950,  edi:233000,  adv:3000000,  sel:6000000, ads:202202,  total:10169152, meta:20150000},
+    {mes:'Abril',    pal:30000,  pub:0,       lab:569700,  edi:100669,  adv:1000000,  sel:0,       ads:74514,   total:1774883,  meta:20150000},
+    {mes:'Maio',     pal:0,      pub:0,       lab:0,       edi:0,       adv:0,        sel:0,       ads:0,       total:0,        meta:20150000},
+    {mes:'Junho',    pal:0,      pub:0,       lab:0,       edi:0,       adv:0,        sel:0,       ads:0,       total:0,        meta:20150000},
+    {mes:'Julho',    pal:0,      pub:0,       lab:0,       edi:0,       adv:0,        sel:0,       ads:0,       total:0,        meta:20150000},
+    {mes:'Agosto',   pal:0,      pub:0,       lab:0,       edi:0,       adv:0,        sel:0,       ads:0,       total:0,        meta:20150000},
+    {mes:'Setembro', pal:0,      pub:0,       lab:0,       edi:0,       adv:0,        sel:0,       ads:0,       total:0,        meta:20150000},
+    {mes:'Outubro',  pal:0,      pub:0,       lab:0,       edi:0,       adv:0,        sel:0,       ads:0,       total:0,        meta:20150000},
+    {mes:'Novembro', pal:0,      pub:0,       lab:0,       edi:0,       adv:0,        sel:0,       ads:0,       total:0,        meta:20150000},
+    {mes:'Dezembro', pal:0,      pub:0,       lab:0,       edi:0,       adv:0,        sel:0,       ads:0,       total:0,        meta:20150000},
+  ],
+  vf: [
+    {data:'07/01',bu:'JOTA LAB',    cli:'JONAS LIMA',              desc:'Mentor MLS',               v:25000,   mes:'Janeiro', resp:'Emily'},
+    {data:'07/01',bu:'JOTA LAB',    cli:'PEDRO QUINTANILHA',       desc:'Seleto',                   v:50000,   mes:'Janeiro', resp:'Emily'},
+    {data:'09/01',bu:'JOTA LAB',    cli:'NATHALIA FREITAS',        desc:'Mentor MLS',               v:25000,   mes:'Janeiro', resp:'Emily'},
+    {data:'09/01',bu:'JOTA LAB',    cli:'BRENO',                   desc:'Clube Tech Sales',         v:25000,   mes:'Janeiro', resp:'Emily'},
+    {data:'09/01',bu:'JOTA LAB',    cli:'PEDRO QUINTANILHA',       desc:'Seleto Club',              v:160000,  mes:'Janeiro', resp:'Emily'},
+    {data:'15/01',bu:'PUBLICIDADE', cli:'HOSTINGER',               desc:'2 vídeos conceitos',       v:269000,  mes:'Janeiro', resp:'Emily'},
+    {data:'22/01',bu:'PUBLICIDADE', cli:'MEDICAL SAN',             desc:'1 ano contrato',           v:1000000, mes:'Janeiro', resp:'Joel Jota'},
+    {data:'23/01',bu:'ADVISORY',    cli:'IVAN PONS',               desc:'6 meses',                  v:600000,  mes:'Janeiro', resp:'Grasi/Emily'},
+    {data:'23/01',bu:'JOTA LAB',    cli:'FORMAÇÃO DE MENTORES',    desc:'Formação de Mentores',     v:50000,   mes:'Janeiro', resp:'Emily'},
+    {data:'23/01',bu:'JOTA LAB',    cli:'SHEENA - MAGIC EVENTOS',  desc:'Fora do ecossistema',      v:31500,   mes:'Janeiro', resp:'Emily'},
+    {data:'26/01',bu:'ADVISORY',    cli:'FÁBIO GONÇALVES',         desc:'1 ano (6M + Renovação)',   v:2000000, mes:'Janeiro', resp:'Grasi/Emily'},
+    {data:'28/01',bu:'JOTA LAB',    cli:'RODRIGO',                 desc:'Seleto Club',              v:40000,   mes:'Janeiro', resp:'Emily'},
+    {data:'28/01',bu:'JOTA LAB',    cli:'EVERTON',                 desc:'Seleto Club',              v:20000,   mes:'Janeiro', resp:'Emily'},
+    {data:'30/01',bu:'JOTA LAB',    cli:'A TRINCA REAL STATE',     desc:'Mentor',                   v:25000,   mes:'Janeiro', resp:'Emily'},
+    {data:'30/01',bu:'JOTA LAB',    cli:'MARÍLIA',                 desc:'Mentora MLS',              v:74000,   mes:'Janeiro', resp:'Emily'},
+    {data:'31/01',bu:'JOTA EDITION',cli:'ESCOLA DO PODCAST',       desc:'Geral janeiro',            v:357000,  mes:'Janeiro', resp:'Grasi'},
+    {data:'31/01',bu:'ADSENSE',     cli:'ADSENSE',                 desc:'Adsense janeiro',          v:124680,  mes:'Janeiro', resp:'—'},
+    {data:'01/02',bu:'ADSENSE',     cli:'ADSENSE',                 desc:'Adsense fevereiro',        v:65184,   mes:'Fevereiro',resp:'—'},
+    {data:'01/02',bu:'JOTA LAB',    cli:'DOUGLAS',                 desc:'Membro Trinca RS',         v:31500,   mes:'Fevereiro',resp:'Emily'},
+    {data:'06/02',bu:'PALESTRAS',   cli:'SUÉLIO',                  desc:'Palestra + Advisory',      v:800000,  mes:'Fevereiro',resp:'Emily'},
+    {data:'06/02',bu:'ADVISORY',    cli:'BIA FINOCHIO',            desc:'1 ano',                    v:300000,  mes:'Fevereiro',resp:'Joel Jota'},
+    {data:'13/02',bu:'ADVISORY',    cli:'FERNANDA TOCHETTO',       desc:'1 ano',                    v:1000000, mes:'Fevereiro',resp:'Grasi'},
+    {data:'12/02',bu:'JOTA LAB',    cli:'CRISTIANO ODONTOTOP',     desc:'MLS',                      v:50000,   mes:'Fevereiro',resp:'Emily'},
+    {data:'12/02',bu:'JOTA LAB',    cli:'PEDRO QUINTANILHA',       desc:'Inclusão de Internet',     v:2050,    mes:'Fevereiro',resp:'Emily'},
+    {data:'20/02',bu:'ADVISORY',    cli:'MARCOS',                  desc:'1 ano',                    v:2400000, mes:'Fevereiro',resp:'Emily'},
+    {data:'28/02',bu:'JOTA EDITION',cli:'ESCOLA DO PODCAST',       desc:'Geral fevereiro',          v:276000,  mes:'Fevereiro',resp:'Grasi'},
+    {data:'01/03',bu:'JOTA LAB',    cli:'CLAX CLUB',               desc:'Evento 01/03',             v:20000,   mes:'Março',   resp:'—'},
+    {data:'02/03',bu:'JOTA LAB',    cli:'EDUARDO - PROSPERUS',     desc:'Prosperus',                v:50000,   mes:'Março',   resp:'Emily'},
+    {data:'03/03',bu:'ADVISORY',    cli:'ISABELA SOLLER',          desc:'6 meses',                  v:1000000, mes:'Março',   resp:'Grasi/Emily'},
+    {data:'04/03',bu:'ADVISORY',    cli:'BRUNO ANDRADE',           desc:'6 meses',                  v:1000000, mes:'Março',   resp:'Grasi/Emily'},
+    {data:'05/03',bu:'JOTA LAB',    cli:'PEDRO QUINTANILHA',       desc:'Inclusão de Internet',     v:2050,    mes:'Março',   resp:'Emily'},
+    {data:'05/03',bu:'JOTA LAB',    cli:'SELETO',                  desc:'Planner 100 unidades',     v:19900,   mes:'Março',   resp:'—'},
+    {data:'06/03',bu:'JOTA LAB',    cli:'TREINAMENTO SELETO',      desc:'23/02/2026',               v:20000,   mes:'Março',   resp:'—'},
+    {data:'11/03',bu:'PUBLICIDADE', cli:'AIRBNB',                  desc:'Patrocínio 4 episódios',   v:192000,  mes:'Março',   resp:'Emily'},
+    {data:'11/03',bu:'JOTA LAB',    cli:'KATERINE',                desc:'Advisory Prosperus',       v:50000,   mes:'Março',   resp:'Emily'},
+    {data:'13/03',bu:'JOTA LAB',    cli:'THIAGO MANCUSSI',         desc:'Advisory Prosperus',       v:50000,   mes:'Março',   resp:'Emily'},
+    {data:'13/03',bu:'JOTA LAB',    cli:'KATERINE - CONTRAT.',     desc:'Advisory Prosperus',       v:25000,   mes:'Março',   resp:'Emily'},
+    {data:'16/03',bu:'JOTA LAB',    cli:'MOISÉS',                  desc:'Cliente MLS',              v:25000,   mes:'Março',   resp:'Emily'},
+    {data:'17/03',bu:'JOTA LAB',    cli:'ATRS',                    desc:'Cliente MLS',              v:25000,   mes:'Março',   resp:'—'},
+    {data:'17/03',bu:'JOTA LAB',    cli:'PEDRO QUINTANILHA',       desc:'Seleto',                   v:50000,   mes:'Março',   resp:'Emily'},
+    {data:'17/03',bu:'JOTA LAB',    cli:'ROSANGELA LOPES',         desc:'Exclusive',                v:25000,   mes:'Março',   resp:'Emily'},
+    {data:'18/03',bu:'JOTA LAB',    cli:'DANI MARTINS',            desc:'23 e 24 de abril',         v:50000,   mes:'Março',   resp:'Emily'},
+    {data:'19/03',bu:'JOTA LAB',    cli:'ÍCARO GASPAR',            desc:'Mentor MLS',               v:25000,   mes:'Março',   resp:'Emily'},
+    {data:'23/03',bu:'JOTA LAB',    cli:'VANESSA GOLTZMAN',        desc:'JotaLab + Advisory',       v:105000,  mes:'Março',   resp:'—'},
+    {data:'24/03',bu:'CLUBES SÓCIOS',cli:'JOSÉ NETTO',             desc:'Seleto',                   v:3000000, mes:'Março',   resp:'Joel Jota'},
+    {data:'24/03',bu:'CLUBES SÓCIOS',cli:'TIAGO GRANITO',          desc:'Seleto',                   v:3000000, mes:'Março',   resp:'Joel Jota'},
+    {data:'26/03',bu:'JOTA EDITION',cli:'MÁQUINA TRIPLA',          desc:'Vendido 26/03',            v:87000,   mes:'Março',   resp:'—'},
+    {data:'27/03',bu:'ADVISORY',    cli:'AMBRENNA E VICTOR',       desc:'30 dias',                  v:1000000, mes:'Março',   resp:'Grasi/Emily'},
+    {data:'31/03',bu:'ADSENSE',     cli:'ADSENSE',                 desc:'Adsense março',            v:202202,  mes:'Março',   resp:'—'},
+    {data:'31/03',bu:'JOTA EDITION',cli:'ESCOLA DO PODCAST',       desc:'Geral março',              v:146000,  mes:'Março',   resp:'Grasi'},
+    {data:'01/04',bu:'JOTA LAB',    cli:'JAQUELINE JUNQUEIRA',     desc:'Clube MAAB - MLS',         v:25000,   mes:'Abril',   resp:'Emily'},
+    {data:'01/04',bu:'PALESTRAS',   cli:'FABIOLA',                 desc:'Palestras Lalas',          v:30000,   mes:'Abril',   resp:'Emily'},
+    {data:'02/04',bu:'JOTA EDITION',cli:'THAIS BERTI',             desc:'Máquina Tripla',           v:7000,    mes:'Abril',   resp:'—'},
+    {data:'03/04',bu:'JOTA EDITION',cli:'LISIANE',                 desc:'Máquina Tripla',           v:7000,    mes:'Abril',   resp:'Kath'},
+    {data:'04/04',bu:'JOTA EDITION',cli:'NATHALIA CUMINALE',       desc:'Máquina Tripla',           v:7000,    mes:'Abril',   resp:'Kath'},
+    {data:'06/04',bu:'JOTA LAB',    cli:'GABRIELA AMIGA LALAS',    desc:'Locação JLab',             v:20000,   mes:'Abril',   resp:'Emily'},
+    {data:'06/04',bu:'JOTA LAB',    cli:'QUÉSIA CARDOSO',          desc:'Mentor MLS',               v:25000,   mes:'Abril',   resp:'Emily'},
+    {data:'07/04',bu:'JOTA EDITION',cli:'DIEGO',                   desc:'Máquina Tripla',           v:7000,    mes:'Abril',   resp:'Rafael'},
+    {data:'08/04',bu:'JOTA EDITION',cli:'DOUGLAS WALTRIK',         desc:'Máquina Tripla',           v:10000,   mes:'Abril',   resp:'Emily'},
+    {data:'08/04',bu:'JOTA LAB',    cli:'WALKYRIA - SALA GUERRA',  desc:'Locação JLab',             v:105000,  mes:'Abril',   resp:'Emily'},
+    {data:'09/04',bu:'JOTA LAB',    cli:'JOSÉ RUBENS - SALA GUERRA',desc:'Locação JLab',            v:105000,  mes:'Abril',   resp:'Emily'},
+    {data:'09/04',bu:'JOTA LAB',    cli:'NÚBIA',                   desc:'Locação JLab',             v:25000,   mes:'Abril',   resp:'Emily'},
+    {data:'10/04',bu:'JOTA LAB',    cli:'TIAGO MANCUSSI',          desc:'Locação JLab',             v:50000,   mes:'Abril',   resp:'Emily'},
+    {data:'10/04',bu:'JOTA EDITION',cli:'BRUNO',                   desc:'Máquina Tripla',           v:7000,    mes:'Abril',   resp:'Kath'},
+    {data:'13/04',bu:'JOTA EDITION',cli:'RAYANE',                  desc:'Máquina Tripla',           v:7000,    mes:'Abril',   resp:'Kath'},
+    {data:'14/04',bu:'JOTA LAB',    cli:'RODRIGO BARBOSA',         desc:'JotaLab + Advisory',       v:105000,  mes:'Abril',   resp:'Joel'},
+    {data:'15/04',bu:'JOTA LAB',    cli:'A TRINCA REAL STATE',     desc:'Locação JLab',             v:25000,   mes:'Abril',   resp:'Joel Jota'},
+    {data:'15/04',bu:'JOTA EDITION',cli:'MARCOS VARANDAS',         desc:'Máquina Tripla',           v:7000,    mes:'Abril',   resp:'Emily'},
+    {data:'15/04',bu:'JOTA EDITION',cli:'ANA PAULA',               desc:'Máquina Tripla Online',    v:3000,    mes:'Abril',   resp:'Emily'},
+    {data:'18/04',bu:'JOTA EDITION',cli:'ANDRÉ PIVETTI',           desc:'Máquina Tripla Online',    v:3000,    mes:'Abril',   resp:'Kath'},
+    {data:'18/04',bu:'JOTA EDITION',cli:'JAMILE',                  desc:'Máquina Tripla',           v:10000,   mes:'Abril',   resp:'Rafael'},
+    {data:'20/04',bu:'JOTA EDITION',cli:'ROBSON',                  desc:'Máquina Tripla Individual',v:3000,    mes:'Abril',   resp:'Emily'},
+    {data:'20/04',bu:'JOTA EDITION',cli:'EDUARDO RAMALHO',         desc:'Máquina Tripla Individual',v:3000,    mes:'Abril',   resp:'Kath'},
+    {data:'22/04',bu:'JOTA LAB',    cli:'CLAX CLUB - ROBERTA',     desc:'Locação JLab',             v:20000,   mes:'Abril',   resp:'Joel Jota'},
+    {data:'22/04',bu:'JOTA EDITION',cli:'LUCIANO MACARO',          desc:'Máquina Tripla Online',    v:3000,    mes:'Abril',   resp:'Kath'},
+    {data:'24/04',bu:'JOTA LAB',    cli:'PEDRO QUINTANILHA',       desc:'Livros 300 Não é Milagre', v:14700,   mes:'Abril',   resp:'Joel Jota'},
+    {data:'24/04',bu:'JOTA EDITION',cli:'ÍNDIO DA COSTA',          desc:'Máquina Tripla – 5 pess.', v:10000,   mes:'Abril',   resp:'Emily'},
+    {data:'24/04',bu:'JOTA EDITION',cli:'FERNANDO MARCOS',         desc:'Máquina Tripla',           v:3000,    mes:'Abril',   resp:'Rafael'},
+    {data:'26/04',bu:'ADVISORY',    cli:'CAIO BARBOSA',            desc:'Advisory 30 dias',         v:1000000, mes:'Abril',   resp:'Grasi/Emily'},
+    {data:'29/04',bu:'JOTA LAB',    cli:'PEDRO QUINTANILHA',       desc:'Locação JLab · 2 diárias', v:50000,   mes:'Abril',   resp:'Emily'},
+    {data:'30/04',bu:'ADSENSE',     cli:'ADSENSE',                 desc:'Adsense abril',            v:74514,   mes:'Abril',   resp:'—'},
+    {data:'30/04',bu:'JOTA EDITION',cli:'MÁQUINA TRIPLA',          desc:'Venda de livros no evento',v:3669,    mes:'Abril',   resp:'Time'},
+  ],
+};
+
+// ── UTILS ──────────────────────────────────────────────────────────
+function fmt(n){if(n>=1000000)return (n/1000000).toFixed(1).replace('.',',')+' M';if(n>=1000)return (n/1000).toFixed(0)+'k';return n.toLocaleString('pt-BR');}
+function fmtR(n){return 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});}
+function parseN(s){if(!s&&s!==0)return 0;return parseFloat(String(s).replace(/[R$\s]/g,'').replace(/\./g,'').replace(',','.').trim())||0;}
+
+const BU_COR={'PALESTRAS':'var(--amber)','PUBLICIDADE':'var(--blue)','JOTA LAB':'var(--green)','JOTA EDITION':'#7c3aed','ADVISORY':'#d97706','A TRINCA MÍDIA':'var(--red)','CLUBES/SELETO':'#0891b2','CLUBES SÓCIOS':'#0891b2','ADSENSE':'#6b7280'};
+const BU_SH={'PUBLICIDADE':'PUBLI','JOTA EDITION':'J.EDITION','JOTA LAB':'J.LAB','CLUBES SÓCIOS':'SELETO','CLUBES/SELETO':'SELETO','A TRINCA MÍDIA':'TRINCA','PALESTRAS':'PAL.','ADVISORY':'ADV','ADSENSE':'ADS'};
+const BU_BADGE={'PALESTRAS':'ba','PUBLICIDADE':'bb','JOTA LAB':'bg','JOTA EDITION':'bb','ADVISORY':'ba','A TRINCA MÍDIA':'br','CLUBES/SELETO':'bb','CLUBES SÓCIOS':'bb','ADSENSE':'bgray'};
+
+function stBadge(pct){
+  if(pct>=100) return '<span class="badge bb">META</span>';
+  if(pct>=80)  return '<span class="badge bg">No Ritmo</span>';
+  if(pct>=40)  return '<span class="badge ba">Atenção</span>';
+  if(pct>0)    return '<span class="badge br">Crítico</span>';
+  return '<span class="badge bgray">Sem venda</span>';
+}
+
+function animBars(){document.querySelectorAll('.pfill[data-w]').forEach(el=>requestAnimationFrame(()=>el.style.width=el.dataset.w+'%'));}
+
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+// ── CSV PARSER ──────────────────────────────────────────────────────
+function parseCSV(txt){
+  const rows=[];
+  const lines=txt.trim().split('\n');
+  for(const line of lines){
+    const row=[];let cur='',inQ=false;
+    for(let i=0;i<line.length;i++){
+      const c=line[i];
+      if(c==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ;}
+      else if(c===','&&!inQ){row.push(cur.trim());cur='';}
+      else cur+=c;
+    }
+    row.push(cur.trim());rows.push(row);
+  }
+  return rows;
+}
+
+function csvToBU(txt){
+  const rows=parseCSV(txt).slice(1); // skip header
+  return rows.filter(r=>r[0]&&r[0].trim()).map(r=>({
+    id:r[0].trim(),meta:parseN(r[1]),vendido:parseN(r[2]),qtd:+r[3]||0,
+    ticket:parseN(r[4]),pipe:parseN(r[5]),meta_mes:parseN(r[6]),
+  }));
+}
+
+function csvToMensal(txt){
+  const rows=parseCSV(txt).slice(1);
+  return rows.filter(r=>r[0]&&r[0].trim()).map(r=>({
+    mes:r[0].trim(),pal:parseN(r[1]),pub:parseN(r[2]),lab:parseN(r[3]),
+    edi:parseN(r[4]),adv:parseN(r[5]),sel:parseN(r[6]),ads:parseN(r[7]),
+    total:parseN(r[8]),meta:parseN(r[9]),
+  }));
+}
+
+function csvToVF(txt){
+  const rows=parseCSV(txt).slice(1);
+  return rows.filter(r=>r[2]&&r[2].trim()).map(r=>({
+    data:r[0].trim(),bu:r[1].trim(),cli:r[2].trim(),
+    desc:r[3].trim(),v:parseN(r[4]),mes:r[5].trim(),resp:r[6].trim(),
+  }));
+}
+
+// ── FETCH ──────────────────────────────────────────────────────────
+let DATA = null;
+let isConnected = false;
+
+async function fetchSheet(url){
+  const resp = await fetch(url+'&cachebust='+Date.now(), {cache:'no-store'});
+  if(!resp.ok) throw new Error('HTTP '+resp.status);
+  return resp.text();
+}
+
+async function loadData(){
+  const btn=document.getElementById('btn-upd');
+  btn.classList.add('loading');
+  btn.textContent='Carregando...';
+
+  const urls = {
+    bu:     CFG.bu     || SHEET_URLS.bu,
+    mensal: CFG.mensal || SHEET_URLS.mensal,
+    vf:     CFG.vf     || SHEET_URLS.vf,
+  };
+
+  const hasUrls = urls.bu && urls.mensal && urls.vf;
+
+  if(hasUrls){
+    try{
+      const [txtBU, txtMen, txtVF] = await Promise.all([
+        fetchSheet(urls.bu),
+        fetchSheet(urls.mensal),
+        fetchSheet(urls.vf),
+      ]);
+      DATA = {
+        bu:     csvToBU(txtBU),
+        mensal: csvToMensal(txtMen),
+        vf:     csvToVF(txtVF),
+        updated: new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),
+      };
+      isConnected = true;
+      showToast('Dados atualizados!');
+    }catch(e){
+      console.error(e);
+      DATA = {...FB, updated: FB.updated+' (fallback)'};
+      isConnected = false;
+      showToast('Erro ao buscar planilha — usando dados locais');
+    }
+  }else{
+    DATA = {...FB};
+    isConnected = false;
+  }
+
+  render();
+  btn.classList.remove('loading');
+  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg> Atualizar';
+
+  document.getElementById('upd-ts').textContent = DATA.updated ? 'Atualizado: '+DATA.updated : '';
+  const cb = document.getElementById('conn-badge');
+  if(isConnected){cb.textContent='CONECTADO';cb.className='conn ok';}
+  else{cb.textContent='MANUAL';cb.className='conn no';}
+}
+
+// ── RENDER ──────────────────────────────────────────────────────────
+let _buF = 'Todos', _mesF = 'Todos';
+
+function render(){
+  const {bu, mensal, vf} = DATA;
+
+  // Totals
+  const tvend = bu.reduce((a,b)=>a+b.vendido,0);
+  const tmeta = bu.reduce((a,b)=>a+b.meta,0);
+  const tqtd  = bu.reduce((a,b)=>a+b.qtd,0);
+  const tpipe = bu.reduce((a,b)=>a+b.pipe,0);
+  const trp   = tvend+tpipe;
+  const tpct  = tmeta?tvend/tmeta*100:0;
+  const tick  = tqtd?Math.round(tvend/tqtd):0;
+  const mmeta = bu.reduce((a,b)=>a+b.meta_mes,0);
+
+  // Trim
+  const q=[
+    {id:'Q1 (Jan–Mar)',total:mensal.filter(m=>['Janeiro','Fevereiro','Março'].includes(m.mes)).reduce((a,b)=>a+b.total,0), meta:mensal.filter(m=>['Janeiro','Fevereiro','Março'].includes(m.mes)).reduce((a,b)=>a+b.meta,0)},
+    {id:'Q2 (Abr–Jun)',total:mensal.filter(m=>['Abril','Maio','Junho'].includes(m.mes)).reduce((a,b)=>a+b.total,0), meta:mensal.filter(m=>['Abril','Maio','Junho'].includes(m.mes)).reduce((a,b)=>a+b.meta,0)},
+    {id:'Q3 (Jul–Set)',total:mensal.filter(m=>['Julho','Agosto','Setembro'].includes(m.mes)).reduce((a,b)=>a+b.total,0), meta:mensal.filter(m=>['Julho','Agosto','Setembro'].includes(m.mes)).reduce((a,b)=>a+b.meta,0)},
+    {id:'Q4 (Out–Dez)',total:mensal.filter(m=>['Outubro','Novembro','Dezembro'].includes(m.mes)).reduce((a,b)=>a+b.total,0), meta:mensal.filter(m=>['Outubro','Novembro','Dezembro'].includes(m.mes)).reduce((a,b)=>a+b.meta,0)},
+  ];
+
+  // BU Rows
+  const buRows = bu.map(b=>{
+    const pct = b.meta?b.vendido/b.meta*100:0;
+    const prp = b.meta?(b.vendido+b.pipe)/b.meta*100:0;
+    const clr = BU_COR[b.id]||'var(--blue)';
+    const pw  = Math.min(pct,100).toFixed(1);
+    const ppw = Math.min(Math.max(prp-pct,0),100-parseFloat(pw)).toFixed(1);
+    return '<tr>'
+      +'<td><strong style="font-size:13px">'+b.id+'</strong></td>'
+      +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:12px;color:var(--text3)">R$'+fmt(b.meta)+'</td>'
+      +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:13px;font-weight:700;color:var(--blue2)">R$'+fmt(b.vendido)+'</td>'
+      +'<td style="min-width:140px"><div class="pbar"><div class="pfill" data-w="'+pw+'" style="background:'+clr+'"></div></div>'
+      +(+ppw>0?'<div class="pbar" style="height:4px;margin-top:2px"><div class="pfill" data-w="'+ppw+'" style="background:'+clr+';opacity:.3"></div></div>':'')
+      +'</td>'
+      +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:12px;color:var(--text3)">'+(b.pipe?'R$'+fmt(b.pipe):'—')+'</td>'
+      +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:13px">R$'+fmt(b.vendido+b.pipe)+'</td>'
+      +'<td>'+stBadge(pct)+' <span style="font-size:11px;color:var(--text3);font-family:\'Space Mono\',monospace">'+pct.toFixed(1)+'%</span></td>'
+      +'</tr>';
+  }).join('');
+
+  // Trim Cards
+  const trimCards = q.map(t=>{
+    const p = t.meta?t.total/t.meta*100:0;
+    const clr = p>=80?'var(--green)':p>=40?'var(--amber)':p>0?'var(--red)':'var(--text3)';
+    return '<div class="mc">'
+      +'<div class="ml">'+t.id+'</div>'
+      +'<div class="mv" style="color:'+clr+';font-size:20px">R$'+fmt(t.total)+'</div>'
+      +'<div class="ms">de R$'+fmt(t.meta)+' · '+p.toFixed(1)+'%</div>'
+      +'<div style="margin-top:10px"><div class="pbar"><div class="pfill" data-w="'+Math.min(p,100).toFixed(1)+'" style="background:'+clr+'"></div></div></div>'
+      +'</div>';
+  }).join('');
+
+  // Meta Mês rows
+  const maioRows = bu.filter(b=>b.meta_mes>0).map(b=>{
+    const clr = BU_COR[b.id]||'var(--blue)';
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--b1);gap:12px">'
+      +'<span style="font-size:14px;font-weight:600;color:var(--text)">'+b.id+'</span>'
+      +'<span style="font-family:\'Space Mono\',monospace;font-size:14px;font-weight:700;color:'+clr+'">'+fmtR(b.meta_mes)+'</span>'
+      +'</div>';
+  }).join('');
+
+  // Mensal table
+  const mesRows = mensal.map(m=>{
+    const pct = m.meta?m.total/m.meta*100:0;
+    const bc = pct>=80?'bg':pct>=40?'ba':pct>0?'br':'bgray';
+    const v = n => n?'R$'+fmt(n):'—';
+    const isFut = !m.total;
+    const rs = isFut?'color:var(--text3)':'';
+    return '<tr style="'+rs+'">'
+      +'<td><strong style="font-size:13px">'+m.mes+'</strong></td>'
+      +'<td style="text-align:right;font-size:12px">'+v(m.pal)+'</td>'
+      +'<td style="text-align:right;font-size:12px">'+v(m.pub)+'</td>'
+      +'<td style="text-align:right;font-size:12px">'+v(m.lab)+'</td>'
+      +'<td style="text-align:right;font-size:12px">'+v(m.edi)+'</td>'
+      +'<td style="text-align:right;font-size:12px">'+v(m.adv)+'</td>'
+      +'<td style="text-align:right;font-size:12px">'+v(m.sel)+'</td>'
+      +'<td style="text-align:right;font-size:12px">'+v(m.ads)+'</td>'
+      +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:13px;font-weight:700;color:'+(isFut?'var(--text3)':'var(--blue2)')+'">'+v(m.total)+'</td>'
+      +'<td style="text-align:center"><span class="badge '+bc+'">'+pct.toFixed(1)+'%</span></td>'
+      +'</tr>';
+  }).join('');
+
+  // Vendas fechadas
+  const buList = ['Todos','ADVISORY','JOTA LAB','JOTA EDITION','PUBLICIDADE','PALESTRAS','CLUBES SÓCIOS','ADSENSE'];
+  const mesList = ['Todos','Janeiro','Fevereiro','Março','Abril','Maio'];
+  let fvf = vf;
+  if(_buF!=='Todos') fvf = fvf.filter(v=>v.bu===_buF||v.bu.startsWith(_buF.split(' ')[0]));
+  if(_mesF!=='Todos') fvf = fvf.filter(v=>v.mes===_mesF);
+  const vfTot = fvf.reduce((a,b)=>a+b.v,0);
+
+  const vfRows = fvf.length ? fvf.map(v=>{
+    const bc = BU_BADGE[v.bu]||'bgray';
+    return '<tr>'
+      +'<td style="font-size:12px;color:var(--text3);white-space:nowrap">'+v.data+'</td>'
+      +'<td><span class="badge '+bc+'" style="font-size:10px">'+(BU_SH[v.bu]||v.bu)+'</span></td>'
+      +'<td style="font-size:13px;font-weight:600;color:var(--text)">'+v.cli+'</td>'
+      +'<td style="font-size:12px;color:var(--text2)">'+v.desc+'</td>'
+      +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:13px;font-weight:700;white-space:nowrap;color:var(--blue2)">R$'+fmt(v.v)+'</td>'
+      +'<td style="font-size:12px;color:var(--text3)">'+v.resp+'</td>'
+      +'</tr>';
+  }).join('') : '<tr><td colspan="6" style="text-align:center;padding:28px;color:var(--text3)">Nenhuma venda neste filtro</td></tr>';
+
+  const buBtns = buList.map(b=>'<button class="fbtn'+(_buF===b?' on':'')+'" onclick="filterBU(\''+b+'\')">'+b+'</button>').join('');
+  const mesBtns = mesList.map(m=>'<button class="fbtn'+(_mesF===m?' on':'')+'" onclick="filterMes(\''+m+'\')">'+m+'</button>').join('');
+
+  const hasUrls = (CFG.bu||SHEET_URLS.bu) && (CFG.mensal||SHEET_URLS.mensal) && (CFG.vf||SHEET_URLS.vf);
+
+  document.getElementById('app').innerHTML =
+    (!hasUrls ? '<div class="setup-banner"><div class="setup-icon">📊</div><div class="setup-txt"><h3>Conecte sua planilha Google Sheets</h3><p>Os dados abaixo são os últimos atualizados manualmente. Para que o dashboard atualize <strong>automaticamente</strong> todos os dias, conecte seu Google Sheets:</p><ul><li>Crie uma planilha no Google Sheets com 3 abas: BU · MENSAL · VF</li><li>Publique como CSV (Arquivo → Publicar na web)</li><li>Cole os links abaixo</li></ul><button class="btn-setup" onclick="openCfg()">⚙ Configurar Google Sheets</button></div></div>' : '')
+    +'<div class="mgrid">'
+      +'<div class="mc blue"><div class="ml">Total Vendido 2026</div><div class="mv blue">R$'+fmt(tvend)+'</div><div class="ms">de R$'+fmt(tmeta)+' em meta</div></div>'
+      +'<div class="mc"><div class="ml">% Meta Anual</div><div class="mv">'+tpct.toFixed(1)+'%</div><div class="ms">'+tqtd+' vendas · ticket R$'+fmt(tick)+'</div></div>'
+      +'<div class="mc"><div class="ml">Real + Pipeline</div><div class="mv">R$'+fmt(trp)+'</div><div class="ms">'+( trp/tmeta*100).toFixed(1)+'% do potencial</div></div>'
+      +'<div class="mc"><div class="ml">Pipeline Ativo</div><div class="mv">R$'+fmt(tpipe)+'</div><div class="ms">em negociação</div></div>'
+    +'</div>'
+
+    +'<div class="sl">Metas por Business Unit — 2026</div>'
+    +'<div class="card"><div style="overflow-x:auto"><table class="vtab">'
+      +'<thead><tr><th>Business Unit</th><th style="text-align:right">Meta Anual</th><th style="text-align:right">Vendido</th><th style="min-width:140px">Progresso</th><th style="text-align:right">Pipeline</th><th style="text-align:right">Real + Pipe</th><th>Status</th></tr></thead>'
+      +'<tbody>'+buRows
+      +'<tr style="background:var(--bg3);font-weight:700">'
+        +'<td>TOTAL GERAL</td>'
+        +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:12px;color:var(--text3)">R$'+fmt(tmeta)+'</td>'
+        +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:13px;color:var(--blue2)">R$'+fmt(tvend)+'</td>'
+        +'<td><div class="pbar"><div class="pfill" data-w="'+Math.min(tpct,100).toFixed(1)+'" style="background:var(--blue)"></div></div></td>'
+        +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:12px">R$'+fmt(tpipe)+'</td>'
+        +'<td style="text-align:right;font-family:\'Space Mono\',monospace;font-size:13px">R$'+fmt(trp)+'</td>'
+        +'<td><span style="font-family:\'Space Mono\',monospace;font-weight:700;color:var(--blue);font-size:14px">'+tpct.toFixed(1)+'%</span></td>'
+      +'</tr>'
+      +'</tbody></table></div></div>'
+
+    +'<div class="tgrid">'+trimCards+'</div>'
+
+    +'<div class="sl">Meta Maio 2026 — R$'+fmt(mmeta)+'</div>'
+    +'<div class="card"><div class="card-body">'+maioRows
+      +'<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0 4px;gap:12px">'
+        +'<span style="font-weight:700;font-size:14px;color:var(--text)">TOTAL MAIO</span>'
+        +'<span style="font-family:\'Space Mono\',monospace;font-size:15px;font-weight:700;color:var(--blue)">'+fmtR(mmeta)+'</span>'
+      +'</div>'
+    +'</div></div>'
+
+    +'<div class="sl">Vendas por Mês</div>'
+    +'<div class="card"><div style="overflow-x:auto"><table class="vtab">'
+      +'<thead><tr><th>Mês</th><th style="text-align:right">Palestras</th><th style="text-align:right">Publi</th><th style="text-align:right">J.Lab</th><th style="text-align:right">J.Edition</th><th style="text-align:right">Advisory</th><th style="text-align:right">Seleto</th><th style="text-align:right">Adsense</th><th style="text-align:right">Total</th><th>% Meta</th></tr></thead>'
+      +'<tbody>'+mesRows+'</tbody>'
+    +'</table></div></div>'
+
+    +'<div class="sl">Vendas Fechadas — '+fvf.length+' registros · R$'+fmt(vfTot)+'</div>'
+    +'<div class="filters">'+buBtns+'</div>'
+    +'<div class="filters" style="margin-bottom:14px">'+mesBtns+'</div>'
+    +'<div class="card">'
+      +'<div class="card-head"><span class="card-title">'+fvf.length+' vendas · R$'+fmt(vfTot)+'</span></div>'
+      +'<div style="overflow-x:auto"><table class="vtab">'
+        +'<thead><tr><th>Data</th><th>BU</th><th>Cliente</th><th>Descrição</th><th style="text-align:right">Valor</th><th>Resp.</th></tr></thead>'
+        +'<tbody>'+vfRows+'</tbody>'
+      +'</table></div>'
+    +'</div>';
+
+  setTimeout(animBars, 80);
+}
+
+function filterBU(v){_buF=v;render();}
+function filterMes(v){_mesF=v;render();}
+
+// ── CONFIG MODAL ───────────────────────────────────────────────────
+function openCfg(){
+  document.getElementById('cfg-bu').value  = CFG.bu     || SHEET_URLS.bu     || '';
+  document.getElementById('cfg-men').value = CFG.mensal || SHEET_URLS.mensal || '';
+  document.getElementById('cfg-vf').value  = CFG.vf     || SHEET_URLS.vf     || '';
+  document.getElementById('mcfg').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+}
+function closeCfg(){
+  document.getElementById('mcfg').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+function saveCfg(){
+  CFG = {
+    bu:     document.getElementById('cfg-bu').value.trim(),
+    mensal: document.getElementById('cfg-men').value.trim(),
+    vf:     document.getElementById('cfg-vf').value.trim(),
+  };
+  localStorage.setItem('jc_res_cfg', JSON.stringify(CFG));
+  closeCfg();
+  loadData();
+}
+function toggleTemplate(){
+  const el=document.getElementById('tmpl');
+  const btn=el.previousElementSibling;
+  const open=el.style.display!=='none';
+  el.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Ver estrutura das abas';
+}
+
+// ── INIT ───────────────────────────────────────────────────────────
+loadData();
+</script>
+</body>
+</html>
