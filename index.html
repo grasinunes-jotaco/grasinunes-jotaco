@@ -241,7 +241,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Space 
 <div class="topbar">
   <div class="tlogo">JOTA<span>/</span>CO</div>
   <div class="tnav" id="tnav"></div>
-  <div class="tbadge" id="semana">SEM 18 · MAI</div>
+  <div class="tbadge" id="semana">SEM 19 · MAI</div>
 </div>
 
 <!-- ── MAIN CONTENT ── -->
@@ -316,8 +316,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Space 
 // ══════════════════════════════════════════
 const METAS={
   'PALESTRAS':      {meta:1000000,   real:830000,    resp:'Emily'},
-  'PUBLICIDADE':    {meta:20000000,  real:1461000,   resp:'Grasi'},
-  'JOTA LAB':       {meta:5000000,   real:1720700,   resp:'Eduardo'},
+  'PUBLICIDADE':    {meta:20000000,  real:1586000,   resp:'Grasi'},
+  'JOTA LAB':       {meta:5000000,   real:1760700,   resp:'Eduardo'},
   'JOTA EDITION':   {meta:5140000,   real:966669,    resp:'Emily'},
   'ADVISORY':       {meta:10000000,  real:10300000,  resp:'Grasi'},
   'A TRINCA MÍDIA': {meta:100000000, real:0,         resp:'Grasi'},
@@ -339,7 +339,6 @@ const PIPELINE_INICIAL=[
   {c:'ADAPTA',           bu:'A TRINCA MÍDIA',      v:5000000,  e:'Em Negociação',   p:40, resp:'Joel',        next:'Negociação Flávio e Joel',  obs:''},
   {c:'AUDIBLE',          bu:'PUBLICIDADE',         v:1000000,  e:'Proposta Enviada',p:50, resp:'Emily',       next:'Devolutiva em junho',       obs:''},
   {c:'BYD',              bu:'A TRINCA MÍDIA',      v:21000000, e:'Proposta Enviada',p:35, resp:'Joel',        next:'Aguardando retorno',        obs:'Joel enviou R$21M'},
-  {c:'HOSTINGER',        bu:'PUBLICIDADE',         v:120000,   e:'Em Contrato',     p:80, resp:'Emily',       next:'Vídeo conceito',            obs:''},
   {c:'NEXFIT',           bu:'A TRINCA MÍDIA',      v:5000000,  e:'Prospecção',      p:25, resp:'Grasi',       next:'A Trinca Mídia',            obs:''},
   {c:'KIWIFI',           bu:'A TRINCA MÍDIA',      v:5000000,  e:'Em Negociação',   p:40, resp:'Joel',        next:'Negociação Flávio e Joel',  obs:''},
   {c:'TATIANE TEÓFILO',  bu:'ADVISORY',            v:1000000,  e:'Em Negociação',   p:60, resp:'Grasi',       next:'Reunião quarta 23/05',     obs:''},
@@ -347,10 +346,10 @@ const PIPELINE_INICIAL=[
   {c:'THE BEST AÇAÍ',    bu:'A TRINCA MÍDIA',      v:5000000,  e:'Em Negociação',   p:40, resp:'Emily/Grasi', next:'Retorno Sérgio',            obs:''},
   {c:'PORMADE',          bu:'A TRINCA MÍDIA',      v:6000000,  e:'Em Negociação',   p:50, resp:'Emily',       next:'',                          obs:'1 ano de contrato'},
   {c:'DR. CARLOS',       bu:'ADVISORY',            v:1000000,  e:'Em Negociação',   p:50, resp:'Grasi',       next:'Fechar em maio',            obs:''},
-  {c:'XP',               bu:'PUBLICIDADE',         v:800000,   e:'Em Negociação',   p:60, resp:'Grasi/Emily', next:'Fechar em maio',            obs:''},
+  {c:'XP',               bu:'PUBLICIDADE',         v:800000,   e:'Em Contrato',     p:80, resp:'Grasi/Emily', next:'Fechar em maio',            obs:''},
   {c:'FRAME',            bu:'SELETO',              v:3000000,  e:'Em Negociação',   p:50, resp:'Joel',        next:'Negociação com Joel',       obs:''},
   {c:'FLÁVIO GARCIA',    bu:'ADVISORY',            v:1000000,  e:'Em Negociação',   p:40, resp:'Emily/Grasi', next:'',                          obs:''},
-  {c:'AMBRENNA E VICTOR',bu:'SELETO',              v:3000000,  e:'Em Negociação',   p:40, resp:'Grasi/Emily', next:'Fechar junho',              obs:''},
+  {c:'AMBRENNA E VICTOR',bu:'SELETO',              v:3000000,  e:'Proposta Enviada',p:50, resp:'Grasi/Emily', next:'Fechar junho',              obs:''},
 ];
 
 const ADVISORY_ATIVOS=[
@@ -501,6 +500,8 @@ const VENDAS=[
   {bu:'JOTA EDITION', cli:'FERNANDO MARCOS',               desc:'Máquina Tripla',           v:3000,    mes:'Abril',  resp:'Rafael'},
   {bu:'ADSENSE',      cli:'ADSENSE',                       desc:'Adsense abr',              v:74514,   mes:'Abril',  resp:'—'},
   {bu:'JOTA EDITION', cli:'MÁQUINA TRIPLA',                desc:'Venda livros evento',      v:3669,    mes:'Abril',  resp:'Time'},
+  {bu:'PUBLICIDADE',  cli:'HOSTINGER',                     desc:'1 vídeo conceito',         v:125000,  mes:'Maio',   resp:'Emily'},
+  {bu:'JOTA LAB',     cli:'RAFAEL NUNES',                  desc:'Locação JLab · podcast',   v:40000,   mes:'Maio',   resp:'Emily'},
 ];
 
 let editPipIdx=-1, editCliIdx=-1;
