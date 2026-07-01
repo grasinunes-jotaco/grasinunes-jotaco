@@ -241,7 +241,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Space 
 <div class="topbar">
   <div class="tlogo">JOTA<span>/</span>CO</div>
   <div class="tnav" id="tnav"></div>
-  <div class="tbadge" id="semana">SEM 27 · JUN</div>
+  <div class="tbadge" id="semana">SEM 27 · JUL</div>
 </div>
 
 <!-- ── MAIN CONTENT ── -->
@@ -316,13 +316,13 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Space 
 // ══════════════════════════════════════════
 const METAS={
   'PALESTRAS':      {meta:1000000,   real:830000,    resp:'Emily'},
-  'PUBLICIDADE':    {meta:20000000,  real:6381149,   resp:'Grasi'},
-  'JOTA LAB':       {meta:5000000,   real:1732200,   resp:'Eduardo'},
-  'JOTA EDITION':   {meta:5140000,   real:969669,    resp:'Emily'},
+  'PUBLICIDADE':    {meta:20000000,  real:5581149,   resp:'Grasi'},
+  'JOTA LAB':       {meta:5000000,   real:1915200,   resp:'Eduardo'},
+  'JOTA EDITION':   {meta:5140000,   real:975669,    resp:'Emily'},
   'ADVISORY':       {meta:10000000,  real:10300000,  resp:'Grasi'},
-  'A TRINCA MÍDIA': {meta:100000000, real:0,         resp:'Grasi'},
-  'CLUBES SÓCIOS':  {meta:100000000, real:9000000,   resp:'Grasi'},
-  'ADSENSE':        {meta:660000,    real:466580,    resp:'—'},
+  'A TRINCA MÍDIA': {meta:100000000, real:6500000,         resp:'Grasi'},
+  'CLUBES SÓCIOS':  {meta:100000000, real:12000000,   resp:'Grasi'},
+  'ADSENSE':        {meta:660000,    real:531443,    resp:'—'},
 };
 
 // Metas mensais reais — aba MENSAL da planilha
@@ -336,72 +336,69 @@ const METAS_MENSAIS={
 
 const PIPELINE_INICIAL=[
   {c:'CARRARO', bu:'A TRINCA MÍDIA', v:6000000, e:'Em Contrato', p:85, resp:'Emily/Grasi', next:'Em contrato – negociação forma de pgto', obs:'Negociação forma de pagamento'},
-  {c:'ADAPTA', bu:'A TRINCA MÍDIA', v:5000000, e:'Em Negociação', p:50, resp:'Joel', next:'NEGOCIAÇÃO FLÁVIO E JOEL', obs:''},
+  {c:'AMBRENNA E VICTOR', bu:'SELETO', v:3000000, e:'Proposta Enviada', p:50, resp:'Grasi/Emily', next:'FECHAR EM JUNHO', obs:''},
   {c:'AUDIBLE', bu:'PUBLICIDADE', v:1000000, e:'Proposta Enviada', p:50, resp:'Emily', next:'PROPOSTA ENVIADA - DEVOLUTIVA EM JUNHO', obs:''},
   {c:'NEXFIT', bu:'A TRINCA MÍDIA', v:5000000, e:'Prospecção', p:25, resp:'Grasi', next:'A Trinca Mídia', obs:''},
   {c:'KIWIFI', bu:'A TRINCA MÍDIA', v:5000000, e:'Em Negociação', p:50, resp:'Joel', next:'NEGOCIAÇÃO FLÁVIO E JOEL', obs:''},
   {c:'THE BEST AÇAÍ', bu:'A TRINCA MÍDIA', v:5000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'Sérgio', obs:''},
   {c:'PORMADE', bu:'A TRINCA MÍDIA', v:2000000, e:'Em Negociação', p:50, resp:'Emily', next:'2 podcast caio e joel + conselho', obs:'1 ANO DE CONTRATO'},
-  {c:'AMBRENNA E VICTOR', bu:'SELETO', v:3000000, e:'Proposta Enviada', p:50, resp:'Grasi/Emily', next:'FECHAR EM JUNHO', obs:''},
-  {c:'FLÁVIO GARCIA', bu:'PODCAST COM PLATÉIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'', obs:''},
-  {c:'CAIO SARAIVA', bu:'PODCAST COM PLATÉIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
-  {c:'VICTOR - MLS', bu:'PODCAST COM PLATÉIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
-  {c:'MARCELO CRUZ', bu:'PODCAST COM PLATÉIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
-  {c:'GABRIEL LONGUINI', bu:'PODCAST COM PLATÉIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily', next:'', obs:''},
-  {c:'THIAGO MANCUSSI', bu:'PODCAST COM PLATÉIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'', obs:''},
-  {c:'LOFTY', bu:'PODCAST COM PLATÉIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
-  {c:'AMARO', bu:'A TRINCA MÍDIA', v:0, e:'Prospecção', p:25, resp:'—', next:'HORAS VOO', obs:''},
-  {c:'DR CARLOS', bu:'PODCAST COM PLATÉIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'FECHAR EM JUNHO', obs:''},
-  {c:'NORMA', bu:'PODCAST COM PLATÉIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'FECHAR EM JUNHO', obs:''}
+  {c:'ACHE', bu:'PALESTRAS', v:95000, e:'Em Negociação', p:50, resp:'Emily', next:'Palestra ON LINE', obs:''},
+  {c:'FLÁVIO GARCIA', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
+  {c:'CAIO SARAIVA', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
+  {c:'VICTOR - MLS', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
+  {c:'MARCELO CRUZ', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
+  {c:'GABRIEL LONGUINI', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily', next:'', obs:''},
+  {c:'THIAGO MANCUSSI', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'', obs:''},
+  {c:'LOFTY', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
+  {c:'DR CARLOS', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'FECHAR EM JUNHO', obs:''},
+  {c:'NORMA', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'FECHAR EM JUNHO', obs:''},
+  {c:'THIAGO MOURA', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'', obs:''}
 ];
 const ADVISORY_ATIVOS=[
-  {n:'Dr. Antônio', per:'Nov/25–Abr/26', dur:'1 ano', foco:'Influência', v:400000, rec:400000, prox:'DISTRATO MAIO', obs:'Distrato confirmado · Reunião 19/04 realizada', abr:'Reunião Presencial', abr_s:'realizado'},
-  {n:'Douglas Nexfit', per:'Até ago/26', dur:'1 ano', foco:'Influência', v:500000, rec:500000, prox:'JOEL PUBLI', obs:'OK pago · evento 27/04 clientes NEXFIT realizado', abr:'Evento 27/04', abr_s:'realizado'},
-  {n:'Fábio Gonçalves', per:'Jan–Dez/26', dur:'1 ano', foco:'Posicionamento + Motor 1 e 2', v:2000000, rec:602000, prox:'PROSPERUS', obs:'13/04 + Online 30/04 · Time do Fábio 06/05 realizado · Visita empresa 12/05 realizada', abr:'Reunião Presencial', abr_s:'realizado'},
-  {n:'Adriana Alves', per:'6 meses', dur:'6 meses', foco:'Contatos / Empresas', v:500000, rec:500000, prox:'RENOVAR', obs:'OK pago · RENOVAR', abr:'—', abr_s:'ok'},
-  {n:'Bia Finochio', per:'Fev–Mai/26', dur:'3 meses', foco:'Influência / posicionamento / motor 2', v:300000, rec:300000, prox:'DISTRATO MAIO', obs:'Distrato confirmado · 17/04 advisory 2h realizada', abr:'Reunião Presencial', abr_s:'realizado'},
-  {n:'Ivan Pons', per:'Fev–Ago/26', dur:'6 meses', foco:'Influência', v:600000, rec:100000, prox:'—', obs:'Realizado 29/04 presencial · 65 membros · Founder Led Growth', abr:'Reunião Presencial', abr_s:'realizado'},
-  {n:'Fernanda Tochetto', per:'Fev–Ago/26', dur:'6 meses', foco:'Influência + Captação', v:1000000, rec:1000000, prox:'SELETO', obs:'OK pago · Adv 05/05 realizado · JJPodcast 15/06 14h · Palestra+Pod 23/06', abr:'Online 26/04', abr_s:'realizado'},
-  {n:'Marcos Carraro', per:'Até Dez/27', dur:'2 anos', foco:'Conselho + Influência', v:3000000, rec:770000, prox:'A TRINCA MÍDIA', obs:'Renovação confirmada · Piracicaba · Encontro abril realizado · Presencial 19/05 agendado', abr:'Reunião Presencial', abr_s:'realizado'},
-  {n:'Isabela Soller', per:'Mar–Jul/26', dur:'6 meses', foco:'Direção Estratégica', v:1000000, rec:520000, prox:'A TRINCA MÍDIA', obs:'Joel visitou empresa 31/03 · Encontro 07/05 realizado', abr:'31/03 escritório', abr_s:'realizado'},
-  {n:'Bruno Andrade', per:'Mar–Jul/26', dur:'6 meses', foco:'Influência + Captação + produto', v:1000000, rec:200000, prox:'SELETO', obs:'Realizado 22/04 c/ Grasi · Presencial 06/05 realizado', abr:'Realizado 22/04', abr_s:'realizado'},
-  {n:'Victor e Ambrenna', per:'Junho/Julho', dur:'30 dias', foco:'Influência / posicionamento / motor 2', v:1000000, rec:300000, prox:'SELETO', obs:'Online 10/04 Joel + Malu · Presencial Jota Co 08–12/06', abr:'Realizado 10/04', abr_s:'realizado'},
-  {n:'Caio e Calleti', per:'Mai–Jun/26', dur:'30 dias', foco:'Influência + Captação + produto', v:1000000, rec:300000, prox:'SELETO', obs:'Encontro 01/05 realizado · Missões 30 dias em execução', abr:'Início 01/05', abr_s:'realizado'}
+  {n:'Dr. Antônio', per:'Nov/25–Abr/26', dur:'1 ano', foco:'Influência', v:400000, rec:400000, prox:'SELETO', obs:'Distrato maio 2026 confirmado · 100% pago', abr:'Reunião 19/04', abr_s:'realizado'},
+  {n:'Douglas Nexfit', per:'Até ago/26', dur:'1 ano', foco:'Influência', v:500000, rec:500000, prox:'JOEL PUBLI', obs:'OK pago 100% · evento 27/04 realizado · próxima entrega a agendar', abr:'Evento 27/04', abr_s:'realizado'},
+  {n:'Fábio Gonçalves', per:'Jan–Ago/26', dur:'6 meses', foco:'Posicionamento + Motor 1 e 2', v:1000000, rec:870000, prox:'CLAX CLUB', obs:'RENOVADO · 87% pago · visita empresa 12/05 realizada', abr:'Reunião 13/04', abr_s:'realizado'},
+  {n:'Adriana Alves', per:'6 meses', dur:'6 meses', foco:'Contatos / Empresas', v:500000, rec:500000, prox:'—', obs:'OK pago 100%', abr:'—', abr_s:'ok'},
+  {n:'Bia Finochio', per:'Fev–Mai/26', dur:'3 meses', foco:'Influência / posicionamento / motor 2', v:300000, rec:300000, prox:'—', obs:'Distrato maio 2026 · 100% pago · evento 13/04 realizado', abr:'Reunião 17/04', abr_s:'realizado'},
+  {n:'Ivan Pons', per:'Fev–Ago/26', dur:'6 meses', foco:'Influência', v:600000, rec:175000, prox:'—', obs:'65 membros · Founder Led Growth · 29% pago · evento+talk 14/05 realizado', abr:'Reunião 29/04', abr_s:'realizado'},
+  {n:'Fernanda Tochetto', per:'Fev–Ago/26', dur:'6 meses', foco:'Influência + Captação', v:1000000, rec:1000000, prox:'SELETO', obs:'OK pago 100% · interesse renovação · palestra 22/06 + JJ Podcast 13/08', abr:'Online 26/04', abr_s:'realizado'},
+  {n:'Marcos Carraro', per:'Até Dez/27', dur:'2 anos', foco:'Conselho + Influência', v:3000000, rec:995000, prox:'A TRINCA MÍDIA', obs:'RENOVADO · Piracicaba · 33% pago · presencial 19/05 realizado', abr:'Encontro abril', abr_s:'realizado'},
+  {n:'Isabela Soller', per:'Mar–Jul/26', dur:'6 meses', foco:'Direção Estratégica', v:1000000, rec:680000, prox:'CLAX CLUB', obs:'68% pago · encontro 07/05 realizado · evento marcas 02/09', abr:'31/03 escritório', abr_s:'realizado'},
+  {n:'Bruno Andrade', per:'Mar–Jul/26', dur:'6 meses', foco:'Influência + Captação + produto', v:1000000, rec:520000, prox:'SELETO', obs:'52% pago · presencial 06/05 realizado', abr:'Reunião 22/04', abr_s:'realizado'},
+  {n:'Victor e Ambrenna', per:'Jun/Jul', dur:'30 dias', foco:'Influência / posicionamento / motor 2', v:1000000, rec:700000, prox:'SELETO', obs:'70% pago · presencial Jota Co 08–12/06 realizado · evento 24–25/08', abr:'Online 10/04', abr_s:'realizado'},
+  {n:'Caio e Calleti', per:'Mai–Jun/26', dur:'30 dias', foco:'Influência + Captação + produto', v:1000000, rec:500000, prox:'SELETO', obs:'50% pago · missões 30 dias · evento com Joel 07/08', abr:'Início 01/05', abr_s:'realizado'}
 ];
 
 const SELETO_ATIVOS=[
   {n:'Cristiano 10X', seg:'Advocacia', v:3000000, rec:430667, ent:'Jan/26'},
-  {n:'Cristiano Demartini', seg:'Odontologia/Saúde', v:3000000, rec:500000, ent:'Jan/26'},
+  {n:'Cristiano Demartini', seg:'Odontologia/Saúde', v:3000000, rec:1500000, ent:'Jan/26'},
   {n:'Eduardo e Wilton', seg:'Franchising', v:3000000, rec:100000, ent:'Jan/26'},
-  {n:'Everton Pieri', seg:'Estética', v:3000000, rec:1475000, ent:'Jan/26'},
-  {n:'Francelino', seg:'Educação', v:3000000, rec:1125000, ent:'Jan/26'},
-  {n:'Índio da Costa', seg:'—', v:3000000, rec:970000, ent:'Jan/26'},
-  {n:'Jhonny e Carla', seg:'Contabilidade', v:3000000, rec:2600000, ent:'Jan/26'},
-  {n:'João Brognoli', seg:'Marketing', v:3000000, rec:850000, ent:'Jan/26'},
-  {n:'José Netto de Lima', seg:'Medicina', v:3000000, rec:250000, ent:'Mar/26'},
-  {n:'Mauro Santos', seg:'Tecnologia', v:3000000, rec:1260000, ent:'Jan/26'},
-  {n:'Pedro Quintanilha', seg:'Educação', v:3000000, rec:827999, ent:'Jan/26'},
-  {n:'Ricardo Novak', seg:'Odontologia/Saúde', v:3000000, rec:2668354, ent:'Jan/26'},
-  {n:'Rodrigo', seg:'—', v:3000000, rec:1550000, ent:'Jan/26'},
-  {n:'Seu Elias', seg:'Barbearia', v:3000000, rec:1323273, ent:'Jan/26'},
-  {n:'Tiago Granito', seg:'Eventos', v:3000000, rec:150000, ent:'Mar/26'},
-  {n:'Yuri Abreu', seg:'Suplementos', v:3000000, rec:1875000, ent:'Jan/26'}
+  {n:'Everton Pieri', seg:'Estética', v:3000000, rec:3000000, ent:'Jan/26'},
+  {n:'Francelino', seg:'Educação', v:3000000, rec:1375000, ent:'Jan/26'},
+  {n:'Índio da Costa', seg:'—', v:3000000, rec:1550000, ent:'Jan/26'},
+  {n:'Jhonny e Carla', seg:'Contabilidade', v:3000000, rec:3000000, ent:'Jan/26'},
+  {n:'João Brognoli', seg:'Marketing', v:3000000, rec:3000000, ent:'Jan/26'},
+  {n:'José Netto de Lima', seg:'Medicina', v:3000000, rec:1000000, ent:'Mar/26'},
+  {n:'Mauro Santos', seg:'Tecnologia', v:3000000, rec:1646666, ent:'Jan/26'},
+  {n:'Pedro Quintanilha', seg:'Educação', v:3000000, rec:1310667, ent:'Jan/26'},
+  {n:'Ricardo Novak', seg:'Odontologia/Saúde', v:3000000, rec:2816503, ent:'Jan/26'},
+  {n:'Rodrigo', seg:'—', v:3000000, rec:2420000, ent:'Jan/26'},
+  {n:'Seu Elias', seg:'Barbearia', v:3000000, rec:1817182, ent:'Jan/26'},
+  {n:'Tiago Granito', seg:'Eventos', v:3000000, rec:570000, ent:'Mar/26'},
+  {n:'Yuri Abreu', seg:'Suplementos', v:3000000, rec:2125000, ent:'Jan/26'}
 ];
 
 const ADVISORY_ENTREGAS=[
   {mes:'JULHO 2026', itens:[
-    {n:'Fábio Gonçalves', ativ:'— agendar entrega —', st:'AGENDAR', obs:''},
-    {n:'Ivan Pons', ativ:'— agendar entrega —', st:'AGENDAR', obs:''},
-    {n:'Fernanda Tochetto', ativ:'Jota Jota Podcast', st:'AGENDAR', obs:''},
-    {n:'Marcos Carraro', ativ:'— agendar entrega —', st:'AGENDAR', obs:''},
-    {n:'Isabela Soller', ativ:'— agendar entrega —', st:'AGENDAR', obs:''}
+    {n:'Marcos Carraro', ativ:'— agendar entrega —', st:'AGENDAR', obs:''}
   ]},
   {mes:'AGOSTO 2026', itens:[
     {n:'Douglas Nexfit', ativ:'— agendar entrega —', st:'AGENDAR', obs:''},
     {n:'Fábio Gonçalves', ativ:'— agendar entrega —', st:'AGENDAR', obs:''},
     {n:'Ivan Pons', ativ:'— agendar entrega —', st:'AGENDAR', obs:''},
-    {n:'Fernanda Tochetto', ativ:'— agendar entrega —', st:'AGENDAR', obs:''},
-    {n:'Ambrenna e Victor', ativ:'Evento 24 e 25 de agosto', st:'AGENDADO', obs:'Evento marcado 24 e 25 de agosto'}
+    {n:'Caio e Calleti', ativ:'Evento 07/08/2026', st:'AGENDADO', obs:'Evento marcado com talk do Joel'},
+    {n:'Fernanda Tochetto', ativ:'Jota Jota Podcast 13/08', st:'AGENDADO', obs:''},
+    {n:'Ambrenna e Victor', ativ:'Evento 24 e 25 de agosto', st:'AGENDADO', obs:'Evento 24 e 25 de agosto'}
   ]}
 ];
 
@@ -492,13 +489,23 @@ const VENDAS=[
   {bu:'JOTA LAB', cli:'RAFAEL NUNES', desc:'LOCAÇÃO JOTALAB - GRAVAÇÃO PODCAST', v:40000, mes:'Maio', resp:'Emily'},
   {bu:'JOTA LAB', cli:'ALINE / GUSTAVO', desc:'LOCAÇÃO JOTA LAB - 1 DIÁRIA', v:31500, mes:'Maio', resp:'Emily'},
   {bu:'JOTA LAB', cli:'MAURO - MEDICAL SAN', desc:'LOCAÇÃO JOTA LAB - 1 DIÁRIA', v:25000, mes:'Maio', resp:'Emily'},
-  {bu:'SELETO', cli:'VANESSA GOLTZMAN', desc:'SELETO 1 ANO', v:0, mes:'Maio', resp:'Grasi/Emily'},
+  {bu:'SELETO', cli:'VANESSA GOLTZMAN', desc:'SELETO 1 ANO', v:3000000, mes:'Maio', resp:'Grasi/Emily'},
   {bu:'SELETO', cli:'WALKYRIA', desc:'SELETO 1 ANO', v:3000000, mes:'Maio', resp:'Grasi/Emily'},
   {bu:'PUBLICIDADE', cli:'MARÍLIA CARDOSO', desc:'PODCAST COM PLATÉIA - 3 ENTREGAS', v:1000000, mes:'Maio', resp:'Grasi'},
   {bu:'JOTA EDITION', cli:'ANDREZA', desc:'MÁQUINA TRIPLA ON LINE', v:3000, mes:'Maio', resp:'Kath'},
   {bu:'PUBLICIDADE', cli:'NUVEMSHOP', desc:'PUBLICIDADE - PODCAST + IMAGEM', v:3000000, mes:'Maio', resp:'Grasi/Emily'},
   {bu:'JOTA LAB', cli:'SELETO - INDIO DA COSTA', desc:'JJ PODCAST', v:20000, mes:'Maio', resp:'Joel Jota'},
-  {bu:'PUBLICIDADE', cli:'XP', desc:'JJ PODCAST', v:800000, mes:'Junho', resp:'Grasi/Emily'}
+  {bu:'PUBLICIDADE', cli:'XP', desc:'JJ PODCAST', v:800000, mes:'Junho', resp:'Grasi/Emily'},
+  {bu:'PUBLICIDADE', cli:'CHEIRIM BÃO', desc:'PUBLICIDADE JOEL JOTA / LALAS', v:0, mes:'Fevereiro', resp:'Grasi'},
+  {bu:'JOTA LAB', cli:'KAT E ESTEFANO', desc:'LOCAÇÃO JOTALAB - GRAVAÇÃO PODCAST', v:40000, mes:'Maio', resp:'Maria'},
+  {bu:'A TRINCA MÍDIA', cli:'SUÉLIO', desc:'A TRINCA PARTICIPAÇÕES', v:1500000, mes:'Maio', resp:'Emily'},
+  {bu:'A TRINCA MÍDIA', cli:'ADAPTA', desc:'A TRINCA PUBLICIDADE', v:5000000, mes:'Maio', resp:'—'},
+  {bu:'JOTA EDITION', cli:'IAGO SANTARÉM', desc:'JOTA EDITION', v:6000, mes:'Maio', resp:'Kath'},
+  {bu:'ADSENSE', cli:'ADSENSE', desc:'MAIO', v:64864, mes:'Maio', resp:'—'},
+  {bu:'JOTA LAB', cli:'NAYARA MARRA', desc:'LOCAÇÃO JOTA LAB', v:31500, mes:'Junho', resp:'Kath'},
+  {bu:'JOTA LAB', cli:'LUCIANO MACARRO', desc:'LOCAÇÃO JOTALAB - GRAVAÇÃO PODCAST', v:46500, mes:'Junho', resp:'Kath'},
+  {bu:'JOTA LAB', cli:'ROSANGELA LOPES', desc:'LOCAÇÃO JOTA LAB', v:25000, mes:'Junho', resp:'Emily'},
+  {bu:'JOTA LAB', cli:'RAFAEL NUNES', desc:'LOCAÇÃO JOTALAB - GRAVAÇÃO PODCAST', v:40000, mes:'Junho', resp:'Emily'}
 ];
 let editPipIdx=-1, editCliIdx=-1;
 const db={
