@@ -315,14 +315,14 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Space 
 // DATA
 // ══════════════════════════════════════════
 const METAS={
-  'PALESTRAS':      {meta:1000000,   real:830000,    resp:'Emily'},
-  'PUBLICIDADE':    {meta:20000000,  real:5581149,   resp:'Grasi'},
-  'JOTA LAB':       {meta:5000000,   real:1915200,   resp:'Eduardo'},
-  'JOTA EDITION':   {meta:5140000,   real:975669,    resp:'Emily'},
+  'PALESTRAS':      {meta:1000000,   real:30000,     resp:'Emily'},
+  'PUBLICIDADE':    {meta:20000000,  real:6381149,   resp:'Grasi'},
+  'JOTA LAB':       {meta:5000000,   real:2029250,   resp:'Eduardo'},
+  'JOTA EDITION':   {meta:5140000,   real:976871,    resp:'Emily'},
   'ADVISORY':       {meta:10000000,  real:10300000,  resp:'Grasi'},
-  'A TRINCA MÍDIA': {meta:100000000, real:6500000,         resp:'Grasi'},
+  'A TRINCA MÍDIA': {meta:100000000, real:13500000,        resp:'Grasi'},
   'CLUBES SÓCIOS':  {meta:100000000, real:12000000,   resp:'Grasi'},
-  'ADSENSE':        {meta:660000,    real:531443,    resp:'—'},
+  'ADSENSE':        {meta:660000,    real:518498,    resp:'—'},
 };
 
 // Metas mensais reais — aba MENSAL da planilha
@@ -336,23 +336,17 @@ const METAS_MENSAIS={
 
 const PIPELINE_INICIAL=[
   {c:'CARRARO', bu:'A TRINCA MÍDIA', v:6000000, e:'Em Contrato', p:85, resp:'Emily/Grasi', next:'Em contrato – negociação forma de pgto', obs:'Negociação forma de pagamento'},
-  {c:'AMBRENNA E VICTOR', bu:'SELETO', v:3000000, e:'Proposta Enviada', p:50, resp:'Grasi/Emily', next:'FECHAR EM JUNHO', obs:''},
-  {c:'AUDIBLE', bu:'PUBLICIDADE', v:1000000, e:'Proposta Enviada', p:50, resp:'Emily', next:'PROPOSTA ENVIADA - DEVOLUTIVA EM JUNHO', obs:''},
   {c:'NEXFIT', bu:'A TRINCA MÍDIA', v:5000000, e:'Prospecção', p:25, resp:'Grasi', next:'A Trinca Mídia', obs:''},
-  {c:'KIWIFI', bu:'A TRINCA MÍDIA', v:5000000, e:'Em Negociação', p:50, resp:'Joel', next:'NEGOCIAÇÃO FLÁVIO E JOEL', obs:''},
-  {c:'THE BEST AÇAÍ', bu:'A TRINCA MÍDIA', v:5000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'Sérgio', obs:''},
-  {c:'PORMADE', bu:'A TRINCA MÍDIA', v:2000000, e:'Em Negociação', p:50, resp:'Emily', next:'2 podcast caio e joel + conselho', obs:'1 ANO DE CONTRATO'},
-  {c:'ACHE', bu:'PALESTRAS', v:95000, e:'Em Negociação', p:50, resp:'Emily', next:'Palestra ON LINE', obs:''},
+  {c:'AMBRENNA E VICTOR', bu:'SELETO', v:3000000, e:'Proposta Enviada', p:50, resp:'Grasi/Emily', next:'', obs:''},
+  {c:'DR CARLOS', bu:'A TRINCA MÍDIA', v:3000000, e:'Em Negociação', p:50, resp:'Grasi/Emily', next:'SELETO', obs:''},
+  {c:'THIAGO MANCUSSI', bu:'A TRINCA MÍDIA', v:2000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'PODCAST TRIPLO', obs:''},
+  {c:'FABIO GONÇALVES', bu:'A TRINCA MÍDIA', v:1500000, e:'Fechado', p:100, resp:'Grasi', next:'CLAX CLUB', obs:'Confecção de contrato'},
+  {c:'RODRIGO GARCIA', bu:'A TRINCA MÍDIA', v:1500000, e:'Fechado', p:100, resp:'Grasi', next:'CLAX CLUB', obs:'Origem Copa do Mundo'},
+  {c:'AUDIBLE', bu:'PUBLICIDADE', v:709102, e:'Fechado', p:100, resp:'Emily', next:'Proposta enviada – devolutiva em junho', obs:'Confecção de contrato'},
   {c:'FLÁVIO GARCIA', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
-  {c:'CAIO SARAIVA', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
   {c:'VICTOR - MLS', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
   {c:'MARCELO CRUZ', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
-  {c:'GABRIEL LONGUINI', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily', next:'', obs:''},
-  {c:'THIAGO MANCUSSI', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'', obs:''},
-  {c:'LOFTY', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'', obs:''},
-  {c:'DR CARLOS', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'FECHAR EM JUNHO', obs:''},
-  {c:'NORMA', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'—', next:'FECHAR EM JUNHO', obs:''},
-  {c:'THIAGO MOURA', bu:'A TRINCA MÍDIA', v:1000000, e:'Em Negociação', p:50, resp:'Emily/Grasi', next:'', obs:''}
+  {c:'ACHE', bu:'PALESTRAS', v:95000, e:'Em Negociação', p:50, resp:'Emily', next:'Palestra ON LINE', obs:''}
 ];
 const ADVISORY_ATIVOS=[
   {n:'Dr. Antônio', per:'Nov/25–Abr/26', dur:'1 ano', foco:'Influência', v:400000, rec:400000, prox:'SELETO', obs:'Distrato maio 2026 confirmado · 100% pago', abr:'Reunião 19/04', abr_s:'realizado'},
@@ -370,7 +364,7 @@ const ADVISORY_ATIVOS=[
 ];
 
 const SELETO_ATIVOS=[
-  {n:'Cristiano 10X', seg:'Advocacia', v:3000000, rec:430667, ent:'Jan/26'},
+  {n:'Cristiano 10X', seg:'Advocacia', v:3000000, rec:697333, ent:'Jan/26'},
   {n:'Cristiano Demartini', seg:'Odontologia/Saúde', v:3000000, rec:1500000, ent:'Jan/26'},
   {n:'Eduardo e Wilton', seg:'Franchising', v:3000000, rec:100000, ent:'Jan/26'},
   {n:'Everton Pieri', seg:'Estética', v:3000000, rec:3000000, ent:'Jan/26'},
@@ -505,7 +499,16 @@ const VENDAS=[
   {bu:'JOTA LAB', cli:'NAYARA MARRA', desc:'LOCAÇÃO JOTA LAB', v:31500, mes:'Junho', resp:'Kath'},
   {bu:'JOTA LAB', cli:'LUCIANO MACARRO', desc:'LOCAÇÃO JOTALAB - GRAVAÇÃO PODCAST', v:46500, mes:'Junho', resp:'Kath'},
   {bu:'JOTA LAB', cli:'ROSANGELA LOPES', desc:'LOCAÇÃO JOTA LAB', v:25000, mes:'Junho', resp:'Emily'},
-  {bu:'JOTA LAB', cli:'RAFAEL NUNES', desc:'LOCAÇÃO JOTALAB - GRAVAÇÃO PODCAST', v:40000, mes:'Junho', resp:'Emily'}
+  {bu:'JOTA LAB', cli:'RAFAEL NUNES', desc:'LOCAÇÃO JOTALAB - GRAVAÇÃO PODCAST', v:40000, mes:'Junho', resp:'Emily'},
+  {bu:'A TRINCA MÍDIA', cli:'CLUBE DO VALOR PARTICIPAÇÕES', desc:'A TRINCA PUBLICIDADE / PARTICIPAÇÕES', v:5000000, mes:'Junho', resp:'—'},
+  {bu:'JOTA LAB', cli:'THALIZA ZANIN', desc:'LOCAÇÃO', v:25000, mes:'Junho', resp:'Maria'},
+  {bu:'JOTA LAB', cli:'KAT E STEFANO', desc:'JOTALAB + GRAVAÇÃO PODCAST', v:40000, mes:'Junho', resp:'Maria'},
+  {bu:'JOTA LAB', cli:'PEDRO CARDIO EASY', desc:'LOCAÇÃO JOTA LAB', v:25000, mes:'Junho', resp:'Maria'},
+  {bu:'JOTA LAB', cli:'SELETO / PEDRO QUINTANILHA', desc:'LOCAÇÃO JOTA LAB', v:40000, mes:'Junho', resp:'—'},
+  {bu:'JOTA LAB', cli:'MARÍLIA ANDRIOLLI', desc:'JOTALAB + GRAVAÇÃO PODCAST', v:37000, mes:'Junho', resp:'Maria'},
+  {bu:'JOTA EDITION', cli:'LIVROS E PLANNERS', desc:'VENDAS DE LIVROS E PLANNERS', v:1202, mes:'Junho', resp:'—'},
+  {bu:'ADSENSE', cli:'ADSENSE', desc:'JUNHO', v:71658, mes:'Junho', resp:'—'},
+  {bu:'A TRINCA MÍDIA', cli:'JOÃO BARCELLOS', desc:'PODCAST COM PLATÉIA - TRIPLO', v:2000000, mes:'Julho', resp:'Grasi/Emily'}
 ];
 let editPipIdx=-1, editCliIdx=-1;
 const db={
