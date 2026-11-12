@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111318">
+<title>Fernanda Toqueto · Acompanhamento</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f5f7;--card:#ffffff;--soft:#f0f1f5;--line:rgba(0,0,0,.08);
+  --text:#111827;--text2:#4b5563;--text3:#8b93a1;
+  --accent:#1d6fdb;--accentbg:rgba(29,111,219,.09);
+  --green:#0e9964;--greenbg:rgba(14,153,100,.10);
+  --amber:#b45309;--amberbg:rgba(180,83,9,.10);
+  --red:#dc2626;--redbg:rgba(220,38,38,.09);
+  --gray:#6b7280;--graybg:rgba(107,114,128,.10);
+  --hero1:#111318;--hero2:#1f2633;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0d0f13;--card:#161a21;--soft:#1d222b;--line:rgba(255,255,255,.08);
+    --text:#eef0f4;--text2:#b3bac6;--text3:#7c8594;
+    --accent:#5b9cf0;--accentbg:rgba(91,156,240,.13);
+    --green:#34c38f;--greenbg:rgba(52,195,143,.13);
+    --amber:#f0a44b;--amberbg:rgba(240,164,75,.13);
+    --red:#f26d6d;--redbg:rgba(242,109,109,.13);
+    --gray:#9ca3af;--graybg:rgba(156,163,175,.12);
+    --hero1:#161a21;--hero2:#222a37;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 64px}
+.mono{font-family:'Space Mono',monospace}
+
+/* hero */
+.hero{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;padding:36px 0 30px;margin-bottom:24px}
+.hero .wrap{padding-bottom:0}
+.brand{font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.6;margin-bottom:18px}
+.hero h1{font-size:clamp(28px,6vw,42px);font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.hero p.msg{opacity:.78;margin-top:10px;max-width:620px;font-size:15px}
+.period{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px;font-size:13px;opacity:.85}
+.period b{font-weight:600}
+.timebar{margin-top:18px;height:8px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden}
+.timebar span{display:block;height:100%;background:#fff;border-radius:99px;transition:width .6s}
+.timelabel{display:flex;justify-content:space-between;font-size:12px;opacity:.65;margin-top:6px}
+
+/* grid */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi .n{font-size:28px;font-weight:600;letter-spacing:-.02em}
+.kpi .l{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
+@media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}.kpis .kpi:first-child{grid-column:1/-1}}
+
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--text3);font-weight:600;margin:32px 0 12px}
+
+/* next */
+.next{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:20px;display:flex;gap:18px;align-items:center}
+.datebox{min-width:72px;text-align:center;background:var(--accentbg);color:var(--accent);border-radius:12px;padding:10px 8px}
+.datebox .d{font-size:28px;font-weight:700;line-height:1}
+.datebox .m{font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+.next h3{font-size:18px;font-weight:600}
+.meta{color:var(--text2);font-size:14px;margin-top:4px;display:flex;flex-wrap:wrap;gap:4px 14px}
+.meta a{color:var(--accent);text-decoration:none;word-break:break-all}
+
+/* deliverables */
+.deliv{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.dcard .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.dcard h3{font-size:16px;font-weight:600;line-height:1.3}
+.dcard .who{font-size:12px;color:var(--text3);margin-top:2px}
+.dcard p{font-size:13.5px;color:var(--text2)}
+.count{font-family:'Space Mono',monospace;font-size:14px;white-space:nowrap;color:var(--text2)}
+.bar{height:6px;border-radius:99px;background:var(--soft);overflow:hidden}
+.bar span{display:block;height:100%;background:var(--green);border-radius:99px}
+
+/* timeline */
+.tl{display:flex;flex-direction:column;gap:8px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:120px 1fr auto;gap:14px;align-items:center}
+.item .when{font-size:13px;color:var(--text2)}
+.item .when b{display:block;color:var(--text);font-size:14px}
+.item h4{font-size:15px;font-weight:600}
+.item .obs{font-size:13px;color:var(--text3);margin-top:2px}
+.item.done{opacity:.72}
+@media (max-width:640px){.item{grid-template-columns:1fr auto}.item .when{grid-column:1/-1}}
+.pill{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.s-agendado{background:var(--accentbg);color:var(--accent)}
+.s-realizado{background:var(--greenbg);color:var(--green)}
+.s-agendar{background:var(--graybg);color:var(--gray)}
+.s-remarcado{background:var(--amberbg);color:var(--amber)}
+.s-cancelado{background:var(--redbg);color:var(--red)}
+.tag{font-size:11px;padding:2px 8px;border-radius:6px;background:var(--soft);color:var(--text2);margin-left:6px;font-weight:500}
+
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.filters button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--text2);padding:6px 12px;border-radius:99px;cursor:pointer}
+.filters button.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--text3);font-size:14px;text-align:center}
+footer{margin-top:40px;font-size:12px;color:var(--text3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.live{display:inline-flex;align-items:center;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.dot.off{background:var(--amber)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">Jota Co · Acompanhamento de contrato</div>
+    <h1 id="cliente">Fernanda Toqueto</h1>
+    <p class="msg" id="mensagem"></p>
+    <div class="period">
+      <span>Início <b id="inicio">—</b></span>
+      <span>Término <b id="termino">—</b></span>
+      <span>Duração <b id="duracao">—</b></span>
+      <span>Status <b id="status">—</b></span>
+    </div>
+    <div class="timebar"><span id="timefill" style="width:0"></span></div>
+    <div class="timelabel"><span id="timeleft"></span><span id="timepct"></span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="kpis">
+    <div class="kpi"><div class="n" id="k-prog">—</div><div class="l">Entregas concluídas</div></div>
+    <div class="kpi"><div class="n" id="k-agend">—</div><div class="l">Encontros agendados</div></div>
+    <div class="kpi"><div class="n" id="k-extra">—</div><div class="l">Encontros extras</div></div>
+  </section>
+
+  <h2>Próximo encontro</h2>
+  <div id="proximo"></div>
+
+  <h2>Suas entregas</h2>
+  <div class="deliv" id="entregas"></div>
+
+  <h2>Agenda completa</h2>
+  <div class="filters" id="filters">
+    <button data-f="todos" class="on">Todos</button>
+    <button data-f="proximos">Próximos</button>
+    <button data-f="realizados">Realizados</button>
+    <button data-f="extras">Extras do plano estratégico</button>
+  </div>
+  <div class="tl" id="agenda"></div>
+
+  <footer>
+    <span class="live"><span class="dot" id="livedot"></span><span id="livetxt">Carregando…</span></span>
+    <span id="atualizado"></span>
+  </footer>
+</main>
+
+<script>
+const SHEET_ID = '1wp2XRMryyTKDsXRrmqWJFcgRPWGTmLDtS7oNpfDkBgg';
+const REFRESH_MS = 60000;
+
+/* Dados de reserva (usados se a planilha não puder ser lida) */
+const FALLBACK = {
+  contrato: {
+    'Cliente':'Fernanda Toqueto','Início do contrato':'1º de dezembro de 2026','Término previsto':'31 de maio de 2027',
+    'Duração':'6 meses','Status do contrato':'Ativo',
+    'Mensagem para a cliente':'Bem-vinda, Fernanda! Aqui você acompanha em tempo real suas entregas, agendamentos e próximos passos.',
+    'Última atualização':'12 de novembro de 2026'
+  },
+  entregas: [
+    {ID:'E1',Entrega:'Podcast com Caio Carneiro',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Fixa',Descricao:'Participação em um episódio de podcast com Caio Carneiro.'},
+    {ID:'E2',Entrega:'Talks com Joel',Responsavel:'Joel',Quantidade:'2',Tipo:'Fixa',Descricao:'Duas talks conduzidas pelo Joel.'},
+    {ID:'E3',Entrega:'Advisor com Joel',Responsavel:'Joel',Quantidade:'6',Tipo:'Mensal',Descricao:'Programa de acompanhamento: um encontro mensal com o Joel (online ou presencial) durante os 6 meses de contrato.'},
+    {ID:'E4',Entrega:'Palestra do Caio Carneiro',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Fixa',Descricao:'Uma palestra do Caio Carneiro.'},
+    {ID:'E5',Entrega:'Agendamentos extras – Plano Estratégico',Responsavel:'Joel',Quantidade:'',Tipo:'Extra',Descricao:'Encontros adicionais gerados pelos planos estratégicos criados pelo Joel com a Fernanda.'}
+  ],
+  agenda: [
+    ['A01','E3','Advisor #1 – Encontro de abertura','Dezembro 2026','Diagnóstico inicial e definição do plano estratégico.','Joel'],
+    ['A02','E3','Advisor #2','Janeiro 2027','','Joel'],['A03','E3','Advisor #3','Fevereiro 2027','','Joel'],
+    ['A04','E3','Advisor #4','Março 2027','','Joel'],['A05','E3','Advisor #5','Abril 2027','','Joel'],
+    ['A06','E3','Advisor #6 – Encontro de fechamento','Maio 2027','Revisão de resultados do ciclo.','Joel'],
+    ['A07','E1','Podcast com Caio Carneiro','A definir','','Caio Carneiro'],
+    ['A08','E2','Talk #1 com Joel','A definir','','Joel'],['A09','E2','Talk #2 com Joel','A definir','','Joel'],
+    ['A10','E4','Palestra do Caio Carneiro','A definir','','Caio Carneiro']
+  ].map(([ID,Entrega_ID,Titulo,Mes_previsto,Observacoes,Responsavel])=>({ID,Entrega_ID,Titulo,Mes_previsto,Data:'',Horario:'',Formato:'A definir',Local_Link:'',Status:'A agendar',Responsavel,Observacoes}))
+};
+
+const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const MES_CURTO = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+
+function parseCSV(text){
+  const rows=[];let row=[],f='',q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){f+='"';i++;} else q=false; } else f+=c; }
+    else if(c==='"') q=true;
+    else if(c===','){row.push(f);f='';}
+    else if(c==='\n'){row.push(f);rows.push(row);row=[];f='';}
+    else if(c!=='\r') f+=c;
+  }
+  if(f!==''||row.length){row.push(f);rows.push(row);}
+  return rows;
+}
+function toObjects(rows){
+  const h=(rows.shift()||[]).map(s=>s.trim());
+  return rows.filter(r=>r.some(v=>v.trim()!=='')).map(r=>Object.fromEntries(h.map((k,i)=>[k,(r[i]||'').trim()])));
+}
+async function loadSheet(name){
+  const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(name)}&_=${Date.now()}`;
+  const res=await fetch(url,{cache:'no-store'});
+  if(!res.ok) throw new Error(res.status);
+  const txt=await res.text();
+  if(txt.trim().startsWith('<')) throw new Error('sem acesso');
+  return toObjects(parseCSV(txt));
+}
+
+/* datas */
+function parseDate(s){
+  if(!s) return null; s=s.trim();
+  let m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/); if(m) return new Date(+m[3],+m[2]-1,+m[1]);
+  m=s.match(/^(\d{4})-(\d{2})-(\d{2})/); if(m) return new Date(+m[1],+m[2]-1,+m[3]);
+  return null;
+}
+function parseLongDate(s){ // "1º de dezembro de 2026"
+  const m=(s||'').toLowerCase().match(/(\d{1,2})\D+de\s+([a-zç]+)\s+de\s+(\d{4})/);
+  if(!m) return parseDate(s);
+  const mi=MESES.indexOf(m[2]); return mi<0?null:new Date(+m[3],mi,+m[1]);
+}
+function monthKey(s){ // "Janeiro 2027" -> 202701
+  const m=(s||'').toLowerCase().match(/([a-zç]+)\s*(?:de\s*)?(\d{4})/);
+  if(!m) return null; const mi=MESES.indexOf(m[1]); return mi<0?null:(+m[2])*100+mi+1;
+}
+function fmtTime(h){ const m=(h||'').match(/^(\d{1,2}):(\d{2})/); return m?`${m[1].padStart(2,'0')}h${m[2]}`:''; }
+const today=()=>{const d=new Date();d.setHours(0,0,0,0);return d;};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function linkify(s){
+  s=esc(s); return s.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+}
+function statusClass(s){
+  s=(s||'').toLowerCase();
+  if(s.startsWith('realiz')) return 's-realizado';
+  if(s.startsWith('agendado')) return 's-agendado';
+  if(s.startsWith('remarc')) return 's-remarcado';
+  if(s.startsWith('cancel')) return 's-cancelado';
+  return 's-agendar';
+}
+
+let STATE=null, FILTER='todos';
+
+function render(data, live){
+  const c=data.contrato, ent=data.entregas;
+  const ag=data.agenda.map(a=>({...a,_date:parseDate(a.Data),_mk:monthKey(a.Mes_previsto),_st:(a.Status||'A agendar')}));
+
+  document.getElementById('cliente').textContent=c['Cliente']||'Fernanda Toqueto';
+  document.getElementById('mensagem').textContent=c['Mensagem para a cliente']||'';
+  document.getElementById('inicio').textContent=c['Início do contrato']||'—';
+  document.getElementById('termino').textContent=c['Término previsto']||'—';
+  document.getElementById('duracao').textContent=c['Duração']||'—';
+  document.getElementById('status').textContent=c['Status do contrato']||'—';
+
+  // tempo de contrato
+  const ini=parseLongDate(c['Início do contrato']), fim=parseLongDate(c['Término previsto']);
+  if(ini&&fim){
+    const t=today(), tot=fim-ini, el=Math.min(Math.max(t-ini,0),tot), pct=Math.round(el/tot*100);
+    document.getElementById('timefill').style.width=pct+'%';
+    const dias=Math.ceil((ini-t)/864e5), rest=Math.ceil((fim-t)/864e5);
+    document.getElementById('timeleft').textContent = t<ini ? `Começa em ${dias} dia${dias===1?'':'s'}` : t>fim ? 'Contrato concluído' : `${rest} dias restantes`;
+    document.getElementById('timepct').textContent = `${pct}% do período`;
+  }
+
+  // entregas
+  const realizadas=id=>ag.filter(a=>a.Entrega_ID===id&&a._st.toLowerCase().startsWith('realiz')).length;
+  let totC=0,totR=0;
+  document.getElementById('entregas').innerHTML=ent.map(e=>{
+    const extra=(e.Tipo||'').toLowerCase()==='extra'||!(+e.Quantidade);
+    const q=+e.Quantidade||0, r=realizadas(e.ID);
+    if(!extra){totC+=q;totR+=Math.min(r,q);}
+    const pct=extra?0:Math.round(Math.min(r,q)/q*100);
+    return `<div class="dcard">
+      <div class="top"><div><h3>${esc(e.Entrega)}</h3><div class="who">${esc(e.Responsavel)}${e.Tipo?` · ${esc(e.Tipo)}`:''}</div></div>
+      <div class="count">${extra?`${r} realizado${r===1?'':'s'}`:`${r}/${q}`}</div></div>
+      <p>${esc(e.Descricao)}</p>
+      ${extra?'<p style="font-size:12px;color:var(--text3)">Sob demanda, conforme o plano estratégico.</p>':`<div class="bar"><span style="width:${pct}%"></span></div>`}
+    </div>`;
+  }).join('');
+
+  // kpis
+  document.getElementById('k-prog').textContent=`${totR}/${totC}`;
+  document.getElementById('k-agend').textContent=ag.filter(a=>a._st.toLowerCase()==='agendado'&&a._date&&a._date>=today()).length;
+  document.getElementById('k-extra').textContent=ag.filter(a=>a.Entrega_ID==='E5'&&!a._st.toLowerCase().startsWith('cancel')).length;
+
+  // próximo
+  const futuros=ag.filter(a=>a._date&&a._date>=today()&&!/^(realiz|cancel)/i.test(a._st)).sort((a,b)=>a._date-b._date||(a.Horario||'').localeCompare(b.Horario||''));
+  const p=futuros[0];
+  document.getElementById('proximo').innerHTML = p ? `<div class="next">
+      <div class="datebox"><div class="d">${p._date.getDate()}</div><div class="m">${MES_CURTO[p._date.getMonth()]}</div></div>
+      <div><h3>${esc(p.Titulo)}</h3><div class="meta">
+        <span>${p._date.toLocaleDateString('pt-BR',{weekday:'long'})}${p.Horario?` · ${fmtTime(p.Horario)}`:''}</span>
+        ${p.Formato&&p.Formato!=='A definir'?`<span>${esc(p.Formato)}</span>`:''}
+        ${p.Responsavel?`<span>com ${esc(p.Responsavel)}</span>`:''}
+        ${p.Local_Link?`<span>${linkify(p.Local_Link)}</span>`:''}
+      </div></div></div>`
+    : `<div class="empty">Ainda não há encontro com data marcada. Assim que agendarmos, ele aparece aqui.</div>`;
+
+  // agenda
+  const rank=a=>{
+    if(/^realiz/i.test(a._st)) return [2, -(a._date?+a._date:0)];
+    if(/^cancel/i.test(a._st)) return [3, 0];
+    if(a._date) return [0, +a._date];
+    return [1, a._mk||999999];
+  };
+  let list=ag.slice().sort((a,b)=>{const x=rank(a),y=rank(b);return x[0]-y[0]||x[1]-y[1]||a.ID.localeCompare(b.ID);});
+  if(FILTER==='proximos') list=list.filter(a=>!/^(realiz|cancel)/i.test(a._st));
+  if(FILTER==='realizados') list=list.filter(a=>/^realiz/i.test(a._st));
+  if(FILTER==='extras') list=list.filter(a=>a.Entrega_ID==='E5');
+  const nomeEnt=Object.fromEntries(ent.map(e=>[e.ID,e.Entrega]));
+  document.getElementById('agenda').innerHTML = list.length ? list.map(a=>{
+    const when = a._date
+      ? `<b>${a._date.toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'}).replace('.','')}</b>${a.Horario?fmtTime(a.Horario):''}`
+      : `<b>${esc(a.Mes_previsto||'A definir')}</b>data a definir`;
+    const metas=[a.Responsavel&&`com ${esc(a.Responsavel)}`, a.Formato&&a.Formato!=='A definir'&&esc(a.Formato), a.Local_Link&&linkify(a.Local_Link)].filter(Boolean).join(' · ');
+    return `<div class="item ${/^realiz/i.test(a._st)?'done':''}">
+      <div class="when">${when}</div>
+      <div><h4>${esc(a.Titulo)}${a.Entrega_ID==='E5'?'<span class="tag">Extra</span>':''}</h4>
+        <div class="obs">${metas}${metas&&a.Observacoes?' — ':''}${esc(a.Observacoes)}</div>
+        ${!metas&&!a.Observacoes&&nomeEnt[a.Entrega_ID]?`<div class="obs">${esc(nomeEnt[a.Entrega_ID])}</div>`:''}</div>
+      <span class="pill ${statusClass(a._st)}">${esc(a._st)}</span>
+    </div>`;
+  }).join('') : `<div class="empty">${FILTER==='extras'?'Nenhum encontro extra ainda. Eles aparecem aqui conforme o plano estratégico for sendo construído com o Joel.':'Nada por aqui ainda.'}</div>`;
+
+  document.getElementById('livedot').className='dot'+(live?'':' off');
+  document.getElementById('livetxt').textContent= live ? 'Atualizado em tempo real' : 'Exibindo última versão salva';
+  document.getElementById('atualizado').textContent = c['Última atualização'] ? `Última atualização: ${c['Última atualização']}` : '';
+}
+
+async function refresh(){
+  try{
+    const [c,e,a]=await Promise.all([loadSheet('Contrato'),loadSheet('Entregas'),loadSheet('Agendamentos')]);
+    const contrato=Object.fromEntries(c.map(r=>[r.Campo,r.Valor]));
+    if(!e.length) throw new Error('vazio');
+    STATE={contrato,entregas:e,agenda:a.filter(r=>r.ID||r.Titulo)}; render(STATE,true);
+  }catch(err){
+    if(!STATE){STATE=FALLBACK;}
+    render(STATE,false);
+  }
+}
+document.getElementById('filters').addEventListener('click',ev=>{
+  const b=ev.target.closest('button'); if(!b) return;
+  FILTER=b.dataset.f; document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b));
+  if(STATE) render(STATE, document.getElementById('livedot').className==='dot');
+});
+refresh(); setInterval(refresh,REFRESH_MS);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden) refresh();});
+</script>
+</body>
+</html>
