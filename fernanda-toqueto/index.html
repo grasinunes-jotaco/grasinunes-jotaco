@@ -126,7 +126,7 @@ footer{margin-top:40px;font-size:12px;color:var(--text3);display:flex;justify-co
   <section class="kpis">
     <div class="kpi"><div class="n" id="k-prog">—</div><div class="l">Entregas concluídas</div></div>
     <div class="kpi"><div class="n" id="k-agend">—</div><div class="l">Encontros agendados</div></div>
-    <div class="kpi"><div class="n" id="k-extra">—</div><div class="l">Encontros extras</div></div>
+    <div class="kpi"><div class="n" id="k-extra">—</div><div class="l">A agendar</div></div>
   </section>
 
   <h2>Próximo encontro</h2>
@@ -140,7 +140,6 @@ footer{margin-top:40px;font-size:12px;color:var(--text3);display:flex;justify-co
     <button data-f="todos" class="on">Todos</button>
     <button data-f="proximos">Próximos</button>
     <button data-f="realizados">Realizados</button>
-    <button data-f="extras">Extras do plano estratégico</button>
   </div>
   <div class="tl" id="agenda"></div>
 
@@ -158,26 +157,27 @@ const REFRESH_MS = 60000;
 const FALLBACK = {
   contrato: {
     'Cliente':'Fernanda Toqueto','Início do contrato':'1º de dezembro de 2026','Término previsto':'31 de maio de 2027',
-    'Duração':'6 meses','Status do contrato':'Ativo',
+    'Programa':'Advisory Joel Jota + Plano estratégico + Podcast CVFI + Talks','Duração':'6 meses','Status do contrato':'Ativo',
     'Mensagem para a cliente':'Bem-vinda, Fernanda! Aqui você acompanha em tempo real suas entregas, agendamentos e próximos passos.',
     'Última atualização':'12 de novembro de 2026'
   },
   entregas: [
-    {ID:'E1',Entrega:'Podcast com Caio Carneiro',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Fixa',Descricao:'Participação em um episódio de podcast com Caio Carneiro.'},
-    {ID:'E2',Entrega:'Talks com Joel',Responsavel:'Joel',Quantidade:'2',Tipo:'Fixa',Descricao:'Duas talks conduzidas pelo Joel.'},
-    {ID:'E3',Entrega:'Advisor com Joel',Responsavel:'Joel',Quantidade:'6',Tipo:'Mensal',Descricao:'Programa de acompanhamento: um encontro mensal com o Joel (online ou presencial) durante os 6 meses de contrato.'},
-    {ID:'E4',Entrega:'Palestra do Caio Carneiro',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Fixa',Descricao:'Uma palestra do Caio Carneiro.'},
-    {ID:'E5',Entrega:'Agendamentos extras – Plano Estratégico',Responsavel:'Joel',Quantidade:'',Tipo:'Extra',Descricao:'Encontros adicionais gerados pelos planos estratégicos criados pelo Joel com a Fernanda.'}
+    {ID:'E1',Entrega:'Sessões individuais de Advisory com Joel Jota',Responsavel:'Joel Jota',Quantidade:'3',Tipo:'Sessão',Descricao:'3 (três) sessões individuais de Advisory com Joel Jota.'},
+    {ID:'E2',Entrega:'Plano estratégico personalizado',Responsavel:'Joel Jota',Quantidade:'1',Tipo:'Entregável',Descricao:'Plano estratégico personalizado, construído a partir das sessões de Advisory.'},
+    {ID:'E3',Entrega:'Gravação do podcast Como Você Fez Isso? (CVFI)',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Gravação',Descricao:'1 (uma) gravação do podcast Como Você Fez Isso? (CVFI), de Caio Carneiro.'},
+    {ID:'E4',Entrega:'Talk Caio Carneiro',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Talk',Descricao:'1 (uma) Talk com Caio Carneiro.'},
+    {ID:'E5',Entrega:'Talks Joel Jota',Responsavel:'Joel Jota',Quantidade:'2',Tipo:'Talk',Descricao:'2 (duas) Talks com Joel Jota.'}
   ],
   agenda: [
-    ['A01','E3','Advisor #1 – Encontro de abertura','Dezembro 2026','Diagnóstico inicial e definição do plano estratégico.','Joel'],
-    ['A02','E3','Advisor #2','Janeiro 2027','','Joel'],['A03','E3','Advisor #3','Fevereiro 2027','','Joel'],
-    ['A04','E3','Advisor #4','Março 2027','','Joel'],['A05','E3','Advisor #5','Abril 2027','','Joel'],
-    ['A06','E3','Advisor #6 – Encontro de fechamento','Maio 2027','Revisão de resultados do ciclo.','Joel'],
-    ['A07','E1','Podcast com Caio Carneiro','A definir','','Caio Carneiro'],
-    ['A08','E2','Talk #1 com Joel','A definir','','Joel'],['A09','E2','Talk #2 com Joel','A definir','','Joel'],
-    ['A10','E4','Palestra do Caio Carneiro','A definir','','Caio Carneiro']
-  ].map(([ID,Entrega_ID,Titulo,Mes_previsto,Observacoes,Responsavel])=>({ID,Entrega_ID,Titulo,Mes_previsto,Data:'',Horario:'',Formato:'A definir',Local_Link:'',Status:'A agendar',Responsavel,Observacoes}))
+    ['A01','E1','Advisory #1 – Sessão individual','Diagnóstico inicial.','Joel Jota'],
+    ['A02','E1','Advisory #2 – Sessão individual','','Joel Jota'],
+    ['A03','E1','Advisory #3 – Sessão individual','','Joel Jota'],
+    ['A04','E2','Entrega do plano estratégico personalizado','','Joel Jota'],
+    ['A05','E3','Gravação do podcast CVFI','Como Você Fez Isso? (CVFI)','Caio Carneiro'],
+    ['A06','E4','Talk Caio Carneiro','','Caio Carneiro'],
+    ['A07','E5','Talk #1 Joel Jota','','Joel Jota'],
+    ['A08','E5','Talk #2 Joel Jota','','Joel Jota']
+  ].map(([ID,Entrega_ID,Titulo,Observacoes,Responsavel])=>({ID,Entrega_ID,Titulo,Mes_previsto:'A definir',Data:'',Horario:'',Formato:'A definir',Local_Link:'',Status:'A agendar',Responsavel,Observacoes}))
 };
 
 const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
@@ -282,7 +282,7 @@ function render(data, live){
   // kpis
   document.getElementById('k-prog').textContent=`${totR}/${totC}`;
   document.getElementById('k-agend').textContent=ag.filter(a=>a._st.toLowerCase()==='agendado'&&a._date&&a._date>=today()).length;
-  document.getElementById('k-extra').textContent=ag.filter(a=>a.Entrega_ID==='E5'&&!a._st.toLowerCase().startsWith('cancel')).length;
+  document.getElementById('k-extra').textContent=ag.filter(a=>/^a agendar/i.test(a._st)).length;
 
   // próximo
   const futuros=ag.filter(a=>a._date&&a._date>=today()&&!/^(realiz|cancel)/i.test(a._st)).sort((a,b)=>a._date-b._date||(a.Horario||'').localeCompare(b.Horario||''));
@@ -295,7 +295,7 @@ function render(data, live){
         ${p.Responsavel?`<span>com ${esc(p.Responsavel)}</span>`:''}
         ${p.Local_Link?`<span>${linkify(p.Local_Link)}</span>`:''}
       </div></div></div>`
-    : `<div class="empty">Ainda não há encontro com data marcada. Assim que agendarmos, ele aparece aqui.</div>`;
+    : `<div class="empty">Ainda não há sessão com data marcada. Assim que agendarmos, ela aparece aqui.</div>`;
 
   // agenda
   const rank=a=>{
@@ -307,21 +307,20 @@ function render(data, live){
   let list=ag.slice().sort((a,b)=>{const x=rank(a),y=rank(b);return x[0]-y[0]||x[1]-y[1]||a.ID.localeCompare(b.ID);});
   if(FILTER==='proximos') list=list.filter(a=>!/^(realiz|cancel)/i.test(a._st));
   if(FILTER==='realizados') list=list.filter(a=>/^realiz/i.test(a._st));
-  if(FILTER==='extras') list=list.filter(a=>a.Entrega_ID==='E5');
   const nomeEnt=Object.fromEntries(ent.map(e=>[e.ID,e.Entrega]));
   document.getElementById('agenda').innerHTML = list.length ? list.map(a=>{
     const when = a._date
       ? `<b>${a._date.toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'}).replace('.','')}</b>${a.Horario?fmtTime(a.Horario):''}`
-      : `<b>${esc(a.Mes_previsto||'A definir')}</b>data a definir`;
+      : (a.Mes_previsto && !/^a definir/i.test(a.Mes_previsto) ? `<b>${esc(a.Mes_previsto)}</b>data a definir` : `<b>Data a definir</b>`);
     const metas=[a.Responsavel&&`com ${esc(a.Responsavel)}`, a.Formato&&a.Formato!=='A definir'&&esc(a.Formato), a.Local_Link&&linkify(a.Local_Link)].filter(Boolean).join(' · ');
     return `<div class="item ${/^realiz/i.test(a._st)?'done':''}">
       <div class="when">${when}</div>
-      <div><h4>${esc(a.Titulo)}${a.Entrega_ID==='E5'?'<span class="tag">Extra</span>':''}</h4>
+      <div><h4>${esc(a.Titulo)}</h4>
         <div class="obs">${metas}${metas&&a.Observacoes?' — ':''}${esc(a.Observacoes)}</div>
         ${!metas&&!a.Observacoes&&nomeEnt[a.Entrega_ID]?`<div class="obs">${esc(nomeEnt[a.Entrega_ID])}</div>`:''}</div>
       <span class="pill ${statusClass(a._st)}">${esc(a._st)}</span>
     </div>`;
-  }).join('') : `<div class="empty">${FILTER==='extras'?'Nenhum encontro extra ainda. Eles aparecem aqui conforme o plano estratégico for sendo construído com o Joel.':'Nada por aqui ainda.'}</div>`;
+  }).join('') : `<div class="empty">Nada por aqui ainda.</div>`;
 
   document.getElementById('livedot').className='dot'+(live?'':' off');
   document.getElementById('livetxt').textContent= live ? 'Atualizado em tempo real' : 'Exibindo última versão salva';
