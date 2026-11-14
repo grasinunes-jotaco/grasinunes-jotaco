@@ -48,11 +48,11 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',system-u
 .timelabel{display:flex;justify-content:space-between;font-size:12px;opacity:.65;margin-top:6px}
 
 /* grid */
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
 .kpi .n{font-size:28px;font-weight:600;letter-spacing:-.02em}
 .kpi .l{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
-@media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}.kpis .kpi:first-child{grid-column:1/-1}}
+@media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
 
 h2{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--text3);font-weight:600;margin:32px 0 12px}
 
@@ -98,6 +98,17 @@ h2{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--text
 .filters button.on{background:var(--text);color:var(--bg);border-color:var(--text)}
 
 .empty{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--text3);font-size:14px;text-align:center}
+/* resultados */
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.rcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.rcard .rtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.rcard h3{font-size:16px;font-weight:600;line-height:1.3}
+.rcard .rdate{font-size:12px;color:var(--text3);white-space:nowrap}
+.rcard .ind{font-size:26px;font-weight:700;color:var(--green);letter-spacing:-.02em;line-height:1.1}
+.rcard .ba{font-size:14px;color:var(--text2);display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.rcard .ba b{color:var(--text);font-weight:600}
+.rcard p{font-size:13.5px;color:var(--text2)}
+.rcard .rel{font-size:12px;color:var(--text3)}
 footer{margin-top:40px;font-size:12px;color:var(--text3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .live{display:inline-flex;align-items:center;gap:6px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
@@ -127,6 +138,7 @@ footer{margin-top:40px;font-size:12px;color:var(--text3);display:flex;justify-co
     <div class="kpi"><div class="n" id="k-prog">—</div><div class="l">Entregas concluídas</div></div>
     <div class="kpi"><div class="n" id="k-agend">—</div><div class="l">Encontros agendados</div></div>
     <div class="kpi"><div class="n" id="k-extra">—</div><div class="l">A agendar</div></div>
+    <div class="kpi"><div class="n" id="k-res">—</div><div class="l">Resultados alcançados</div></div>
   </section>
 
   <h2>Próximo encontro</h2>
@@ -134,6 +146,9 @@ footer{margin-top:40px;font-size:12px;color:var(--text3);display:flex;justify-co
 
   <h2>Suas entregas</h2>
   <div class="deliv" id="entregas"></div>
+
+  <h2>Resultados alcançados</h2>
+  <div class="res" id="resultados"></div>
 
   <h2>Agenda completa</h2>
   <div class="filters" id="filters">
@@ -155,6 +170,7 @@ const REFRESH_MS = 60000;
 
 /* Dados de reserva (usados se a planilha não puder ser lida) */
 const FALLBACK = {
+  resultados: [],
   contrato: {
     'Cliente':'André Nunes','Início do contrato':'1º de dezembro de 2026','Término previsto':'31 de maio de 2027',
     'Programa':'GIGANTE · JJ Podcast + Advisory Joel Jota e Caio Carneiro + Talks + Diárias Jota Lab','Duração':'6 meses','Status do contrato':'Ativo',
@@ -301,6 +317,19 @@ function render(data, live){
       </div></div></div>`
     : `<div class="empty">Ainda não há sessão com data marcada. Assim que agendarmos, ela aparece aqui.</div>`;
 
+  // resultados
+  const res=(data.resultados||[]).filter(r=>r.Resultado||r.Indicador||r.Detalhes)
+    .map(r=>({...r,_date:parseDate(r.Data)})).sort((a,b)=>(b._date||0)-(a._date||0));
+  document.getElementById('k-res').textContent=res.length;
+  document.getElementById('resultados').innerHTML = res.length ? res.map(r=>`<div class="rcard">
+      <div class="rtop"><h3>${esc(r.Resultado||'Resultado')}</h3>${r._date?`<span class="rdate">${r._date.toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'}).replace('.','')}</span>`:(r.Data?`<span class="rdate">${esc(r.Data)}</span>`:'')}</div>
+      ${r.Indicador?`<div class="ind">${esc(r.Indicador)}</div>`:''}
+      ${r.Antes||r.Depois?`<div class="ba">${r.Antes?`<span>Antes <b>${esc(r.Antes)}</b></span>`:''}${r.Antes&&r.Depois?'<span>→</span>':''}${r.Depois?`<span>Depois <b>${esc(r.Depois)}</b></span>`:''}</div>`:''}
+      ${r.Detalhes?`<p>${linkify(r.Detalhes)}</p>`:''}
+      ${r.Relacionado_a?`<div class="rel">Relacionado a: ${esc(r.Relacionado_a)}</div>`:''}
+    </div>`).join('')
+    : `<div class="empty" style="grid-column:1/-1">Os resultados conquistados ao longo do programa vão aparecer aqui.</div>`;
+
   // agenda
   const rank=a=>{
     if(/^realiz/i.test(a._st)) return [2, -(a._date?+a._date:0)];
@@ -336,7 +365,8 @@ async function refresh(){
     const [c,e,a]=await Promise.all([loadSheet('Contrato'),loadSheet('Entregas'),loadSheet('Agendamentos')]);
     const contrato=Object.fromEntries(c.map(r=>[r.Campo,r.Valor]));
     if(!e.length) throw new Error('vazio');
-    STATE={contrato,entregas:e,agenda:a.filter(r=>r.ID||r.Titulo)}; render(STATE,true);
+    const resultados=await loadSheet('Resultados').catch(()=>[]);
+    STATE={contrato,entregas:e,agenda:a.filter(r=>r.ID||r.Titulo),resultados}; render(STATE,true);
   }catch(err){
     if(!STATE){STATE=FALLBACK;}
     render(STATE,false);
