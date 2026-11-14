@@ -157,27 +157,27 @@ const REFRESH_MS = 60000;
 const FALLBACK = {
   contrato: {
     'Cliente':'André Nunes','Início do contrato':'1º de dezembro de 2026','Término previsto':'31 de maio de 2027',
-    'Programa':'GIGANTE · Advisory Joel Jota + Plano estratégico + Podcast CVFI + Talks','Duração':'6 meses','Status do contrato':'Ativo',
+    'Programa':'GIGANTE · JJ Podcast + Advisory Joel Jota e Caio Carneiro + Talks','Duração':'6 meses','Status do contrato':'Ativo',
     'Mensagem para a cliente':'Bem-vindo ao GIGANTE, André! Aqui você acompanha em tempo real suas entregas, agendamentos e próximos passos.',
     'Última atualização':'14 de novembro de 2026'
   },
   entregas: [
-    {ID:'E1',Entrega:'Sessões individuais de Advisory com Joel Jota',Responsavel:'Joel Jota',Quantidade:'3',Tipo:'Sessão',Descricao:'3 (três) sessões individuais de Advisory com Joel Jota.'},
-    {ID:'E2',Entrega:'Plano estratégico personalizado',Responsavel:'Joel Jota',Quantidade:'1',Tipo:'Entregável',Descricao:'Plano estratégico personalizado, construído a partir das sessões de Advisory.'},
-    {ID:'E3',Entrega:'Gravação do podcast Como Você Fez Isso? (CVFI)',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Gravação',Descricao:'1 (uma) gravação do podcast Como Você Fez Isso? (CVFI), de Caio Carneiro.'},
-    {ID:'E4',Entrega:'Talk Caio Carneiro',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Talk',Descricao:'1 (uma) Talk com Caio Carneiro.'},
-    {ID:'E5',Entrega:'Talks Joel Jota',Responsavel:'Joel Jota',Quantidade:'2',Tipo:'Talk',Descricao:'2 (duas) Talks com Joel Jota.'}
+    {ID:'E1',Entrega:'Gravação do JJ Podcast',Responsavel:'Joel Jota',Quantidade:'1',Tipo:'Gravação',Descricao:'1 (uma) gravação do JJ Podcast, de Joel Jota.'},
+    {ID:'E2',Entrega:'Advisory presencial com Joel Jota',Responsavel:'Joel Jota',Quantidade:'2',Tipo:'Sessão',Descricao:'2 (dois) encontros presenciais de Advisory com Joel Jota.'},
+    {ID:'E3',Entrega:'Advisory online com Joel Jota',Responsavel:'Joel Jota',Quantidade:'1',Tipo:'Sessão',Descricao:'1 (um) encontro online de Advisory com Joel Jota.'},
+    {ID:'E4',Entrega:'Talk Joel Jota',Responsavel:'Joel Jota',Quantidade:'1',Tipo:'Talk',Descricao:'1 (uma) Talk com Joel Jota.'},
+    {ID:'E5',Entrega:'Talk Caio Carneiro',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Talk',Descricao:'1 (uma) Talk com Caio Carneiro.'},
+    {ID:'E6',Entrega:'Advisory presencial com Caio Carneiro',Responsavel:'Caio Carneiro',Quantidade:'1',Tipo:'Sessão',Descricao:'1 (um) encontro presencial de Advisory com Caio Carneiro.'}
   ],
   agenda: [
-    ['A01','E1','Advisory #1 – Sessão individual','Diagnóstico inicial.','Joel Jota'],
-    ['A02','E1','Advisory #2 – Sessão individual','','Joel Jota'],
-    ['A03','E1','Advisory #3 – Sessão individual','','Joel Jota'],
-    ['A04','E2','Entrega do plano estratégico personalizado','','Joel Jota'],
-    ['A05','E3','Gravação do podcast CVFI','Como Você Fez Isso? (CVFI)','Caio Carneiro'],
-    ['A06','E4','Talk Caio Carneiro','','Caio Carneiro'],
-    ['A07','E5','Talk #1 Joel Jota','','Joel Jota'],
-    ['A08','E5','Talk #2 Joel Jota','','Joel Jota']
-  ].map(([ID,Entrega_ID,Titulo,Observacoes,Responsavel])=>({ID,Entrega_ID,Titulo,Mes_previsto:'A definir',Data:'',Horario:'',Formato:'A definir',Local_Link:'',Status:'A agendar',Responsavel,Observacoes}))
+    ['A01','E1','Gravação do JJ Podcast','','Joel Jota','A definir'],
+    ['A02','E2','Advisory #1 – Presencial com Joel Jota','','Joel Jota','Presencial'],
+    ['A03','E2','Advisory #2 – Presencial com Joel Jota','','Joel Jota','Presencial'],
+    ['A04','E3','Advisory – Online com Joel Jota','','Joel Jota','Online'],
+    ['A05','E4','Talk Joel Jota','','Joel Jota','A definir'],
+    ['A06','E5','Talk Caio Carneiro','','Caio Carneiro','A definir'],
+    ['A07','E6','Advisory – Presencial com Caio Carneiro','','Caio Carneiro','Presencial']
+  ].map(([ID,Entrega_ID,Titulo,Observacoes,Responsavel,Formato])=>({ID,Entrega_ID,Titulo,Mes_previsto:'A definir',Data:'',Horario:'',Formato,Local_Link:'',Status:'A agendar',Responsavel,Observacoes}))
 };
 
 const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
