@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#111318">
-<title>Fernanda Toqueto · Acompanhamento</title>
+<title>Fernanda Tochetto · Acompanhamento</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -109,7 +109,7 @@ footer{margin-top:40px;font-size:12px;color:var(--text3);display:flex;justify-co
 <header class="hero">
   <div class="wrap">
     <div class="brand">Jota Co · Acompanhamento de contrato</div>
-    <h1 id="cliente">Fernanda Toqueto</h1>
+    <h1 id="cliente">Fernanda Tochetto</h1>
     <p class="msg" id="mensagem"></p>
     <div class="period">
       <span>Início <b id="inicio">—</b></span>
@@ -156,7 +156,7 @@ const REFRESH_MS = 60000;
 /* Dados de reserva (usados se a planilha não puder ser lida) */
 const FALLBACK = {
   contrato: {
-    'Cliente':'Fernanda Toqueto','Início do contrato':'1º de dezembro de 2026','Término previsto':'31 de maio de 2027',
+    'Cliente':'Fernanda Tochetto','Início do contrato':'1º de dezembro de 2026','Término previsto':'31 de maio de 2027',
     'Programa':'Advisory Joel Jota + Plano estratégico + Podcast CVFI + Talks','Duração':'6 meses','Status do contrato':'Ativo',
     'Mensagem para a cliente':'Bem-vinda, Fernanda! Aqui você acompanha em tempo real suas entregas, agendamentos e próximos passos.',
     'Última atualização':'16 de novembro de 2026'
@@ -249,7 +249,7 @@ function render(data, live){
   const c=data.contrato, ent=data.entregas;
   const ag=data.agenda.map(a=>({...a,_date:parseDate(a.Data),_mk:monthKey(a.Mes_previsto),_st:(a.Status||'A agendar')}));
 
-  document.getElementById('cliente').textContent=c['Cliente']||'Fernanda Toqueto';
+  document.getElementById('cliente').textContent=c['Cliente']||'Fernanda Tochetto';
   document.getElementById('mensagem').textContent=c['Mensagem para a cliente']||'';
   document.getElementById('inicio').textContent=c['Início do contrato']||'—';
   document.getElementById('termino').textContent=c['Término previsto']||'—';
