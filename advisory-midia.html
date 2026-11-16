@@ -53,11 +53,23 @@ footer{color:var(--muted);font-size:12.5px}
   <header>
     <span class="eyebrow">Jota Co · Acompanhamento</span>
     <h1>Advisory + Mídia</h1>
-    <p class="lead">Clique no cliente para abrir a planilha de acompanhamento dele.</p>
+    <p class="lead">Primeiro as páginas dos Advisorys. Embaixo, as planilhas de acompanhamento de cada cliente.</p>
   </header>
 
+  <section class="list" aria-label="Páginas dos Advisorys">
+    <h2>Páginas dos Advisorys</h2>
+    <a class="item" href="https://claude.ai/artifact/PyajMJmqpv1LYQomyxQL5R" target="_blank" rel="noopener">
+      <div class="info"><span class="name">Advisory Isabela Soller</span><span class="prog">Página do Advisory</span></div><span class="go">Abrir →</span></a>
+    <a class="item" href="https://claude.ai/artifact/6gPNokNgMkoULoW4dJfHjR" target="_blank" rel="noopener">
+      <div class="info"><span class="name">Advisory Ribana e João</span><span class="prog">Página do Advisory</span></div><span class="go">Abrir →</span></a>
+    <a class="item" href="https://claude.ai/artifact/WbszmxKDNvunGVueBneKdA" target="_blank" rel="noopener">
+      <div class="info"><span class="name">Acompanhamento Mentoria Jota Jota</span><span class="prog">Página de acompanhamento</span></div><span class="go">Abrir →</span></a>
+    <a class="item" href="https://claude.ai/artifact/7iued6qcZtRUJLdnHn9Um1" target="_blank" rel="noopener">
+      <div class="info"><span class="name">Trilho do Advisory</span><span class="prog">Passo a passo do Advisory</span></div><span class="go">Abrir →</span></a>
+  </section>
+
   <section class="list" aria-label="Clientes">
-    <h2 id="cli-h">Clientes ativos (4)</h2>
+    <h2 id="cli-h">Planilhas de acompanhamento (4)</h2>
     <p class="note" id="status">Carregando a lista atualizada do Drive…</p>
     <button type="button" class="btn" id="retry" hidden>Atualizar lista do Drive</button>
     <div class="list" id="clients">
@@ -82,18 +94,6 @@ footer{color:var(--muted);font-size:12.5px}
         <span class="meta"><span class="pill">Ativo</span>01/02/2027 → 31/07/2027</span></div>
       <span class="go">Abrir →</span></a>
     </div>
-  </section>
-
-  <section class="list" aria-label="Páginas dos Advisorys">
-    <h2>Páginas dos Advisorys</h2>
-    <a class="item" href="https://claude.ai/artifact/PyajMJmqpv1LYQomyxQL5R" target="_blank" rel="noopener">
-      <div class="info"><span class="name">Advisory Isabela Soller</span><span class="prog">Página do Advisory</span></div><span class="go">Abrir →</span></a>
-    <a class="item" href="https://claude.ai/artifact/6gPNokNgMkoULoW4dJfHjR" target="_blank" rel="noopener">
-      <div class="info"><span class="name">Advisory Ribana e João</span><span class="prog">Página do Advisory</span></div><span class="go">Abrir →</span></a>
-    <a class="item" href="https://claude.ai/artifact/WbszmxKDNvunGVueBneKdA" target="_blank" rel="noopener">
-      <div class="info"><span class="name">Acompanhamento Mentoria Jota Jota</span><span class="prog">Página de acompanhamento</span></div><span class="go">Abrir →</span></a>
-    <a class="item" href="https://claude.ai/artifact/7iued6qcZtRUJLdnHn9Um1" target="_blank" rel="noopener">
-      <div class="info"><span class="name">Trilho do Advisory</span><span class="prog">Passo a passo do Advisory</span></div><span class="go">Abrir →</span></a>
   </section>
 
   <section class="list" aria-label="Links de apoio">
@@ -149,7 +149,7 @@ footer{color:var(--muted);font-size:12.5px}
       m.appendChild(document.createTextNode(r.meta)); info.appendChild(m);
       a.appendChild(info); a.appendChild(el("span","go","Abrir →")); box.appendChild(a);
     });
-    head.textContent="Clientes ativos ("+rows.length+")";
+    head.textContent="Planilhas de acompanhamento ("+rows.length+")";
   }
 
   function payloadFiles(res){
