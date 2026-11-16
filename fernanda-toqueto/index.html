@@ -159,7 +159,7 @@ const FALLBACK = {
     'Cliente':'Fernanda Toqueto','Início do contrato':'1º de dezembro de 2026','Término previsto':'31 de maio de 2027',
     'Programa':'Advisory Joel Jota + Plano estratégico + Podcast CVFI + Talks','Duração':'6 meses','Status do contrato':'Ativo',
     'Mensagem para a cliente':'Bem-vinda, Fernanda! Aqui você acompanha em tempo real suas entregas, agendamentos e próximos passos.',
-    'Última atualização':'12 de novembro de 2026'
+    'Última atualização':'16 de novembro de 2026'
   },
   entregas: [
     {ID:'E1',Entrega:'Sessões individuais de Advisory com Joel Jota',Responsavel:'Joel Jota',Quantidade:'3',Tipo:'Sessão',Descricao:'3 (três) sessões individuais de Advisory com Joel Jota.'},
@@ -178,6 +178,9 @@ const FALLBACK = {
     ['A07','E5','Talk #1 Joel Jota','','Joel Jota'],
     ['A08','E5','Talk #2 Joel Jota','','Joel Jota']
   ].map(([ID,Entrega_ID,Titulo,Observacoes,Responsavel])=>({ID,Entrega_ID,Titulo,Mes_previsto:'A definir',Data:'',Horario:'',Formato:'A definir',Local_Link:'',Status:'A agendar',Responsavel,Observacoes}))
+  .map(a=>a.ID==='A05'?{...a,Mes_previsto:'Fevereiro 2027',Observacoes:'Como Você Fez Isso? (CVFI). Previsto para fevereiro de 2027; dia a definir.'}:a)
+  .map(a=>a.ID==='A07'?{...a,Mes_previsto:'Outubro 2027',Data:'18/10/2027',Status:'Agendado',Observacoes:'Horário e local a definir.'}:a)
+  .map(a=>a.ID==='A06'?{...a,Mes_previsto:'Junho 2027',Data:'22/06/2027',Horario:'14:00',Formato:'Presencial',Local_Link:'Local a definir',Status:'Agendado',Observacoes:'Talk presencial – 60 minutos. Aguardando confirmação do Caio.'}:a)
 };
 
 const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
