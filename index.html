@@ -395,6 +395,23 @@ const ADVISORY_ENTREGAS=[
   ]}
 ];
 
+const PEDRO_Q={
+  n:'Pedro Quintanilha', ano:'2027', v:2000000, rec:0, seg:'Educação', origem:'Sócio Seleto',
+  objetivos:[
+    {t:'R$ 40 milhões', d:'Meta de faturamento', ic:'R$'},
+    {t:'Blue Table', d:'Entrada / posicionamento na Blue Table', ic:'BT'},
+    {t:'Aumentar influência', d:'Autoridade e alcance da marca pessoal', ic:'↑'},
+    {t:'Definição assertiva de ICP', d:'Cliente ideal claro para vendas e conteúdo', ic:'◎'}
+  ],
+  entregas:[
+    {n:1, ativ:'Almoço Flávio', quando:'Data a definir', st:'AGENDAR', obs:''},
+    {n:2, ativ:'Advisory Joel', quando:'Data a definir', st:'AGENDAR', obs:''},
+    {n:3, ativ:'Talk Caio Carneiro', quando:'Data a definir', st:'AGENDAR', obs:''},
+    {n:4, ativ:'JJ Podcast', quando:'2º semestre 2027', st:'AGENDAR', obs:''},
+    {n:5, ativ:'Talk Joel Jota', quando:'Data a definir', st:'AGENDAR', obs:''}
+  ]
+};
+
 const VENDAS=[
   {bu:'JOTA LAB', cli:'JONAS LIMA', desc:'MENTOR MLS', v:25000, mes:'Janeiro', resp:'Emily'},
   {bu:'JOTA LAB', cli:'PEDRO QUINTANILHA', desc:'SELETO', v:50000, mes:'Janeiro', resp:'Emily'},
@@ -538,13 +555,14 @@ const TABS_MOBILE=[
   {id:'more',     label:'Mais',     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>'},
 ];
 const MORE_ITEMS=[
+  {id:'pedro',    label:'Pedro Quintanilha', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>'},
   {id:'seleto',   label:'Sócio Seleto',  icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'},
   {id:'clientes', label:'Publi · Palestra',      icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'},
   {id:'time',     label:'Time',          icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'},
   {id:'reporte',  label:'Reporte Joel',  icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>'},
 ];
-const ALL_NAV=['overview','pipeline','vendas','advisory','seleto','clientes','time','reporte'];
-const NAV_LABELS={overview:'Visão Geral',pipeline:'Pipeline',vendas:'Vendas',advisory:'Advisory',seleto:'Seleto',clientes:'Publi · Palestra',time:'Time',reporte:'Reporte'};
+const ALL_NAV=['overview','pipeline','vendas','advisory','pedro','seleto','clientes','time','reporte'];
+const NAV_LABELS={overview:'Visão Geral',pipeline:'Pipeline',vendas:'Vendas',advisory:'Advisory',pedro:'Pedro Q.',seleto:'Seleto',clientes:'Publi · Palestra',time:'Time',reporte:'Reporte'};
 
 // Build desktop nav
 const dnav=document.getElementById('tnav');
@@ -596,6 +614,7 @@ function showP(id){
   else if(id==='pipeline') mc.innerHTML=renderPip();
   else if(id==='vendas') mc.innerHTML=renderVendas();
   else if(id==='advisory') mc.innerHTML=renderAdvisory();
+  else if(id==='pedro') mc.innerHTML=renderPedro();
   else if(id==='seleto') mc.innerHTML=renderSeleto();
   else if(id==='clientes') mc.innerHTML=renderCli();
   else if(id==='time') mc.innerHTML=renderTime();
@@ -609,7 +628,7 @@ function showP(id){
   });
   document.querySelectorAll('.mpitem').forEach(b=>b.classList.toggle('active',b.dataset.p===id));
   // Animate after render
-  if(id==='overview') setTimeout(animBars,80);
+  if(id==='overview'||id==='pedro') setTimeout(animBars,80);
   // Scroll to top
   window.scrollTo(0,0);
 }
@@ -1030,6 +1049,61 @@ function renderAdvisory(){
     });
     html+=`</div></div>`;
   });
+  return html;
+}
+
+// ══ PEDRO QUINTANILHA ══
+function renderPedro(){
+  const P=PEDRO_Q;
+  const tot=P.entregas.length;
+  const done=P.entregas.filter(e=>e.st==='REALIZADO').length;
+  const ag=P.entregas.filter(e=>e.st==='AGENDADO').length;
+  const pend=tot-done-ag;
+  const pctE=Math.round(done/tot*100);
+  const pctR=P.v?Math.round(P.rec/P.v*100):0;
+  const stBadge=st=>st==='REALIZADO'?'bg':st==='AGENDADO'?'bb':st==='PENDENTE'?'ba':'bgray';
+
+  let html=`<div class="sh">
+    <div><div class="st">${P.n}</div><div class="ss">Advisory ${P.ano} · ${P.origem} · ${P.seg}</div></div>
+  </div>
+  <div class="mgrid">
+    <div class="mc blue"><div class="ml">Contrato ${P.ano}</div><div class="mv blue mono">R$${fmt(P.v)}</div><div class="ms">${tot} entregas</div></div>
+    <div class="mc"><div class="ml">Recebido</div><div class="mv mono" style="color:var(--green)">R$${fmt(P.rec)}</div><div class="ms">${pctR}% pago</div></div>
+    <div class="mc"><div class="ml">Entregas realizadas</div><div class="mv mono">${done}/${tot}</div><div class="ms">${pctE}% concluído</div></div>
+    <div class="mc"><div class="ml">A agendar</div><div class="mv mono" style="color:var(--amber)">${pend}</div><div class="ms">${ag} agendada(s)</div></div>
+  </div>`;
+
+  html+=`<div class="slabel">Objetivos</div>
+  <div class="mgrid">`;
+  P.objetivos.forEach(o=>{
+    html+=`<div class="mc"><div style="display:flex;align-items:center;gap:10px">
+      <div style="width:34px;height:34px;border-radius:9px;background:var(--bluebg);border:1px solid var(--blueb);color:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;flex-shrink:0">${o.ic}</div>
+      <div style="min-width:0"><div style="font-size:15px;font-weight:700;color:var(--text)">${o.t}</div><div class="ms" style="margin-top:2px">${o.d}</div></div>
+    </div></div>`;
+  });
+  html+=`</div>`;
+
+  html+=`<div class="slabel">Progresso das Entregas</div>
+  <div class="card"><div class="card-body"><div class="dr">
+    <div style="flex:1;display:flex;align-items:center;gap:10px">${pctBar(pctE,pctE>=80?'#0e9964':'#1d6fdb')}
+    <span style="font-size:13px;font-weight:700;font-family:'Space Mono',monospace;color:var(--blue)">${pctE}%</span></div>
+  </div></div></div>`;
+
+  html+=`<div class="slabel">Cronograma de Entregas ${P.ano}</div>
+  <div class="card"><div class="del-month">Entregas · ${P.ano}</div><div class="card-body">`;
+  P.entregas.forEach(e=>{
+    html+=`<div class="dr">
+      <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
+        <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--text3)">${String(e.n).padStart(2,'0')}</span>
+        <div style="min-width:0">
+          <div style="font-size:14px;font-weight:600;color:var(--text)">${e.ativ}</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:2px">${e.quando}${e.obs?' · '+e.obs:''}</div>
+        </div>
+      </div>
+      <span class="badge ${stBadge(e.st)}">${e.st}</span>
+    </div>`;
+  });
+  html+=`</div></div>`;
   return html;
 }
 
