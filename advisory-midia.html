@@ -74,6 +74,20 @@ a.row:hover{background:var(--surface-2)}
 .btn{font:inherit;font-weight:600;font-size:13px;color:var(--accent);background:none;border:1px solid var(--accent);border-radius:6px;padding:5px 12px;cursor:pointer}
 footer{border-top:1px solid var(--line);padding-top:15px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}a.card:hover{transform:none}}
+
+/* cartão de cliente com dois links */
+.cli{display:flex;flex-direction:column;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:17px 18px}
+.cli .topo{display:flex;align-items:center;gap:15px}
+.cli .prog{font-size:13px;color:var(--muted);line-height:1.4}
+.cli .linha{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-family:var(--mono);font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.acoes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+.acoes a,.acoes span{display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;font-weight:600;font-size:13.5px;border-radius:7px;padding:9px 10px;text-align:center}
+.acoes a.pag{background:var(--accent);color:var(--surface)}
+.acoes a.pag:hover{background:var(--accent-2)}
+.acoes a.pla{border:1px solid var(--accent);color:var(--accent)}
+.acoes a.pla:hover{background:var(--accent-soft)}
+.acoes span.falta{border:1px dashed var(--line);color:var(--muted);font-weight:500}
+.pill.fim{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
 </style>
 
 <header class="capa">
@@ -81,26 +95,21 @@ footer{border-top:1px solid var(--line);padding-top:15px;font-family:var(--mono)
     <div>
       <div class="eyebrow">Jota Co</div>
       <h1>Advisory + A Trinca Publicidade</h1>
-      <p>Páginas e planilhas de acompanhamento de cada cliente.</p>
+      <p>Cada cliente com a página e a planilha de acompanhamento.</p>
     </div>
     <dl>
-      <div><dt>Páginas</dt><dd id="n-pag">7</dd></div>
-      <div><dt>Planilhas</dt><dd id="n-plan">5</dd></div>
+      <div><dt>Clientes</dt><dd id="n-cli">7</dd></div>
+      <div><dt>Com os dois links</dt><dd id="n-ambos">6</dd></div>
     </dl>
   </div>
 </header>
 
 <main class="in">
 
-  <section aria-labelledby="h-pag">
-    <div class="head"><h2 id="h-pag">Páginas dos clientes</h2><span class="conta">Clique para abrir</span></div>
-    <div class="grade" id="paginas"></div>
-  </section>
-
   <section aria-labelledby="cli-h">
-    <div class="head"><h2 id="cli-h">Planilhas de acompanhamento</h2><span class="conta" id="cli-conta">5 clientes</span></div>
+    <div class="head"><h2 id="cli-h">Clientes</h2><span class="conta" id="cli-conta">Página · Planilha</span></div>
     <div class="status"><span id="status">Carregando a lista atualizada do Drive…</span><button type="button" class="btn" id="retry" hidden>Atualizar lista do Drive</button></div>
-    <div class="lista" id="clients"></div>
+    <div class="grade" id="clientes"></div>
   </section>
 
   <section aria-labelledby="h-apoio">
@@ -114,14 +123,15 @@ footer{border-top:1px solid var(--line);padding-top:15px;font-family:var(--mono)
 <script>
 (function(){
   var MARCA="ADVISORY + A TRINCA PUBLICIDADE";
-  var PAGINAS=[
-    ["Julio Pereira","https://jotaco-julio-pereira.netlify.app"],
-    ["Marina Takiuti","https://jotaco-marina-takiuti.netlify.app"],
-    ["André Nunes","https://jotaco-andre-nunes.netlify.app"],
-    ["Fernanda Tochetto","https://jotaco-fernanda-toqueto.netlify.app"],
-    ["Leandro Reche","https://jotaco-leandro-reche.netlify.app"],
-    ["Isabela Soller","https://advisory-isabela-soller.netlify.app"],
-    ["Ribana e João","https://claude.ai/artifact/6gPNokNgMkoULoW4dJfHjR"]
+  // Um registro por cliente: nome, página, planilha (ID no Drive), programa, período, situação
+  var CLIENTES=[
+    {n:"Julio Pereira",pag:"https://jotaco-julio-pereira.netlify.app",id:"1oqHzJZWer6vFZ1BTwQjgGsFzRgtgOMIo-2frgjI9Opg",p:"Advisory Joel Jota + Plano estratégico + Diárias Jota Lab",d:"01/11/2026 → 30/04/2027",st:"Ativo"},
+    {n:"Marina Takiuti",pag:"https://jotaco-marina-takiuti.netlify.app",id:"1tfrfV6uXymiUJ_EvMnmojfx1UmLiyuq4fRJeCFA6-Fw",p:"Advisory Joel Jota + Plano estratégico + Podcast CVFI + Diárias Jota Lab",d:"15/11/2026 → 15/05/2027",st:"Ativo"},
+    {n:"André Nunes",pag:"https://jotaco-andre-nunes.netlify.app",id:"10aGSQWiLqw18L7V4Z4WKmn1JItH5aey90qqjUqc94NY",p:"GIGANTE · JJ Podcast + Advisory Joel Jota e Caio Carneiro + Talks + Diárias Jota Lab",d:"10/01/2027 → 10/07/2027",st:"Ativo"},
+    {n:"Fernanda Tochetto",pag:"https://jotaco-fernanda-toqueto.netlify.app",id:"1wp2XRMryyTKDsXRrmqWJFcgRPWGTmLDtS7oNpfDkBgg",p:"Advisory Joel Jota + Plano estratégico + Podcast CVFI + Talks",d:"01/02/2027 → 31/07/2027",st:"Ativo"},
+    {n:"Leandro Reche",pag:"https://jotaco-leandro-reche.netlify.app",id:"1jRWz7rxjjhkTLpn6gAh9W5OszyXdpubS1MP7IeGTIdg",p:"Advisory Joel Jota + Plano estratégico + JJ Podcast com Plateia",d:"datas a definir",st:"Ativo"},
+    {n:"Isabela Soller",pag:"https://advisory-isabela-soller.netlify.app",id:"1P4j94RYNADasQ3U1gJh5J5iZNAxVRgvj7oPkKPcPvWA",p:"Advisory Joel Jota · combinados em andamento",d:"01/03/2026 → 31/08/2026",st:"Encerrado"},
+    {n:"Ribana e João",pag:"https://claude.ai/artifact/6gPNokNgMkoULoW4dJfHjR",id:"",p:"Programa de Advisory",d:"",st:"Ativo"}
   ];
   var APOIO=[
     ["Trilho do Advisory","Passo a passo do Advisory","https://claude.ai/artifact/7iued6qcZtRUJLdnHn9Um1"],
@@ -132,26 +142,16 @@ footer{border-top:1px solid var(--line);padding-top:15px;font-family:var(--mono)
   var SKIP={"1DanPvU0yaIqYILupXcQhQcJA88wRV07oQ31aka8O0jg":1};
   var INPUT={query:"parentId = '"+FOLDER+"' and mimeType = 'application/vnd.google-apps.spreadsheet' and trashed = false",
     pageSize:100, excludeContentSnippets:true, orderBy:"modifiedTime desc"};
-  var KNOWN={
-    "1oqHzJZWer6vFZ1BTwQjgGsFzRgtgOMIo-2frgjI9Opg":{n:"Julio Pereira",p:"Advisory Joel Jota + Plano estratégico + Diárias Jota Lab",d:"01/11/2026 → 30/04/2027",o:1},
-    "1tfrfV6uXymiUJ_EvMnmojfx1UmLiyuq4fRJeCFA6-Fw":{n:"Marina Takiuti",p:"Advisory Joel Jota + Plano estratégico + Podcast CVFI + Diárias Jota Lab",d:"15/11/2026 → 15/05/2027",o:2},
-    "10aGSQWiLqw18L7V4Z4WKmn1JItH5aey90qqjUqc94NY":{n:"André Nunes",p:"GIGANTE · JJ Podcast + Advisory Joel Jota e Caio Carneiro + Talks + Diárias Jota Lab",d:"10/01/2027 → 10/07/2027",o:3},
-    "1wp2XRMryyTKDsXRrmqWJFcgRPWGTmLDtS7oNpfDkBgg":{n:"Fernanda Tochetto",p:"Advisory Joel Jota + Plano estratégico + Podcast CVFI + Talks",d:"01/02/2027 → 31/07/2027",o:4},
-    "1jRWz7rxjjhkTLpn6gAh9W5OszyXdpubS1MP7IeGTIdg":{n:"Leandro Reche",p:"Advisory Joel Jota + Plano estratégico + JJ Podcast com Plateia",d:"datas a definir",o:5}
-  };
   var $=function(id){return document.getElementById(id)};
   function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
-  function link(cls,href){var a=el("a",cls);a.href=href;a.target="_blank";a.rel="noopener";return a;}
+  function link(cls,href,txt){var a=el("a",cls,txt);a.href=href;a.target="_blank";a.rel="noopener";return a;}
   function iniciais(n){var p=n.replace(/\b(e|de|da|do|dos|das)\b/gi," ").trim().split(/\s+/);return ((p[0]||"")[0]||"")+((p.length>1?p[p.length-1][0]:"")||"");}
-
-  // páginas
-  var g=$("paginas");
-  PAGINAS.forEach(function(p){
-    var a=link("card",p[1]); var ini=el("span","ini",iniciais(p[0]).toUpperCase()); ini.setAttribute("aria-hidden","true");
-    var t=el("span","txt"); t.appendChild(el("span","nome",p[0])); t.appendChild(el("span","marca",MARCA));
-    a.appendChild(ini); a.appendChild(t); a.appendChild(el("span","seta","→")); a.setAttribute("aria-label",p[0]+" – "+MARCA); g.appendChild(a);
-  });
-  $("n-pag").textContent=PAGINAS.length;
+  function nameFrom(t){
+    var s=String(t||"").replace(/^\s*acompanhamento\s*[–—-]?\s*/i,"").replace(/\s*[-–—]\s*acompanhamento.*$/i,"").replace(/\s*\(.*\)\s*$/,"").trim();
+    return s||String(t||"Novo cliente");
+  }
+  function fmt(iso){var d=new Date(iso);if(isNaN(d))return "";
+    return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear();}
 
   // outros links
   var ap=$("apoio");
@@ -160,34 +160,29 @@ footer{border-top:1px solid var(--line);padding-top:15px;font-family:var(--mono)
     a.appendChild(t); a.appendChild(el("span","datas","")); a.appendChild(el("span","seta","→")); ap.appendChild(a);
   });
 
-  // planilhas
-  var status=$("status"), retry=$("retry"), box=$("clients");
-  var mcpRef=null;
-  function nameFrom(t){
-    var s=String(t||"").replace(/^\s*acompanhamento\s*[–—-]?\s*/i,"").replace(/\s*[-–—]\s*acompanhamento.*$/i,"").replace(/\s*\(.*\)\s*$/,"").trim();
-    return s||String(t||"Novo cliente");
-  }
-  function fmt(iso){var d=new Date(iso);if(isNaN(d))return "";
-    return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear();}
-  function render(files){
-    var rows=files.filter(function(f){return f&&f.id&&!SKIP[f.id];}).map(function(f){
-      var k=KNOWN[f.id];
-      return {id:f.id,name:k?k.n:nameFrom(f.title),prog:k?k.p:(f.title||""),
-        meta:k?k.d:("criada em "+fmt(f.createdTime)),isNew:!k,o:k?k.o:0,c:f.createdTime||""};
+  // clientes: conhecidos + planilhas novas vindas do Drive
+  var novos=[];
+  function render(){
+    var lista=novos.concat(CLIENTES), g=$("clientes"); g.replaceChildren();
+    lista.forEach(function(c){
+      var card=el("article","cli");
+      var topo=el("div","topo"); var ini=el("span","ini",iniciais(c.n).toUpperCase()); ini.setAttribute("aria-hidden","true");
+      var t=el("span","txt"); t.appendChild(el("span","nome",c.n)); t.appendChild(el("span","marca",MARCA));
+      topo.appendChild(ini); topo.appendChild(t); card.appendChild(topo);
+      if(c.p) card.appendChild(el("div","prog",c.p));
+      var ln=el("div","linha"); ln.appendChild(el("span",c.novo?"pill new":(c.st==="Ativo"?"pill":"pill fim"),c.novo?"Novo":c.st));
+      if(c.d) ln.appendChild(document.createTextNode(c.d)); card.appendChild(ln);
+      var ac=el("div","acoes");
+      ac.appendChild(c.pag?link("pag",c.pag,"Página →"):el("span","falta","Sem página"));
+      ac.appendChild(c.id?link("pla","https://docs.google.com/spreadsheets/d/"+c.id+"/edit","Planilha →"):el("span","falta","Sem planilha"));
+      card.appendChild(ac); g.appendChild(card);
     });
-    rows.sort(function(a,b){ if(a.isNew!==b.isNew)return a.isNew?-1:1; return a.isNew?(a.c<b.c?1:-1):a.o-b.o; });
-    box.replaceChildren();
-    rows.forEach(function(r){
-      var a=link("row","https://docs.google.com/spreadsheets/d/"+r.id+"/edit");
-      var t=el("span","txt"); t.appendChild(el("span","nome",r.name+" – "+MARCA)); t.appendChild(el("span","prog",r.prog));
-      var d=el("span","datas"); d.appendChild(el("span",r.isNew?"pill new":"pill",r.isNew?"Novo":"Ativo")); d.appendChild(document.createTextNode(r.meta));
-      a.appendChild(t); a.appendChild(d); a.appendChild(el("span","seta","→")); box.appendChild(a);
-    });
-    $("cli-conta").textContent=rows.length+(rows.length===1?" cliente":" clientes");
-    $("n-plan").textContent=rows.length;
+    $("n-cli").textContent=lista.length;
+    $("n-ambos").textContent=lista.filter(function(c){return c.pag&&c.id;}).length;
   }
-  render(Object.keys(KNOWN).map(function(id){return {id:id};}));
+  render();
 
+  var status=$("status"), retry=$("retry"), mcpRef=null;
   function payloadFiles(res){var p=res&&res.payload; if(typeof p==="string"){try{p=JSON.parse(p)}catch(e){p=null}}
     return p&&Array.isArray(p.files)?p.files:null;}
   function stamp(res){var t=res&&res.cache&&res.cache.storedAt?new Date(res.cache.storedAt):new Date();
@@ -201,7 +196,11 @@ footer{border-top:1px solid var(--line);padding-top:15px;font-family:var(--mono)
     else {status.textContent="Não consegui falar com o Google Drive agora. Mostrando a última lista salva.";retry.hidden=false;}
   }
   function onData(res){var f=payloadFiles(res); if(!f){status.textContent="Mostrando a última lista salva.";return;}
-    render(f); retry.hidden=true; status.textContent="Lista atualizada do Drive · "+stamp(res);}
+    var conhecidos={}; CLIENTES.forEach(function(c){if(c.id)conhecidos[c.id]=1;});
+    novos=f.filter(function(x){return x&&x.id&&!SKIP[x.id]&&!conhecidos[x.id];})
+      .sort(function(a,b){return (a.createdTime||"")<(b.createdTime||"")?1:-1;})
+      .map(function(x){return {n:nameFrom(x.title),pag:"",id:x.id,p:x.title||"",d:"criada em "+fmt(x.createdTime),novo:true};});
+    render(); retry.hidden=true; status.textContent="Lista atualizada do Drive · "+stamp(res);}
   retry.addEventListener("click",function(){
     if(!mcpRef)return; retry.hidden=true; status.textContent="Buscando no Drive…";
     mcpRef.callTool(SERVER,TOOL,INPUT,{cache:{refresh:true,staleTime:0,gcTime:3600000}}).then(onData,onError);
