@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#111318">
+<title>Advisory Artur — Joel Jota</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f5f7;--bg2:#ffffff;--bg3:#f0f1f5;
+  --b1:rgba(0,0,0,0.07);--b2:rgba(0,0,0,0.12);
+  --text:#111827;--text2:#4b5563;--text3:#9ca3af;
+  --ink:#111318;
+  --blue:#1d6fdb;--blue2:#1558b8;--bluebg:rgba(29,111,219,0.08);--blueb:rgba(29,111,219,0.22);
+  --green:#0e9964;--gnbg:rgba(14,153,100,0.08);
+  --r:10px;--rl:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:16px;line-height:1.6;}
+a{color:inherit;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+/* HERO */
+.hero{background:var(--ink);color:#fff;padding:72px 0 64px;position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(29,111,219,.35) 0%,rgba(29,111,219,0) 70%);pointer-events:none;}
+.tag{display:inline-block;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#8fb8f0;border:1px solid rgba(143,184,240,.35);border-radius:6px;padding:5px 12px;margin-bottom:22px;}
+.hero h1{font-size:clamp(38px,7vw,64px);line-height:1.02;letter-spacing:-.035em;font-weight:700;}
+.hero h1 span{color:#5d9be8;}
+.hero p.lead{margin-top:20px;max-width:620px;font-size:clamp(17px,2.2vw,19px);color:rgba(255,255,255,.75);}
+.facts{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;position:relative;z-index:1;}
+.fact{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:14px 18px;min-width:150px;}
+.fact b{display:block;font-family:'Space Mono',monospace;font-size:24px;line-height:1.1;color:#fff;}
+.fact small{font-size:12px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.1em;font-weight:600;}
+
+/* SECTIONS */
+section{padding:64px 0 8px;}
+.eyebrow{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;}
+h2{font-size:clamp(26px,4vw,34px);letter-spacing:-.03em;line-height:1.15;margin-bottom:16px;}
+.intro{font-size:18px;color:var(--text2);max-width:720px;}
+
+/* PILARES */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:28px;}
+.pcard{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);padding:24px 22px;box-shadow:0 1px 4px rgba(0,0,0,.05);
+  display:flex;flex-direction:column;gap:10px;transition:transform .2s,border-color .2s;}
+.pcard:hover{transform:translateY(-2px);border-color:var(--blueb);}
+.pnum{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--blue);background:var(--bluebg);border:1px solid var(--blueb);
+  width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.pcard h3{font-size:21px;letter-spacing:-.02em;}
+.pcard p{font-size:15px;color:var(--text2);}
+
+/* FORMATO */
+.flist{margin-top:28px;display:grid;gap:12px;}
+.fitem{display:flex;gap:16px;align-items:flex-start;background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);padding:18px 20px;}
+.ficon{flex-shrink:0;width:40px;height:40px;border-radius:10px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;}
+.ficon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.fitem h4{font-size:17px;margin-bottom:2px;}
+.fitem p{font-size:15px;color:var(--text2);}
+
+/* JORNADA */
+.timeline{margin-top:28px;display:grid;grid-template-columns:repeat(6,1fr);gap:10px;}
+.step{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);padding:18px 16px;position:relative;}
+.step .m{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
+.step .pl{display:inline-block;margin:8px 0 6px;font-size:12px;font-weight:700;color:var(--blue);background:var(--bluebg);border-radius:5px;padding:2px 8px;}
+.step p{font-size:14px;color:var(--text2);line-height:1.45;}
+.step::before{content:"";position:absolute;top:0;left:16px;right:16px;height:3px;border-radius:0 0 3px 3px;background:var(--blue);opacity:.25;}
+.step:nth-child(n)::before{opacity:calc(.15 + var(--i)*.14);}
+.note{margin-top:14px;font-size:13px;color:var(--text3);}
+
+/* RESULTADO */
+.result{margin:64px 0 0;background:var(--ink);color:#fff;border-radius:22px;padding:44px 36px;}
+.result h2{color:#fff;}
+.result .eyebrow{color:#8fb8f0;}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:22px;}
+.ritem{border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:18px;background:rgba(255,255,255,.04);}
+.ritem b{display:block;font-size:18px;margin-bottom:4px;}
+.ritem span{font-size:14px;color:rgba(255,255,255,.65);}
+
+/* ACOMPANHAMENTO */
+.track{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;background:var(--bg2);
+  border:1px solid var(--blueb);border-radius:var(--rl);padding:22px 24px;}
+.track p{color:var(--text2);font-size:15px;max-width:600px;}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:15px;
+  padding:12px 20px;border-radius:10px;transition:background .15s;white-space:nowrap;}
+.btn:hover{background:var(--blue2);}
+
+footer{padding:48px 0 40px;text-align:center;font-size:13px;color:var(--text3);}
+footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04em;}
+
+@media (max-width:860px){.timeline{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){
+  .wrap{padding:0 16px;}
+  .hero{padding:52px 0 44px;}
+  section{padding:48px 0 4px;}
+  .timeline{grid-template-columns:1fr;}
+  .result{padding:32px 22px;margin-top:48px;}
+  .btn{width:100%;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="tag">Advisory · Joel Jota</div>
+    <h1>Advisory<br><span>Artur</span></h1>
+    <p class="lead">Acompanhamento individual de 6 meses, conduzido diretamente pelo Joel, para desenvolver clareza de direção, visão estratégica e postura de liderança.</p>
+    <div class="facts">
+      <div class="fact"><b>6 meses</b><small>de acompanhamento</small></div>
+      <div class="fact"><b>6+</b><small>encontros presenciais</small></div>
+      <div class="fact"><b>4</b><small>pilares de trabalho</small></div>
+      <div class="fact"><b>1:1</b><small>direto com o Joel</small></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="eyebrow">Sobre o programa</div>
+    <h2>Um trabalho individual, próximo e prático</h2>
+    <p class="intro">Durante seis meses, o Joel acompanha o Artur de perto, com encontros presenciais, contato direto e vivências reais da rotina. O foco é o empresário: como ele enxerga o cenário, decide e lidera pessoas.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Pilares do trabalho</div>
+    <h2>Quatro frentes de desenvolvimento</h2>
+    <div class="pgrid">
+      <article class="pcard">
+        <div class="pnum">01</div>
+        <h3>Direção</h3>
+        <p>Clareza de cenário e definição de metas.</p>
+      </article>
+      <article class="pcard">
+        <div class="pnum">02</div>
+        <h3>Visão</h3>
+        <p>Ampliação de repertório e leitura estratégica.</p>
+      </article>
+      <article class="pcard">
+        <div class="pnum">03</div>
+        <h3>Liderança</h3>
+        <p>Responsabilidade, disciplina e capacidade de influenciar pessoas pelo exemplo.</p>
+      </article>
+      <article class="pcard">
+        <div class="pnum">04</div>
+        <h3>Comportamento</h3>
+        <p>Postura, comunicação, inteligência emocional e conduta em ambientes profissionais e sociais.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Formato</div>
+    <h2>Como o acompanhamento acontece</h2>
+    <div class="flist">
+      <div class="fitem">
+        <div class="ficon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M3.5 19c.6-3.2 3-5 5.5-5s4.9 1.8 5.5 5"/><path d="M14.8 14.3c2.5-.4 4.9 1 5.7 4.2"/></svg></div>
+        <div><h4>Encontros presenciais</h4><p>Mínimo de 6 encontros presenciais com Joel Jota ao longo dos 6 meses.</p></div>
+      </div>
+      <div class="fitem">
+        <div class="ficon"><svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"/></svg></div>
+        <div><h4>Contato direto via WhatsApp</h4><p>Canal aberto com Joel Jota durante todo o período.</p></div>
+      </div>
+      <div class="fitem">
+        <div class="ficon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div>
+        <div><h4>Vivências no dia a dia do Joel</h4><p>Participação próxima em momentos reais da rotina, para compreender na prática comportamento, postura e tomada de decisão.</p></div>
+      </div>
+      <div class="fitem">
+        <div class="ficon"><svg viewBox="0 0 24 24"><path d="M5 20V5"/><path d="M5 5h11l-2 3.5L16 12H5"/></svg></div>
+        <div><h4>Desafios práticos</h4><p>Desafios entre os encontros, com acompanhamento da evolução.</p></div>
+      </div>
+      <div class="fitem">
+        <div class="ficon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="1.8"/><circle cx="19" cy="6" r="1.8"/><circle cx="5" cy="18" r="1.8"/><circle cx="19" cy="18" r="1.8"/><path d="M6.4 7.3 10.2 10.4M17.6 7.3l-3.8 3.1M6.4 16.7l3.8-3.1M17.6 16.7l-3.8-3.1"/></svg></div>
+        <div><h4>Acesso ao ecossistema do Joel</h4><p>Eventos, experiências e convivência com empresários de alto nível.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Jornada</div>
+    <h2>Seis meses, um encontro por mês</h2>
+    <div class="timeline">
+      <div class="step" style="--i:1"><div class="m">Mês 1</div><span class="pl">Direção</span><p>Diagnóstico de cenário e definição das metas do semestre.</p></div>
+      <div class="step" style="--i:2"><div class="m">Mês 2</div><span class="pl">Visão</span><p>Leitura estratégica do negócio e ampliação de repertório.</p></div>
+      <div class="step" style="--i:3"><div class="m">Mês 3</div><span class="pl">Liderança</span><p>Responsabilidade, disciplina e exemplo. Revisão de meio de programa.</p></div>
+      <div class="step" style="--i:4"><div class="m">Mês 4</div><span class="pl">Comportamento</span><p>Postura, comunicação e inteligência emocional.</p></div>
+      <div class="step" style="--i:5"><div class="m">Mês 5</div><span class="pl">Liderança</span><p>Influência sobre o time e consolidação da rotina de decisão.</p></div>
+      <div class="step" style="--i:6"><div class="m">Mês 6</div><span class="pl">Fechamento</span><p>Avaliação da evolução nos 4 pilares e plano de continuidade.</p></div>
+    </div>
+    <p class="note">A sequência de temas é uma referência e se ajusta ao momento do Artur ao longo do programa.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Acompanhamento</div>
+    <h2>Evolução registrada</h2>
+    <div class="track">
+      <p>Encontros, desafios, notas por pilar, vivências e conversas ficam registrados na planilha de acompanhamento, que mostra a evolução mês a mês.</p>
+      <a class="btn" href="https://docs.google.com/spreadsheets/d/1tJloTToTyWmnPnuhwOUyJleyifs3i832OfYUYqqWU98/edit" target="_blank" rel="noopener">Abrir planilha →</a>
+    </div>
+  </section>
+
+  <div class="result">
+    <div class="eyebrow">Resultado esperado</div>
+    <h2>Um empresário mais claro, seguro e consistente</h2>
+    <div class="rgrid">
+      <div class="ritem"><b>Clareza de objetivos</b><span>Sabe onde está e para onde vai.</span></div>
+      <div class="ritem"><b>Segurança nas decisões</b><span>Decide com mais critério e menos hesitação.</span></div>
+      <div class="ritem"><b>Liderança consistente</b><span>Postura que inspira e influencia pelo exemplo.</span></div>
+    </div>
+  </div>
+
+</main>
+
+<footer><b>JOTA CO</b> · Advisory individual com Joel Jota</footer>
+
+</body>
+</html>
