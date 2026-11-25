@@ -69,6 +69,18 @@ h2{font-size:clamp(26px,4vw,34px);letter-spacing:-.03em;line-height:1.15;margin-
 .step:nth-child(n)::before{opacity:calc(.15 + var(--i)*.14);}
 .note{margin-top:14px;font-size:13px;color:var(--text3);}
 
+.sched{margin-top:10px;font-size:12px;font-weight:700;color:var(--green);background:var(--gnbg);border-radius:5px;padding:3px 8px;display:inline-block;}
+
+/* PRÓXIMO ENCONTRO */
+.next{margin-top:40px;display:flex;gap:20px;align-items:center;justify-content:space-between;background:var(--bg2);
+  border:1px solid var(--blueb);border-left:4px solid var(--blue);border-radius:var(--rl);padding:24px 26px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.next h3{font-size:22px;letter-spacing:-.02em;margin-bottom:6px;}
+.next p{font-size:15px;color:var(--text2);max-width:620px;}
+.next-d{flex-shrink:0;text-align:center;background:var(--ink);color:#fff;border-radius:12px;padding:14px 18px;}
+.next-d b{display:block;font-family:'Space Mono',monospace;font-size:26px;line-height:1.1;}
+.next-d span{font-size:11px;letter-spacing:.14em;color:#8fb8f0;font-weight:700;}
+@media (max-width:560px){.next{flex-direction:column-reverse;align-items:flex-start;padding:20px;}}
+
 /* RESULTADO */
 .result{margin:64px 0 0;background:var(--ink);color:#fff;border-radius:22px;padding:44px 36px;}
 .result h2{color:#fff;}
@@ -123,6 +135,15 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
     <h2>Um trabalho individual, próximo e prático</h2>
     <p class="intro">Durante seis meses, o Joel acompanha o Artur de perto, com encontros presenciais, contato direto e vivências reais da rotina. O foco é o empresário: como ele enxerga o cenário, decide e lidera pessoas.</p>
   </section>
+
+  <div class="next">
+    <div class="next-l">
+      <div class="eyebrow">Primeiro encontro · Agendado</div>
+      <h3>27 a 29 de novembro · Alphaville</h3>
+      <p>Três dias com Joel Jota para abrir o programa: diagnóstico de cenário, alinhamento de expectativas e definição das metas dos 6 meses.</p>
+    </div>
+    <div class="next-d"><b>27–29</b><span>NOV 2026</span></div>
+  </div>
 
   <section>
     <div class="eyebrow">Pilares do trabalho</div>
@@ -182,7 +203,7 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
     <div class="eyebrow">Jornada</div>
     <h2>Seis meses, um encontro por mês</h2>
     <div class="timeline">
-      <div class="step" style="--i:1"><div class="m">Mês 1</div><span class="pl">Direção</span><p>Diagnóstico de cenário e definição das metas do semestre.</p></div>
+      <div class="step" style="--i:1"><div class="m">Mês 1</div><span class="pl">Direção</span><p>Diagnóstico de cenário e definição das metas do semestre.</p><div class="sched">27 a 29/11 · Alphaville</div></div>
       <div class="step" style="--i:2"><div class="m">Mês 2</div><span class="pl">Visão</span><p>Leitura estratégica do negócio e ampliação de repertório.</p></div>
       <div class="step" style="--i:3"><div class="m">Mês 3</div><span class="pl">Liderança</span><p>Responsabilidade, disciplina e exemplo. Revisão de meio de programa.</p></div>
       <div class="step" style="--i:4"><div class="m">Mês 4</div><span class="pl">Comportamento</span><p>Postura, comunicação e inteligência emocional.</p></div>
