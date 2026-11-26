@@ -150,6 +150,33 @@ h3.sub{font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercas
 .hint{font-size:12px;color:var(--text3);margin-top:20px;}
 @media (max-width:560px){.cal{grid-template-columns:repeat(10,1fr);}.today{padding:22px 16px;}}
 
+
+/* AÇÕES — SIMPLES */
+#pane-acoes{max-width:620px;}
+.a-head{text-align:center;padding:34px 0 6px;}
+.a-date{font-size:28px;font-weight:700;letter-spacing:-.02em;}
+.a-sub{font-size:14px;color:var(--text3);margin-top:2px;}
+.a-sec{font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin:30px 0 10px;}
+.a-row{display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--b1);border-radius:14px;padding:14px 14px 14px 18px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:all .2s;}
+.a-row.ok{background:var(--gnbg);border-color:rgba(14,153,100,.3);}
+.a-ico{font-size:26px;flex-shrink:0;width:34px;text-align:center;}
+.a-txt{flex:1;min-width:0;}
+.a-txt b{display:block;font-size:18px;line-height:1.25;}
+.a-txt span{font-size:14px;color:var(--text2);}
+.a-row.ok .a-txt b{color:var(--green);}
+.okb{flex-shrink:0;min-width:84px;height:52px;border-radius:12px;border:2px solid var(--blue);background:#fff;color:var(--blue);font-family:inherit;font-size:18px;font-weight:700;cursor:pointer;}
+.a-row.ok .okb{background:var(--green);border-color:var(--green);color:#fff;}
+.a-row.off{opacity:.5;}
+.a-row.off .okb{border-color:var(--b2);color:var(--text3);cursor:default;}
+.a-in{width:90px;height:52px;font-family:'Space Mono',monospace;font-size:18px;text-align:center;border:1px solid var(--b2);border-radius:12px;background:#fff;color:var(--text);}
+.a-done{display:none;text-align:center;background:var(--green);color:#fff;font-weight:700;font-size:18px;border-radius:14px;padding:16px;margin-top:6px;}
+.a-done.on{display:block;}
+.a-count{text-align:center;font-size:15px;color:var(--text2);margin-top:10px;}
+.a-total{text-align:center;margin-top:34px;font-size:15px;color:var(--text2);}
+.a-total b{font-family:'Space Mono',monospace;font-size:22px;color:var(--text);}
+.task .a-txt b{font-size:16px;font-weight:600;}
+@media (max-width:560px){.okb{min-width:70px;}.a-txt b{font-size:17px;}}
+
 /* RESULTADO */
 .result{margin:64px 0 0;background:var(--ink);color:#fff;border-radius:22px;padding:44px 36px;}
 .result h2{color:#fff;}
@@ -358,45 +385,29 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
 </main>
 
 <main class="wrap pane" id="pane-acoes" hidden>
-  <div class="today">
-    <div class="thead">
-      <div>
-        <div class="eyebrow" id="dlabel">Hoje</div>
-        <h2 id="dtitle">—</h2>
-      </div>
-      <div class="dnav"><button id="prev" aria-label="Dia anterior">‹</button><button id="next" aria-label="Próximo dia">›</button></div>
-    </div>
-    <div id="checks"></div>
-    <div class="score"><span id="pct">0%</span><div class="bar"><i id="pbar"></i></div><span id="dayn">Dia 1 de 180</span></div>
+  <div class="a-head">
+    <div class="a-date" id="dtitle">—</div>
+    <div class="a-sub" id="dsub">Dia 1 de 180</div>
   </div>
 
-  <div class="stats">
-    <div class="stat"><small>Dias cumpridos 100%</small><b id="s-full">0</b></div>
-    <div class="stat"><small>Sequência atual</small><b id="s-streak">0</b></div>
-    <div class="stat"><small>Dias sem açaí</small><b id="s-acai">0</b></div>
-    <div class="stat"><small>Dias treinados</small><b id="s-treino">0</b></div>
+  <div class="a-sec">Ações de hoje</div>
+  <div id="checks"></div>
+
+  <div class="a-done" id="adone">✓ Dia completo. Boa, Arthur!</div>
+  <div class="a-count" id="acount">0 de 4 feitas hoje</div>
+
+  <div class="a-sec">Peso da semana</div>
+  <div class="a-row">
+    <div class="a-txt"><b>Meu peso (kg)</b><span id="wmsg">Meta: abaixo de 100 kg</span></div>
+    <input id="w" class="a-in" type="number" step="0.1" inputmode="decimal" placeholder="kg">
+    <button class="okb" id="wok">OK</button>
   </div>
 
-  <section>
-    <div class="eyebrow">Peso</div>
-    <h2>Registro semanal</h2>
-    <div class="weight"><input id="w" type="number" step="0.1" inputmode="decimal" placeholder="kg"><span id="wmsg" style="color:var(--text2);font-size:14px"></span></div>
-  </section>
+  <div class="a-sec">Tarefas até 25/12</div>
+  <div id="tasks"></div>
 
-  <section>
-    <div class="eyebrow">180 dias</div>
-    <h2>Sua jornada</h2>
-    <div class="cal" id="cal"></div>
-    <div class="legend"><span style="--c:var(--green)">100%</span><span style="--c:#bfe8d1">75%</span><span style="--c:#fff1c7">50%</span><span style="--c:#fde2e2">25% ou menos</span></div>
-  </section>
-
-  <section>
-    <div class="eyebrow">Até 25/12</div>
-    <h2>Tarefas do mês 1</h2>
-    <div class="tasks" id="tasks"></div>
-  </section>
-
-  <p class="hint">As marcações ficam salvas neste aparelho. Use sempre o mesmo celular para registrar.</p>
+  <div class="a-total"><b id="s-full">0</b> dias completos de 180</div>
+  <p class="hint">Suas respostas ficam salvas neste celular.</p>
 </main>
 
 <footer><b>JOTA CO</b> · Advisory individual com Joel Jota</footer>
@@ -405,90 +416,61 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
 (function(){
   var START=new Date(2026,10,26), DAYS=180, KEY='advisory-arthur-v1';
   var HABITS=[
-    {k:'treino',t:'Treinar',d:'Exercício físico, todo dia'},
-    {k:'acai',t:'Zero açaí',d:'180 dias sem açaí'},
-    {k:'sono',t:'Acordei às 6:00 sem soneca',d:'Segunda a sexta',wk:true},
-    {k:'podcast',t:'Podcast',d:'5 aprendizados + 1 decisão'}
+    {k:'treino',i:'💪',t:'Treinei hoje',d:'Exercício físico, todo dia'},
+    {k:'acai',i:'🚫',t:'Não comi açaí',d:'180 dias sem açaí'},
+    {k:'sono',i:'⏰',t:'Acordei às 6:00',d:'Sem soneca · seg a sex',wk:true},
+    {k:'podcast',i:'🎧',t:'Ouvi o podcast',d:'5 aprendizados + 1 decisão'}
   ];
-  var TASKS=['Falar com a Simone e pedir para liderar a criação de uma área nova','Definir a área TikTok Shop: escopo, metas e perfil das 2–3 vagas','Começar as entrevistas do time','Comprar e usar Whoop ou Oura','Escolher o prêmio das metas'];
+  var TASKS=['Falar com a Simone','Definir a área TikTok Shop','Começar as entrevistas do time','Comprar o Whoop ou o Oura','Escolher o prêmio'];
   var st={d:{},t:{},w:{}};
   try{var r=localStorage.getItem(KEY); if(r) st=Object.assign(st,JSON.parse(r));}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
   function day0(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate());}
-  function idx(d){return Math.round((day0(d)-START)/864e5);}
-  function dOf(i){var d=new Date(START);d.setDate(d.getDate()+i);return d;}
-  function key(i){var d=dOf(i);return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
-  function wkend(i){var w=dOf(i).getDay();return w===0||w===6;}
-  function req(i){return HABITS.filter(function(h){return !(h.wk&&wkend(i));});}
-  function pct(i){var rec=st.d[key(i)]||{},q=req(i),n=q.filter(function(h){return rec[h.k];}).length;return n/q.length;}
-  var todayI=Math.max(0,Math.min(DAYS-1,idx(new Date()))), cur=todayI;
-  var fmt=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long'});
-  var tick='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
-
+  var t0=day0(new Date()), ti=Math.round((t0-START)/864e5), cur=Math.max(0,Math.min(DAYS-1,ti));
+  var dd=new Date(START); dd.setDate(dd.getDate()+cur);
+  var K=dd.getFullYear()+'-'+(dd.getMonth()+1)+'-'+dd.getDate();
+  var wk=dd.getDay()===0||dd.getDay()===6;
+  function esc(x){return x;}
+  function row(icon,title,desc,ok,off,attr){
+    return '<div class="a-row'+(ok?' ok':'')+(off?' off':'')+'"><div class="a-ico">'+icon+'</div><div class="a-txt"><b>'+title+'</b><span>'+desc+'</span></div><button class="okb" '+attr+(off?' disabled':'')+'>'+(ok?'✓':'OK')+'</button></div>';
+  }
   function render(){
-    var rec=st.d[key(cur)]||{};
-    document.getElementById('dlabel').textContent=cur===todayI?'Hoje':(cur<todayI?'Dia anterior':'Próximo dia');
-    var t=fmt.format(dOf(cur)); document.getElementById('dtitle').textContent=t.charAt(0).toUpperCase()+t.slice(1);
-    var h='';
+    var f=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long'}).format(dd);
+    document.getElementById('dtitle').textContent=f.charAt(0).toUpperCase()+f.slice(1);
+    document.getElementById('dsub').textContent=ti<0?'O programa começa em 26/11':'Dia '+(cur+1)+' de '+DAYS;
+    var rec=st.d[K]||{}, h='', need=0, done=0;
     HABITS.forEach(function(x){
-      var off=x.wk&&wkend(cur);
-      h+='<label class="chk'+(off?' off':'')+'"><input type="checkbox" data-k="'+x.k+'"'+(rec[x.k]?' checked':'')+(off?' disabled':'')+'><span class="box">'+tick+'</span><div><b>'+x.t+'</b><span>'+(off?'Fim de semana: não precisa':x.d)+'</span></div></label>';
+      var off=x.wk&&wk; if(!off){need++; if(rec[x.k])done++;}
+      h+=row(x.i,x.t,off?'Fim de semana: não precisa':x.d,!!rec[x.k],off,'data-h="'+x.k+'"');
     });
-    var c=document.getElementById('checks'); c.innerHTML=h;
-    c.querySelectorAll('input').forEach(function(inp){inp.onchange=function(){
-      var k=key(cur); st.d[k]=st.d[k]||{}; st.d[k][inp.dataset.k]=inp.checked; save(); render();
-    };});
-    var p=Math.round(pct(cur)*100);
-    document.getElementById('pct').textContent=p+'%';
-    document.getElementById('pbar').style.width=p+'%';
-    document.getElementById('dayn').textContent='Dia '+(cur+1)+' de '+DAYS;
-    document.getElementById('prev').disabled=cur<=0;
-    document.getElementById('next').disabled=cur>=todayI;
-    var w=document.getElementById('w'); w.value=st.w[key(cur)]||'';
-    stats(); cal();
-  }
-  function stats(){
-    var full=0,acai=0,tr=0,streak=0;
-    for(var i=0;i<=todayI;i++){var r=st.d[key(i)]||{}; if(pct(i)===1)full++; if(r.acai)acai++; if(r.treino)tr++;}
-    for(var j=todayI;j>=0;j--){ if(pct(j)===1)streak++; else if(j===todayI)continue; else break; }
+    document.getElementById('checks').innerHTML=h;
+    document.getElementById('acount').textContent=done+' de '+need+' feitas hoje';
+    document.getElementById('adone').classList.toggle('on',done===need);
+    var th='';
+    TASKS.forEach(function(t,i){th+=row('📌',t,st.t[i]?'Feito':'Até 25/12',!!st.t[i],false,'data-t="'+i+'"').replace('a-row','a-row task');});
+    document.getElementById('tasks').innerHTML=th;
+    var w=st.w[K]; document.getElementById('w').value=w||'';
+    document.getElementById('wok').parentNode.classList.toggle('ok',!!w);
+    document.getElementById('wok').textContent=w?'✓':'OK';
+    var last=null; Object.keys(st.w).forEach(function(k){last=st.w[k];});
+    document.getElementById('wmsg').textContent=last?'Último: '+last+' kg':'Meta: abaixo de 100 kg';
+    var full=0; Object.keys(st.d).forEach(function(k){var r=st.d[k],p=k.split('-'),dw=new Date(+p[0],p[1]-1,+p[2]).getDay(),we=dw===0||dw===6;
+      if(r.treino&&r.acai&&r.podcast&&(we||r.sono))full++;});
     document.getElementById('s-full').textContent=full;
-    document.getElementById('s-streak').textContent=streak;
-    document.getElementById('s-acai').textContent=acai;
-    document.getElementById('s-treino').textContent=tr;
-    var ws=Object.keys(st.w).sort(function(a,b){return new Date(a)-new Date(b);}), last=null;
-    for(var m=0;m<=todayI;m++){if(st.w[key(m)])last=st.w[key(m)];}
-    document.getElementById('wmsg').textContent=last?('Último registro: '+last+' kg · meta: abaixo de 100 kg'):'Partida: 129 kg · meta: abaixo de 100 kg';
+    document.querySelectorAll('[data-h]').forEach(function(b){b.onclick=function(){st.d[K]=st.d[K]||{};st.d[K][b.dataset.h]=!st.d[K][b.dataset.h];save();render();};});
+    document.querySelectorAll('[data-t]').forEach(function(b){b.onclick=function(){st.t[b.dataset.t]=!st.t[b.dataset.t];save();render();};});
   }
-  function cal(){
-    var h='';
-    for(var i=0;i<DAYS;i++){
-      var cls='';
-      if(i<=todayI){var p=pct(i); cls=p===1?'p4':p>=.75?'p3':p>=.5?'p2':(st.d[key(i)]?'p1':'');}
-      if(i===cur)cls+=' now';
-      h+='<i class="'+cls+'" data-i="'+i+'" title="'+dOf(i).toLocaleDateString('pt-BR')+'"></i>';
-    }
-    var el=document.getElementById('cal'); el.innerHTML=h;
-    el.querySelectorAll('i').forEach(function(x){x.onclick=function(){var i=+x.dataset.i; if(i<=todayI){cur=i;render();window.scrollTo({top:0,behavior:'smooth'});}};});
-  }
-  function tasks(){
-    var h=''; TASKS.forEach(function(t,i){h+='<label><input type="checkbox" data-i="'+i+'"'+(st.t[i]?' checked':'')+'><span>'+t+'</span></label>';});
-    var el=document.getElementById('tasks'); el.innerHTML=h;
-    el.querySelectorAll('input').forEach(function(x){x.onchange=function(){st.t[x.dataset.i]=x.checked;save();};});
-  }
-  document.getElementById('prev').onclick=function(){if(cur>0){cur--;render();}};
-  document.getElementById('next').onclick=function(){if(cur<todayI){cur++;render();}};
-  document.getElementById('w').onchange=function(e){var v=e.target.value; if(v)st.w[key(cur)]=v; else delete st.w[key(cur)]; save(); stats();};
+  document.getElementById('wok').onclick=function(){var v=document.getElementById('w').value; if(v)st.w[K]=v; else delete st.w[K]; save(); render();};
 
   function show(t){
     document.querySelectorAll('.tab').forEach(function(b){b.classList.toggle('on',b.dataset.t===t);});
     document.getElementById('pane-prog').hidden=t!=='prog';
     document.getElementById('pane-acoes').hidden=t!=='acoes';
-    var f=document.querySelector('footer'); if(f) f.style.display='';
     if(history.replaceState) history.replaceState(null,'',t==='acoes'?'#acoes':location.pathname);
   }
   document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){show(b.dataset.t);window.scrollTo({top:document.querySelector('.tabs').offsetTop});};});
   if(location.hash==='#acoes') show('acoes');
-  tasks(); render();
+  render();
 })();
 </script>
 </body>
