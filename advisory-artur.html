@@ -447,7 +447,7 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
     document.getElementById('acount').textContent=done+' de '+need+' feitas hoje';
     document.getElementById('adone').classList.toggle('on',done===need);
     var th='';
-    TASKS.forEach(function(t,i){th+=row('📌',t,st.t[i]?'Feito':'Até 25/12',!!st.t[i],false,'data-t="'+i+'"').replace('a-row','a-row task');});
+    TASKS.forEach(function(t,i){th+=row('📌',t,st.t[i]?'Feito':'Até 25/12',!!st.t[i],false,'data-task="'+i+'"').replace('a-row','a-row task');});
     document.getElementById('tasks').innerHTML=th;
     var w=st.w[K]; document.getElementById('w').value=w||'';
     document.getElementById('wok').parentNode.classList.toggle('ok',!!w);
@@ -458,7 +458,7 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
       if(r.treino&&r.acai&&r.podcast&&(we||r.sono))full++;});
     document.getElementById('s-full').textContent=full;
     document.querySelectorAll('[data-h]').forEach(function(b){b.onclick=function(){st.d[K]=st.d[K]||{};st.d[K][b.dataset.h]=!st.d[K][b.dataset.h];save();render();};});
-    document.querySelectorAll('[data-t]').forEach(function(b){b.onclick=function(){st.t[b.dataset.t]=!st.t[b.dataset.t];save();render();};});
+    document.querySelectorAll('[data-task]').forEach(function(b){b.onclick=function(){st.t[b.dataset.task]=!st.t[b.dataset.task];save();render();};});
   }
   document.getElementById('wok').onclick=function(){var v=document.getElementById('w').value; if(v)st.w[K]=v; else delete st.w[K]; save(); render();};
 
