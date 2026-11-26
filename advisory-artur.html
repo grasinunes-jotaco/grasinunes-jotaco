@@ -81,6 +81,75 @@ h2{font-size:clamp(26px,4vw,34px);letter-spacing:-.03em;line-height:1.15;margin-
 .next-d span{font-size:11px;letter-spacing:.14em;color:#8fb8f0;font-weight:700;}
 @media (max-width:560px){.next{flex-direction:column-reverse;align-items:flex-start;padding:20px;}}
 
+/* METAS */
+.mgrid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:28px;}
+.meta{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);padding:22px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:10px;}
+.mtop{display:flex;align-items:center;gap:10px;}
+.mn{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:var(--ink);border-radius:7px;padding:3px 8px;}
+.mt{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;}
+.mbig{font-size:22px;letter-spacing:-.02em;line-height:1.2;color:var(--text2);}
+.mbig b{color:var(--text);}
+.mbig i{font-style:normal;color:var(--blue);}
+.meta p{font-size:14px;color:var(--text2);}
+h3.sub{font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.1em;margin:32px 0 12px;}
+.daily{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+.dly{background:var(--gnbg);border:1px solid rgba(14,153,100,.22);border-radius:var(--r);padding:14px 16px;}
+.dly b{display:block;color:var(--green);font-size:17px;}
+.dly span{font-size:14px;color:var(--text2);}
+.todo{list-style:none;display:grid;gap:8px;}
+.todo li{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:12px 16px 12px 44px;position:relative;font-size:15px;}
+.todo li::before{content:"";position:absolute;left:16px;top:50%;width:14px;height:14px;margin-top:-7px;border:2px solid var(--blue);border-radius:4px;}
+.prize{margin-top:24px;background:linear-gradient(135deg,#fff8e1 0%,#fff1c7 100%);border:1px solid rgba(180,83,9,.22);border-radius:var(--rl);padding:22px 24px;}
+.prize .eyebrow{color:#b45309;}
+.prize h3{font-size:20px;letter-spacing:-.02em;margin-bottom:4px;}
+.prize p{font-size:15px;color:var(--text2);}
+
+
+/* TABS */
+.tabs{position:sticky;top:0;z-index:50;background:rgba(244,245,247,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--b1);}
+.tabs .wrap{display:flex;gap:6px;padding-top:10px;padding-bottom:10px;}
+.tab{border:1px solid transparent;background:transparent;font-family:inherit;font-size:15px;font-weight:600;color:var(--text2);padding:9px 16px;border-radius:9px;cursor:pointer;}
+.tab.on{background:var(--bluebg);border-color:var(--blueb);color:var(--blue);}
+.pane[hidden]{display:none;}
+
+/* AÇÕES */
+.today{margin-top:36px;background:var(--ink);color:#fff;border-radius:20px;padding:26px 24px;}
+.today .eyebrow{color:#8fb8f0;}
+.thead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px;}
+.thead h2{color:#fff;margin:0;font-size:26px;}
+.dnav{display:flex;gap:6px;}
+.dnav button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;border-radius:8px;width:38px;height:38px;font-size:18px;cursor:pointer;font-family:inherit;}
+.dnav button:disabled{opacity:.3;cursor:default;}
+.chk{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer;user-select:none;-webkit-user-select:none;}
+.chk input{position:absolute;opacity:0;pointer-events:none;}
+.box{flex-shrink:0;width:28px;height:28px;border-radius:8px;border:2px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.box svg{width:16px;height:16px;stroke:#fff;stroke-width:3;fill:none;opacity:0;}
+.chk input:checked + .box{background:var(--green);border-color:var(--green);}
+.chk input:checked + .box svg{opacity:1;}
+.chk b{display:block;font-size:17px;}
+.chk span{font-size:13px;color:rgba(255,255,255,.6);}
+.chk.off{opacity:.45;cursor:default;}
+.score{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:14px;color:rgba(255,255,255,.7);}
+.bar{flex:1;height:8px;background:rgba(255,255,255,.12);border-radius:8px;overflow:hidden;}
+.bar i{display:block;height:100%;background:var(--green);width:0;transition:width .25s;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px;}
+.stat{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--rl);padding:16px 18px;}
+.stat small{display:block;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
+.stat b{font-family:'Space Mono',monospace;font-size:26px;line-height:1.3;}
+.cal{display:grid;grid-template-columns:repeat(15,1fr);gap:4px;margin-top:12px;}
+.cal i{aspect-ratio:1;border-radius:3px;background:var(--bg3);border:1px solid var(--b1);}
+.cal i.p1{background:#fde2e2;}.cal i.p2{background:#fff1c7;}.cal i.p3{background:#bfe8d1;}.cal i.p4{background:var(--green);}
+.cal i.now{outline:2px solid var(--blue);outline-offset:1px;}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text3);margin-top:10px;}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:var(--c);}
+.tasks label{display:flex;gap:12px;align-items:flex-start;background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);padding:12px 16px;margin-bottom:8px;cursor:pointer;font-size:15px;}
+.tasks input{width:20px;height:20px;accent-color:var(--green);flex-shrink:0;margin-top:2px;}
+.tasks input:checked + span{text-decoration:line-through;color:var(--text3);}
+.weight{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.weight input{font-family:'Space Mono',monospace;font-size:18px;width:120px;padding:10px 12px;border:1px solid var(--b2);border-radius:10px;background:var(--bg2);color:var(--text);}
+.hint{font-size:12px;color:var(--text3);margin-top:20px;}
+@media (max-width:560px){.cal{grid-template-columns:repeat(10,1fr);}.today{padding:22px 16px;}}
+
 /* RESULTADO */
 .result{margin:64px 0 0;background:var(--ink);color:#fff;border-radius:22px;padding:44px 36px;}
 .result h2{color:#fff;}
@@ -128,7 +197,12 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
   </div>
 </header>
 
-<main class="wrap">
+<nav class="tabs"><div class="wrap">
+  <button class="tab on" data-t="prog">O programa</button>
+  <button class="tab" data-t="acoes">Minhas ações</button>
+</div></nav>
+
+<main class="wrap pane" id="pane-prog">
 
   <section>
     <div class="eyebrow">Sobre o programa</div>
@@ -144,6 +218,56 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
     </div>
     <div class="next-d"><b>26–29</b><span>NOV 2026</span></div>
   </div>
+
+  <section>
+    <div class="eyebrow">Metas definidas · Encontro de 26/11/2026</div>
+    <h2>Os 4 compromissos dos próximos 6 meses</h2>
+    <div class="mgrid2">
+      <article class="meta">
+        <div class="mtop"><span class="mn">01</span><span class="mt">Corpo / Saúde — Shape</span></div>
+        <div class="mbig">129 kg <i>→</i> <b>sub 100 kg</b></div>
+        <p>Cerca de 5 kg por mês: 124 · 119 · 114 · 109 · 104 · 99.</p>
+      </article>
+      <article class="meta">
+        <div class="mtop"><span class="mn">02</span><span class="mt">Habilidade — Liderança</span></div>
+        <div class="mbig"><b>Área TikTok Shop</b></div>
+        <p>Liderar uma área própria de TikTok Shop / criadores de conteúdo, com um time de 2 a 3 pessoas entrevistadas por ele. Liderança = conhecimento, atitude e habilidade.</p>
+      </article>
+      <article class="meta">
+        <div class="mtop"><span class="mn">03</span><span class="mt">Dinheiro</span></div>
+        <div class="mbig"><b>R$ 2 milhões</b> em 6 meses</div>
+        <p>Cerca de R$ 333 mil por mês.</p>
+      </article>
+      <article class="meta">
+        <div class="mtop"><span class="mn">04</span><span class="mt">Hábitos</span></div>
+        <div class="mbig"><b>4 hábitos</b> · 180 dias</div>
+        <p>Facilite os bons hábitos, dificulte os maus.</p>
+      </article>
+    </div>
+
+    <h3 class="sub">Todo dia</h3>
+    <div class="daily">
+      <div class="dly"><b>Treinar</b><span>Todos os dias, sem exceção.</span></div>
+      <div class="dly"><b>Zero açaí</b><span>180 dias sem comer açaí.</span></div>
+      <div class="dly"><b>Acordar 6:00</b><span>Segunda a sexta. Proibido soneca.</span></div>
+      <div class="dly"><b>Podcast</b><span>5 aprendizados + 1 decisão.</span></div>
+    </div>
+
+    <h3 class="sub">Até 25/12 — Mês 1</h3>
+    <ul class="todo">
+      <li>Falar com a Simone e pedir para liderar a criação de uma área nova</li>
+      <li>Definir a área TikTok Shop: escopo, metas e perfil das 2–3 vagas</li>
+      <li>Começar as entrevistas — ele mesmo entrevista o time</li>
+      <li>Usar Whoop ou Oura para medir sono, treino e recuperação</li>
+      <li>Escolher o prêmio das metas</li>
+    </ul>
+
+    <div class="prize">
+      <div class="eyebrow">Prêmio</div>
+      <h3>Algo que dá para comprar hoje — mas não vai</h3>
+      <p>Porque vai ter que merecer. O prêmio só é liberado com as metas batidas.</p>
+    </div>
+  </section>
 
   <section>
     <div class="eyebrow">Pilares do trabalho</div>
@@ -233,7 +357,139 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
 
 </main>
 
+<main class="wrap pane" id="pane-acoes" hidden>
+  <div class="today">
+    <div class="thead">
+      <div>
+        <div class="eyebrow" id="dlabel">Hoje</div>
+        <h2 id="dtitle">—</h2>
+      </div>
+      <div class="dnav"><button id="prev" aria-label="Dia anterior">‹</button><button id="next" aria-label="Próximo dia">›</button></div>
+    </div>
+    <div id="checks"></div>
+    <div class="score"><span id="pct">0%</span><div class="bar"><i id="pbar"></i></div><span id="dayn">Dia 1 de 180</span></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><small>Dias cumpridos 100%</small><b id="s-full">0</b></div>
+    <div class="stat"><small>Sequência atual</small><b id="s-streak">0</b></div>
+    <div class="stat"><small>Dias sem açaí</small><b id="s-acai">0</b></div>
+    <div class="stat"><small>Dias treinados</small><b id="s-treino">0</b></div>
+  </div>
+
+  <section>
+    <div class="eyebrow">Peso</div>
+    <h2>Registro semanal</h2>
+    <div class="weight"><input id="w" type="number" step="0.1" inputmode="decimal" placeholder="kg"><span id="wmsg" style="color:var(--text2);font-size:14px"></span></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">180 dias</div>
+    <h2>Sua jornada</h2>
+    <div class="cal" id="cal"></div>
+    <div class="legend"><span style="--c:var(--green)">100%</span><span style="--c:#bfe8d1">75%</span><span style="--c:#fff1c7">50%</span><span style="--c:#fde2e2">25% ou menos</span></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Até 25/12</div>
+    <h2>Tarefas do mês 1</h2>
+    <div class="tasks" id="tasks"></div>
+  </section>
+
+  <p class="hint">As marcações ficam salvas neste aparelho. Use sempre o mesmo celular para registrar.</p>
+</main>
+
 <footer><b>JOTA CO</b> · Advisory individual com Joel Jota</footer>
 
+<script>
+(function(){
+  var START=new Date(2026,10,26), DAYS=180, KEY='advisory-arthur-v1';
+  var HABITS=[
+    {k:'treino',t:'Treinar',d:'Exercício físico, todo dia'},
+    {k:'acai',t:'Zero açaí',d:'180 dias sem açaí'},
+    {k:'sono',t:'Acordei às 6:00 sem soneca',d:'Segunda a sexta',wk:true},
+    {k:'podcast',t:'Podcast',d:'5 aprendizados + 1 decisão'}
+  ];
+  var TASKS=['Falar com a Simone e pedir para liderar a criação de uma área nova','Definir a área TikTok Shop: escopo, metas e perfil das 2–3 vagas','Começar as entrevistas do time','Comprar e usar Whoop ou Oura','Escolher o prêmio das metas'];
+  var st={d:{},t:{},w:{}};
+  try{var r=localStorage.getItem(KEY); if(r) st=Object.assign(st,JSON.parse(r));}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+  function day0(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate());}
+  function idx(d){return Math.round((day0(d)-START)/864e5);}
+  function dOf(i){var d=new Date(START);d.setDate(d.getDate()+i);return d;}
+  function key(i){var d=dOf(i);return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+  function wkend(i){var w=dOf(i).getDay();return w===0||w===6;}
+  function req(i){return HABITS.filter(function(h){return !(h.wk&&wkend(i));});}
+  function pct(i){var rec=st.d[key(i)]||{},q=req(i),n=q.filter(function(h){return rec[h.k];}).length;return n/q.length;}
+  var todayI=Math.max(0,Math.min(DAYS-1,idx(new Date()))), cur=todayI;
+  var fmt=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long'});
+  var tick='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+  function render(){
+    var rec=st.d[key(cur)]||{};
+    document.getElementById('dlabel').textContent=cur===todayI?'Hoje':(cur<todayI?'Dia anterior':'Próximo dia');
+    var t=fmt.format(dOf(cur)); document.getElementById('dtitle').textContent=t.charAt(0).toUpperCase()+t.slice(1);
+    var h='';
+    HABITS.forEach(function(x){
+      var off=x.wk&&wkend(cur);
+      h+='<label class="chk'+(off?' off':'')+'"><input type="checkbox" data-k="'+x.k+'"'+(rec[x.k]?' checked':'')+(off?' disabled':'')+'><span class="box">'+tick+'</span><div><b>'+x.t+'</b><span>'+(off?'Fim de semana: não precisa':x.d)+'</span></div></label>';
+    });
+    var c=document.getElementById('checks'); c.innerHTML=h;
+    c.querySelectorAll('input').forEach(function(inp){inp.onchange=function(){
+      var k=key(cur); st.d[k]=st.d[k]||{}; st.d[k][inp.dataset.k]=inp.checked; save(); render();
+    };});
+    var p=Math.round(pct(cur)*100);
+    document.getElementById('pct').textContent=p+'%';
+    document.getElementById('pbar').style.width=p+'%';
+    document.getElementById('dayn').textContent='Dia '+(cur+1)+' de '+DAYS;
+    document.getElementById('prev').disabled=cur<=0;
+    document.getElementById('next').disabled=cur>=todayI;
+    var w=document.getElementById('w'); w.value=st.w[key(cur)]||'';
+    stats(); cal();
+  }
+  function stats(){
+    var full=0,acai=0,tr=0,streak=0;
+    for(var i=0;i<=todayI;i++){var r=st.d[key(i)]||{}; if(pct(i)===1)full++; if(r.acai)acai++; if(r.treino)tr++;}
+    for(var j=todayI;j>=0;j--){ if(pct(j)===1)streak++; else if(j===todayI)continue; else break; }
+    document.getElementById('s-full').textContent=full;
+    document.getElementById('s-streak').textContent=streak;
+    document.getElementById('s-acai').textContent=acai;
+    document.getElementById('s-treino').textContent=tr;
+    var ws=Object.keys(st.w).sort(function(a,b){return new Date(a)-new Date(b);}), last=null;
+    for(var m=0;m<=todayI;m++){if(st.w[key(m)])last=st.w[key(m)];}
+    document.getElementById('wmsg').textContent=last?('Último registro: '+last+' kg · meta: abaixo de 100 kg'):'Partida: 129 kg · meta: abaixo de 100 kg';
+  }
+  function cal(){
+    var h='';
+    for(var i=0;i<DAYS;i++){
+      var cls='';
+      if(i<=todayI){var p=pct(i); cls=p===1?'p4':p>=.75?'p3':p>=.5?'p2':(st.d[key(i)]?'p1':'');}
+      if(i===cur)cls+=' now';
+      h+='<i class="'+cls+'" data-i="'+i+'" title="'+dOf(i).toLocaleDateString('pt-BR')+'"></i>';
+    }
+    var el=document.getElementById('cal'); el.innerHTML=h;
+    el.querySelectorAll('i').forEach(function(x){x.onclick=function(){var i=+x.dataset.i; if(i<=todayI){cur=i;render();window.scrollTo({top:0,behavior:'smooth'});}};});
+  }
+  function tasks(){
+    var h=''; TASKS.forEach(function(t,i){h+='<label><input type="checkbox" data-i="'+i+'"'+(st.t[i]?' checked':'')+'><span>'+t+'</span></label>';});
+    var el=document.getElementById('tasks'); el.innerHTML=h;
+    el.querySelectorAll('input').forEach(function(x){x.onchange=function(){st.t[x.dataset.i]=x.checked;save();};});
+  }
+  document.getElementById('prev').onclick=function(){if(cur>0){cur--;render();}};
+  document.getElementById('next').onclick=function(){if(cur<todayI){cur++;render();}};
+  document.getElementById('w').onchange=function(e){var v=e.target.value; if(v)st.w[key(cur)]=v; else delete st.w[key(cur)]; save(); stats();};
+
+  function show(t){
+    document.querySelectorAll('.tab').forEach(function(b){b.classList.toggle('on',b.dataset.t===t);});
+    document.getElementById('pane-prog').hidden=t!=='prog';
+    document.getElementById('pane-acoes').hidden=t!=='acoes';
+    var f=document.querySelector('footer'); if(f) f.style.display='';
+    if(history.replaceState) history.replaceState(null,'',t==='acoes'?'#acoes':location.pathname);
+  }
+  document.querySelectorAll('.tab').forEach(function(b){b.onclick=function(){show(b.dataset.t);window.scrollTo({top:document.querySelector('.tabs').offsetTop});};});
+  if(location.hash==='#acoes') show('acoes');
+  tasks(); render();
+})();
+</script>
 </body>
 </html>
