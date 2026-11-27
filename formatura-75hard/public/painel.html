@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel · Formatura 75 Hard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: header bar, KPI row, two columns (inviter ranking | guest list) stacking on phones */
+:root{
+  --ink:#14110f; --panel:#1e1a17; --panel2:#262019; --line:#3a332d;
+  --fg:#f3ede6; --muted:#b4a99d; --gold:#d6a24a; --gold-dk:#b4832f;
+  --ok:#7fd1a0; --ok-bg:#1d3326; --err:#ff8a7a;
+  --display:"Oswald","Arial Narrow",Arial,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--ink);color:var(--fg);font:15px/1.5 var(--body);
+  padding-block:max(20px,env(safe-area-inset-top)) 40px;
+  padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:20px}
+h1,h2{font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;margin:0}
+h1{font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.05}
+h1 span{color:var(--gold)}
+h2{font-size:1.05rem;margin-bottom:12px}
+.eyebrow{font:500 .74rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between}
+.top .meta{color:var(--muted);font-size:.85rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+button,.btn{font:600 .88rem/1 var(--body);color:var(--fg);background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:10px 14px;cursor:pointer}
+button:hover{border-color:var(--gold)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+button.primary{background:var(--gold);color:#1a1306;border-color:var(--gold)}
+button.primary:hover{background:var(--gold-dk)}
+input,select{font:inherit;color:var(--fg);background:var(--ink);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpis .k:first-child{grid-column:1/-1}}
+.k{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.k dt{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.k dd{margin:6px 0 0;font:700 2rem/1 var(--display);font-variant-numeric:tabular-nums}
+.k.main dd{color:var(--gold)}
+.k small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+.cols{display:grid;grid-template-columns:320px minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.cols{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:2px;max-height:520px;overflow:auto}
+.rank li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.rank li:hover .n{color:var(--gold)}
+.rank .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank .c{font:700 1rem/1 var(--display);font-variant-numeric:tabular-nums;color:var(--gold)}
+.rank .bar{grid-column:1/-1;height:3px;background:var(--panel2);border-radius:2px;overflow:hidden}
+.rank .bar i{display:block;height:100%;background:var(--gold)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tools input{flex:1 1 220px;min-width:0}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{font:500 .7rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+td.nome{font-weight:600}
+td .sub{display:block;color:var(--muted);font-size:.8rem;font-weight:400}
+.pill{display:inline-block;font:600 .72rem/1 var(--body);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.pill.Coautor{color:var(--gold);border-color:var(--gold)}
+.pill.Membro{color:#e8d8c2}
+.pill.Convidado{color:var(--muted)}
+.chk{min-width:112px;white-space:nowrap}
+.chk.on{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+tr.presente td.nome{color:var(--ok)}
+.empty{color:var(--muted);text-align:center;padding:32px 8px}
+@media (max-width:700px){
+  thead{display:none}
+  table,tbody,tr,td{display:block;width:100%}
+  tr{border-bottom:1px solid var(--line);padding:10px 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}
+  td{border:0;padding:0}
+  td.nome{grid-column:1}
+  td.acao{grid-column:2;grid-row:1/span 3;align-self:center}
+  td.tipo,td.conv,td.contato,td.data{grid-column:1;font-size:.85rem;color:var(--muted)}
+  td.data{display:none}
+}
+.login{max-width:380px;margin:12vh auto 0;display:grid;gap:14px}
+.login p{color:var(--muted);margin:0}
+.msg{font-size:.85rem;color:var(--err);min-height:1.2em;margin:0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);display:inline-block}
+.dot.off{background:var(--err)}
+</style>
+</head>
+<body>
+
+<form class="login card" id="login" hidden>
+  <div class="eyebrow">Formatura 75 Hard · Etapa 3</div>
+  <h1>Painel de <span>inscrições</span></h1>
+  <p>Digite a senha da organização para ver as confirmações.</p>
+  <input id="senha" type="password" autocomplete="current-password" placeholder="Senha" required>
+  <button class="primary" type="submit">Entrar</button>
+  <p class="msg" id="login-msg" role="status"></p>
+</form>
+
+<main class="wrap" id="app" hidden>
+  <div class="top">
+    <div>
+      <div class="eyebrow">16/12 · 19h · Casa de Destino – Alphaville</div>
+      <h1>Formatura 75 Hard <span>Etapa 3</span></h1>
+    </div>
+    <div class="meta">
+      <span><span class="dot" id="dot"></span> <span id="atualizado">Carregando…</span></span>
+      <button id="recarregar" type="button">Atualizar</button>
+      <button id="csv" type="button">Baixar planilha</button>
+      <button id="sair" type="button">Sair</button>
+    </div>
+  </div>
+
+  <dl class="kpis">
+    <div class="k main"><dt>Inscritos</dt><dd id="k-total">0</dd><small id="k-total-sub">confirmações recebidas</small></div>
+    <div class="k"><dt>Coautores</dt><dd id="k-coautor">0</dd></div>
+    <div class="k"><dt>Membros</dt><dd id="k-membro">0</dd></div>
+    <div class="k"><dt>Convidados</dt><dd id="k-convidado">0</dd></div>
+    <div class="k"><dt>Presentes</dt><dd id="k-presentes">0</dd><small id="k-pres-sub">check-in feito</small></div>
+  </dl>
+
+  <div class="cols">
+    <section class="card">
+      <h2>Quem mais convidou</h2>
+      <ul class="rank" id="rank"></ul>
+      <p class="empty" id="rank-empty" hidden>Ninguém ainda.</p>
+    </section>
+
+    <section class="card">
+      <h2>Lista de inscritos</h2>
+      <div class="tools">
+        <input id="busca" type="search" placeholder="Buscar nome, quem convidou, e-mail ou telefone">
+        <select id="filtro" aria-label="Filtrar por tipo">
+          <option value="">Todos</option>
+          <option>Coautor</option>
+          <option>Membro</option>
+          <option>Convidado</option>
+          <option value="__presentes">Só presentes</option>
+          <option value="__faltam">Ainda não chegaram</option>
+        </select>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Nome</th><th>Tipo</th><th>Convidado por</th><th>Contato</th><th>Inscrição</th><th>Check-in</th></tr></thead>
+          <tbody id="lista"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="lista-empty" hidden>Nenhuma inscrição encontrada.</p>
+    </section>
+  </div>
+</main>
+
+<script>
+(function(){
+  var KEY='painel75_senha', senha='', dados=[], timer=null;
+  try{senha=localStorage.getItem(KEY)||'';}catch(e){}
+  var $=function(id){return document.getElementById(id);};
+
+  function api(opts){
+    opts=opts||{}; opts.headers=Object.assign({'x-senha':senha},opts.headers||{});
+    return fetch('/api/painel',opts).then(function(r){
+      if(r.status===401) throw {senha:true};
+      if(!r.ok) throw new Error(r.status);
+      return r.json();
+    });
+  }
+  function norm(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/\s+/g,' ').trim();}
+  function titulo(s){return String(s||'').trim().replace(/\s+/g,' ').toLowerCase().replace(/(^|\s)\S/g,function(c){return c.toUpperCase();});}
+  function dataBR(iso){if(!iso)return '';var d=new Date(iso);return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
+  function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+
+  function mostrarLogin(msg){
+    $('app').hidden=true;$('login').hidden=false;$('login-msg').textContent=msg||'';$('senha').focus();
+    if(timer){clearInterval(timer);timer=null;}
+  }
+  function carregar(){
+    return api().then(function(r){
+      dados=r.inscritos||[];
+      $('login').hidden=true;$('app').hidden=false;
+      $('dot').classList.remove('off');
+      $('atualizado').textContent='Atualizado às '+new Date(r.atualizado_em).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+      render();
+      if(!timer) timer=setInterval(function(){carregar().catch(function(){});},30000);
+    }).catch(function(e){
+      if(e&&e.senha){try{localStorage.removeItem(KEY);}catch(_){}senha='';mostrarLogin(dados.length?'Sessão expirada. Entre de novo.':'Senha incorreta.');return;}
+      $('dot').classList.add('off');$('atualizado').textContent='Sem conexão. Tentando de novo…';
+      if($('app').hidden) mostrarLogin('Não foi possível carregar. Verifique a conexão.');
+    });
+  }
+
+  function render(){
+    var c={Coautor:0,Membro:0,Convidado:0},pres=0;
+    dados.forEach(function(d){if(c[d.voce_e]!=null)c[d.voce_e]++;if(d.checkin_em)pres++;});
+    $('k-total').textContent=dados.length;
+    $('k-coautor').textContent=c.Coautor;$('k-membro').textContent=c.Membro;$('k-convidado').textContent=c.Convidado;
+    $('k-presentes').textContent=pres;
+    $('k-pres-sub').textContent=dados.length?Math.round(pres*100/dados.length)+'% dos inscritos':'check-in feito';
+
+    // Ranking: people who were named as inviter, counting their guests
+    var g={};
+    dados.forEach(function(d){
+      if(d.voce_e!=='Convidado')return;
+      var k=norm(d.quem_convidou); if(!k)return;
+      (g[k]=g[k]||{nome:titulo(d.quem_convidou),n:0}).n++;
+    });
+    var rk=Object.keys(g).map(function(k){return g[k];}).sort(function(a,b){return b.n-a.n||a.nome.localeCompare(b.nome);});
+    var max=rk.length?rk[0].n:1, ul=$('rank'); ul.textContent='';
+    rk.forEach(function(r){
+      var li=el('li');li.title='Filtrar a lista por '+r.nome;
+      li.appendChild(el('span','n',r.nome));li.appendChild(el('span','c',r.n));
+      var bar=el('span','bar'),i=el('i');i.style.width=(r.n*100/max)+'%';bar.appendChild(i);li.appendChild(bar);
+      li.addEventListener('click',function(){$('busca').value=r.nome;$('filtro').value='';renderLista();});
+      ul.appendChild(li);
+    });
+    $('rank-empty').hidden=rk.length>0;
+    renderLista();
+  }
+
+  function renderLista(){
+    var q=norm($('busca').value), f=$('filtro').value, tb=$('lista'); tb.textContent='';
+    var rows=dados.filter(function(d){
+      if(f==='__presentes'&&!d.checkin_em)return false;
+      if(f==='__faltam'&&d.checkin_em)return false;
+      if(f&&f[0]!=='_'&&d.voce_e!==f)return false;
+      if(!q)return true;
+      return norm([d.nome,d.quem_convidou,d.email,d.telefone].join(' ')).indexOf(q)>=0||String(d.telefone).replace(/\D/g,'').indexOf(q.replace(/\D/g,'')||'#')>=0;
+    }).sort(function(a,b){return norm(a.nome).localeCompare(norm(b.nome));});
+    rows.forEach(function(d){
+      var tr=el('tr',d.checkin_em?'presente':'');
+      var tdn=el('td','nome',titulo(d.nome));tr.appendChild(tdn);
+      var tdt=el('td','tipo');tdt.appendChild(el('span','pill '+(d.voce_e||''),d.voce_e||'—'));tr.appendChild(tdt);
+      tr.appendChild(el('td','conv',d.quem_convidou?'Convidado por '+titulo(d.quem_convidou):''));
+      var tdc=el('td','contato',d.telefone||'');tdc.appendChild(el('span','sub',d.email||''));tr.appendChild(tdc);
+      tr.appendChild(el('td','data',dataBR(d.criado_em)));
+      var tda=el('td','acao'),b=el('button','chk'+(d.checkin_em?' on':''),d.checkin_em?'✓ Presente':'Fazer check-in');
+      b.type='button';
+      b.addEventListener('click',function(){checkin(d,b);});
+      tda.appendChild(b);tr.appendChild(tda);
+      tb.appendChild(tr);
+    });
+    // On phones the "convidado por" column is useful as a subtitle only for guests
+    $('lista-empty').hidden=rows.length>0;
+  }
+
+  function checkin(d,b){
+    var novo=!d.checkin_em; b.disabled=true;
+    api({method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id:d.id,presente:novo})})
+      .then(function(){d.checkin_em=novo?new Date().toISOString():null;render();})
+      .catch(function(e){if(e&&e.senha)mostrarLogin('Sessão expirada. Entre de novo.');else{b.disabled=false;b.textContent='Erro — tentar de novo';}});
+  }
+
+  function csv(){
+    var cols=[['nome','Nome'],['voce_e','Tipo'],['quem_convidou','Quem convidou'],['email','E-mail'],['telefone','Telefone'],['criado_em','Inscrito em'],['checkin_em','Check-in']];
+    var esc=function(v){v=String(v==null?'':v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"';};
+    var lines=[cols.map(function(c){return esc(c[1]);}).join(';')];
+    dados.forEach(function(d){lines.push(cols.map(function(c){var v=d[c[0]];if(c[0]==='criado_em'||c[0]==='checkin_em')v=v?dataBR(v):'';return esc(v);}).join(';'));});
+    var blob=new Blob(['﻿'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='inscritos-formatura-75hard.csv';
+    document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+  }
+
+  $('login').addEventListener('submit',function(e){
+    e.preventDefault();senha=$('senha').value.trim();
+    try{localStorage.setItem(KEY,senha);}catch(_){}
+    $('login-msg').textContent='Entrando…';carregar();
+  });
+  $('busca').addEventListener('input',renderLista);
+  $('filtro').addEventListener('change',renderLista);
+  $('recarregar').addEventListener('click',function(){carregar();});
+  $('csv').addEventListener('click',csv);
+  $('sair').addEventListener('click',function(){try{localStorage.removeItem(KEY);}catch(_){}senha='';dados=[];mostrarLogin('');});
+
+  if(senha) carregar(); else mostrarLogin('');
+})();
+</script>
+</body>
+</html>
