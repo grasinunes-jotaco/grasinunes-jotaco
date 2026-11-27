@@ -21,6 +21,7 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0}
 body{background:var(--ink);color:var(--fg);font:16px/1.55 var(--body);
   padding-block:max(28px,env(safe-area-inset-top)) 48px;
@@ -47,6 +48,15 @@ input{font:inherit;color:var(--fg);background:var(--ink);border:1px solid var(--
 input:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
 input[aria-invalid="true"]{border-color:var(--err)}
 .hint{font-size:.8rem;color:var(--muted)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:600;font-size:.92rem;padding:0;margin-bottom:6px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:480px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;align-items:center;gap:10px;font-weight:500;background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer}
+.opt input{width:auto;accent-color:var(--gold);margin:0}
+.opt:has(input:checked){border-color:var(--gold);color:var(--gold)}
+.opt:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:1px}
+#tipo.bad .opt{border-color:var(--err)}
 .error{font-size:.82rem;color:var(--err)}
 button{font:700 1.05rem/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:#1a1306;background:var(--gold);border:0;border-radius:10px;padding:16px;cursor:pointer}
 button:hover{background:var(--gold-dk)}
@@ -91,9 +101,19 @@ button[disabled]{opacity:.6;cursor:progress}
       <span class="error" id="nome-err" hidden>Informe seu nome e sobrenome.</span>
     </div>
 
-    <div class="field">
+    <fieldset class="field" id="tipo">
+      <legend>Você é</legend>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="voce_e" value="Coautor" required> Sou coautor</label>
+        <label class="opt"><input type="radio" name="voce_e" value="Membro"> Sou membro</label>
+        <label class="opt"><input type="radio" name="voce_e" value="Convidado"> Sou convidado</label>
+      </div>
+      <span class="error" id="tipo-err" hidden>Escolha uma opção.</span>
+    </fieldset>
+
+    <div class="field" id="convidou-field" hidden>
       <label for="convidou">Quem te convidou? <small>(nome do coautor ou membro)</small></label>
-      <input id="convidou" name="quem_convidou" type="text" required minlength="2" placeholder="Se você é coautor ou membro, escreva “Sou coautor” ou “Sou membro”">
+      <input id="convidou" name="quem_convidou" type="text" minlength="2" placeholder="Ex.: João Souza">
       <span class="error" id="convidou-err" hidden>Diga quem te convidou.</span>
     </div>
 
@@ -131,15 +151,26 @@ button[disabled]{opacity:.6;cursor:progress}
     if(d.length>7) o='('+d.slice(0,2)+') '+d.slice(2,d.length-4)+'-'+d.slice(-4);
     tel.value=o;
   });
+  var cf=document.getElementById('convidou-field'), conv=document.getElementById('convidou');
+  function tipo(){var r=form.querySelector('input[name="voce_e"]:checked');return r?r.value:'';}
+  form.querySelectorAll('input[name="voce_e"]').forEach(function(r){
+    r.addEventListener('change',function(){
+      var g=tipo()==='Convidado';
+      cf.hidden=!g; if(!g){conv.value='';conv.setAttribute('aria-invalid','false');document.getElementById('convidou-err').hidden=true;}
+      document.getElementById('tipo').classList.remove('bad');document.getElementById('tipo-err').hidden=true;
+    });
+  });
   var checks={
     nome:function(v){return v.trim().split(/\s+/).length>=2;},
-    convidou:function(v){return v.trim().length>=2;},
+    convidou:function(v){return tipo()!=='Convidado'||v.trim().length>=2;},
     email:function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());},
     telefone:function(v){return v.replace(/\D/g,'').length>=10;}
   };
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var ok=true, first=null;
+    if(!tipo()){ok=false;first=form.querySelector('input[name="voce_e"]');
+      document.getElementById('tipo').classList.add('bad');document.getElementById('tipo-err').hidden=false;}
     Object.keys(checks).forEach(function(id){
       var el=document.getElementById(id), good=checks[id](el.value);
       el.setAttribute('aria-invalid',good?'false':'true');
