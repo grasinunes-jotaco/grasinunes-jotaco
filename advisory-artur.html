@@ -177,6 +177,43 @@ h3.sub{font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercas
 .task .a-txt b{font-size:16px;font-weight:600;}
 @media (max-width:560px){.okb{min-width:70px;}.a-txt b{font-size:17px;}}
 
+
+/* PAINEL TOPO */
+.pan{background:var(--ink);color:#fff;border-radius:20px;padding:22px;margin-top:18px;display:grid;grid-template-columns:auto 1fr;gap:18px 20px;align-items:center;}
+.ring{position:relative;width:118px;height:118px;}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+.rbg{fill:none;stroke:rgba(255,255,255,.12);stroke-width:12;}
+.rfg{fill:none;stroke:#22c55e;stroke-width:12;stroke-linecap:round;stroke-dasharray:314.16;stroke-dashoffset:314.16;transition:stroke-dashoffset .4s;}
+.rtxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.rtxt b{font-family:'Space Mono',monospace;font-size:26px;line-height:1;}
+.rtxt span{font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;}
+.pstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.ps{background:rgba(255,255,255,.06);border-radius:12px;padding:10px 12px;}
+.ps b{display:block;font-family:'Space Mono',monospace;font-size:22px;line-height:1.1;}
+.ps span{font-size:12px;color:rgba(255,255,255,.65);}
+.pbar{height:5px;background:rgba(255,255,255,.12);border-radius:5px;margin-top:6px;overflow:hidden;}
+.pbar i{display:block;height:100%;width:0;background:#22c55e;}
+.pmini{grid-column:1/-1;display:flex;gap:8px;}
+.pm{flex:1;text-align:center;border-radius:10px;padding:8px 4px;background:rgba(255,255,255,.06);font-size:20px;opacity:.4;}
+.pm.ok{background:rgba(34,197,94,.2);opacity:1;}
+.pm.off{opacity:.15;}
+.pm small{display:block;font-size:10px;color:rgba(255,255,255,.7);margin-top:2px;}
+@media (max-width:420px){.pan{grid-template-columns:1fr;justify-items:center;}.pstats{width:100%;}}
+
+/* JORNADA */
+.jr{background:var(--bg2);border:1px solid var(--b1);border-radius:16px;padding:18px;}
+.jr-top{font-size:15px;color:var(--text2);margin-bottom:12px;}
+.jr-top b{font-family:'Space Mono',monospace;font-size:22px;color:var(--green);}
+.jgrid{display:grid;grid-template-columns:repeat(15,1fr);gap:4px;}
+.jgrid i{aspect-ratio:1;border-radius:4px;background:var(--bg3);}
+.jgrid i.c{background:var(--green);}
+.jgrid i.p{background:#bfe8d1;}
+.jgrid i.t{outline:2px solid var(--blue);outline-offset:1px;}
+.jleg{display:flex;gap:16px;font-size:12px;color:var(--text3);margin-top:12px;}
+.jleg span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;}
+.jleg .l1::before{background:var(--green);}.jleg .l2::before{background:#bfe8d1;}.jleg .l3::before{outline:2px solid var(--blue);}
+@media (max-width:560px){.jgrid{grid-template-columns:repeat(10,1fr);}}
+
 /* RESULTADO */
 .result{margin:64px 0 0;background:var(--ink);color:#fff;border-radius:22px;padding:44px 36px;}
 .result h2{color:#fff;}
@@ -390,6 +427,20 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
     <div class="a-sub" id="dsub">Dia 1 de 180</div>
   </div>
 
+  <div class="pan">
+    <div class="ring">
+      <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" class="rbg"/><circle cx="60" cy="60" r="50" class="rfg" id="rfg"/></svg>
+      <div class="rtxt"><b id="rnum">0/4</b><span>hoje</span></div>
+    </div>
+    <div class="pstats">
+      <div class="ps"><b id="p-full">0</b><span>dias completos</span><div class="pbar"><i id="p-fullbar"></i></div></div>
+      <div class="ps"><b id="p-streak">0</b><span>sequência 🔥</span></div>
+      <div class="ps"><b id="p-acai">0</b><span>dias sem açaí</span></div>
+      <div class="ps"><b id="p-treino">0</b><span>dias treinados</span></div>
+    </div>
+    <div class="pmini" id="pmini"></div>
+  </div>
+
   <div class="a-sec">Ações de hoje</div>
   <div id="checks"></div>
 
@@ -406,7 +457,12 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
   <div class="a-sec">Tarefas até 25/12</div>
   <div id="tasks"></div>
 
-  <div class="a-total"><b id="s-full">0</b> dias completos de 180</div>
+  <div class="a-sec">Sua jornada · dias completos</div>
+  <div class="jr">
+    <div class="jr-top"><b id="s-full">0</b> de 180 dias completos</div>
+    <div class="jgrid" id="jgrid"></div>
+    <div class="jleg"><span class="l1">Completo</span><span class="l2">Parcial</span><span class="l3">Hoje</span></div>
+  </div>
   <p class="hint">Suas respostas ficam salvas neste celular.</p>
 </main>
 
@@ -416,10 +472,10 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
 (function(){
   var START=new Date(2026,10,26), DAYS=180, KEY='advisory-arthur-v1';
   var HABITS=[
-    {k:'treino',i:'💪',t:'Treinei hoje',d:'Exercício físico, todo dia'},
-    {k:'acai',i:'🚫',t:'Não comi açaí',d:'180 dias sem açaí'},
-    {k:'sono',i:'⏰',t:'Acordei às 6:00',d:'Sem soneca · seg a sex',wk:true},
-    {k:'podcast',i:'🎧',t:'Ouvi o podcast',d:'5 aprendizados + 1 decisão'}
+    {k:'treino',i:'💪',t:'Treinei hoje',s:'Treino',d:'Exercício físico, todo dia'},
+    {k:'acai',i:'🚫',t:'Não comi açaí',s:'Açaí',d:'180 dias sem açaí'},
+    {k:'sono',i:'⏰',t:'Acordei às 6:00',s:'6:00',d:'Sem soneca · seg a sex',wk:true},
+    {k:'podcast',i:'🎧',t:'Ouvi o podcast',s:'Podcast',d:'5 aprendizados + 1 decisão'}
   ];
   var TASKS=['Falar com a Simone','Definir a área TikTok Shop','Começar as entrevistas do time','Comprar o Whoop ou o Oura','Escolher o prêmio'];
   var st={d:{},t:{},w:{}};
@@ -430,7 +486,7 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
   var dd=new Date(START); dd.setDate(dd.getDate()+cur);
   var K=dd.getFullYear()+'-'+(dd.getMonth()+1)+'-'+dd.getDate();
   var wk=dd.getDay()===0||dd.getDay()===6;
-  function esc(x){return x;}
+  function keyOf(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
   function row(icon,title,desc,ok,off,attr){
     return '<div class="a-row'+(ok?' ok':'')+(off?' off':'')+'"><div class="a-ico">'+icon+'</div><div class="a-txt"><b>'+title+'</b><span>'+desc+'</span></div><button class="okb" '+attr+(off?' disabled':'')+'>'+(ok?'✓':'OK')+'</button></div>';
   }
@@ -454,9 +510,27 @@ footer b{font-family:'Space Mono',monospace;color:var(--blue);letter-spacing:.04
     document.getElementById('wok').textContent=w?'✓':'OK';
     var last=null; Object.keys(st.w).forEach(function(k){last=st.w[k];});
     document.getElementById('wmsg').textContent=last?'Último: '+last+' kg':'Meta: abaixo de 100 kg';
-    var full=0; Object.keys(st.d).forEach(function(k){var r=st.d[k],p=k.split('-'),dw=new Date(+p[0],p[1]-1,+p[2]).getDay(),we=dw===0||dw===6;
-      if(r.treino&&r.acai&&r.podcast&&(we||r.sono))full++;});
+    var full=0,acai=0,tr=0,streak=0,g='',lim=Math.min(ti,DAYS-1);
+    for(var i=0;i<DAYS;i++){
+      var di=new Date(START);di.setDate(di.getDate()+i);
+      var r=st.d[keyOf(di)]||{},we=di.getDay()===0||di.getDay()===6;
+      var c=r.treino&&r.acai&&r.podcast&&(we||r.sono), any=r.treino||r.acai||r.podcast||r.sono;
+      if(i<=lim){if(c)full++; if(r.acai)acai++; if(r.treino)tr++;}
+      g+='<i class="'+(c?'c':any?'p':'')+(i===cur?' t':'')+'" title="'+di.toLocaleDateString('pt-BR')+'"></i>';
+    }
+    for(var j=lim;j>=0;j--){var dj=new Date(START);dj.setDate(dj.getDate()+j);var rj=st.d[keyOf(dj)]||{},wj=dj.getDay()===0||dj.getDay()===6;
+      if(rj.treino&&rj.acai&&rj.podcast&&(wj||rj.sono))streak++; else if(j===lim)continue; else break;}
     document.getElementById('s-full').textContent=full;
+    document.getElementById('jgrid').innerHTML=g;
+    document.getElementById('p-full').textContent=full+'/180';
+    document.getElementById('p-fullbar').style.width=(full/180*100)+'%';
+    document.getElementById('p-streak').textContent=streak;
+    document.getElementById('p-acai').textContent=acai;
+    document.getElementById('p-treino').textContent=tr;
+    document.getElementById('rnum').textContent=done+'/'+need;
+    document.getElementById('rfg').style.strokeDashoffset=314.16*(1-(need?done/need:0));
+    var mh='';HABITS.forEach(function(x){var off=x.wk&&wk;mh+='<div class="pm'+(rec[x.k]&&!off?' ok':'')+(off?' off':'')+'">'+x.i+'<small>'+x.s+'</small></div>';});
+    document.getElementById('pmini').innerHTML=mh;
     document.querySelectorAll('[data-h]').forEach(function(b){b.onclick=function(){st.d[K]=st.d[K]||{};st.d[K][b.dataset.h]=!st.d[K][b.dataset.h];save();render();};});
     document.querySelectorAll('[data-task]').forEach(function(b){b.onclick=function(){st.t[b.dataset.task]=!st.t[b.dataset.task];save();render();};});
   }
