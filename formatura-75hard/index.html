@@ -111,10 +111,10 @@ button[disabled]{opacity:.6;cursor:progress}
       <span class="error" id="tipo-err" hidden>Escolha uma opção.</span>
     </fieldset>
 
-    <div class="field" id="convidou-field" hidden>
-      <label for="convidou">Quem te convidou? <small>(nome do coautor ou membro)</small></label>
-      <input id="convidou" name="quem_convidou" type="text" minlength="2" placeholder="Ex.: João Souza">
-      <span class="error" id="convidou-err" hidden>Diga quem te convidou.</span>
+    <div class="field" id="convidou-field">
+      <label for="convidou">Nome de quem te convidou</label>
+      <input id="convidou" name="quem_convidou" type="text" required minlength="2" placeholder="Ex.: João Souza">
+      <span class="error" id="convidou-err" hidden>Informe o nome de quem te convidou.</span>
     </div>
 
     <div class="field">
@@ -151,18 +151,15 @@ button[disabled]{opacity:.6;cursor:progress}
     if(d.length>7) o='('+d.slice(0,2)+') '+d.slice(2,d.length-4)+'-'+d.slice(-4);
     tel.value=o;
   });
-  var cf=document.getElementById('convidou-field'), conv=document.getElementById('convidou');
   function tipo(){var r=form.querySelector('input[name="voce_e"]:checked');return r?r.value:'';}
   form.querySelectorAll('input[name="voce_e"]').forEach(function(r){
     r.addEventListener('change',function(){
-      var g=tipo()==='Convidado';
-      cf.hidden=!g; if(!g){conv.value='';conv.setAttribute('aria-invalid','false');document.getElementById('convidou-err').hidden=true;}
       document.getElementById('tipo').classList.remove('bad');document.getElementById('tipo-err').hidden=true;
     });
   });
   var checks={
     nome:function(v){return v.trim().split(/\s+/).length>=2;},
-    convidou:function(v){return tipo()!=='Convidado'||v.trim().length>=2;},
+    convidou:function(v){return v.trim().length>=2;},
     email:function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());},
     telefone:function(v){return v.replace(/\D/g,'').length>=10;}
   };
