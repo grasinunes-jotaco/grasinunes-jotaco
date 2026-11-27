@@ -93,9 +93,8 @@ tr.presente td.nome{color:var(--ok)}
 <form class="login card" id="login" hidden>
   <div class="eyebrow">Formatura 75 Hard · Etapa 3</div>
   <h1>Painel de <span>inscrições</span></h1>
-  <p>Digite a senha da organização para ver as confirmações.</p>
-  <input id="senha" type="password" autocomplete="current-password" placeholder="Senha" required>
-  <button class="primary" type="submit">Entrar</button>
+  <p>Não foi possível carregar as inscrições.</p>
+  <button class="primary" type="submit">Tentar de novo</button>
   <p class="msg" id="login-msg" role="status"></p>
 </form>
 
@@ -109,7 +108,6 @@ tr.presente td.nome{color:var(--ok)}
       <span><span class="dot" id="dot"></span> <span id="atualizado">Carregando…</span></span>
       <button id="recarregar" type="button">Atualizar</button>
       <button id="csv" type="button">Baixar planilha</button>
-      <button id="sair" type="button">Sair</button>
     </div>
   </div>
 
@@ -172,7 +170,7 @@ tr.presente td.nome{color:var(--ok)}
   function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
 
   function mostrarLogin(msg){
-    $('app').hidden=true;$('login').hidden=false;$('login-msg').textContent=msg||'';$('senha').focus();
+    $('app').hidden=true;$('login').hidden=false;$('login-msg').textContent=msg||'';
     if(timer){clearInterval(timer);timer=null;}
   }
   function carregar(){
@@ -262,17 +260,14 @@ tr.presente td.nome{color:var(--ok)}
   }
 
   $('login').addEventListener('submit',function(e){
-    e.preventDefault();senha=$('senha').value.trim();
-    try{localStorage.setItem(KEY,senha);}catch(_){}
-    $('login-msg').textContent='Entrando…';carregar();
+    e.preventDefault();$('login-msg').textContent='Carregando…';carregar();
   });
   $('busca').addEventListener('input',renderLista);
   $('filtro').addEventListener('change',renderLista);
   $('recarregar').addEventListener('click',function(){carregar();});
   $('csv').addEventListener('click',csv);
-  $('sair').addEventListener('click',function(){try{localStorage.removeItem(KEY);}catch(_){}senha='';dados=[];mostrarLogin('');});
 
-  if(senha) carregar(); else mostrarLogin('');
+  carregar();
 })();
 </script>
 </body>

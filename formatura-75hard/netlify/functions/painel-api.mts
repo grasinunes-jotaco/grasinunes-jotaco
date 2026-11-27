@@ -8,9 +8,6 @@ const json = (body: unknown, status = 200) =>
   })
 
 export default async (req: Request) => {
-  const senha = Netlify.env.get("PAINEL_SENHA")
-  if (!senha || req.headers.get("x-senha") !== senha) return json({ erro: "senha" }, 401)
-
   const store = getStore({ name: "inscricoes", consistency: "strong" })
 
   if (req.method === "POST") {
